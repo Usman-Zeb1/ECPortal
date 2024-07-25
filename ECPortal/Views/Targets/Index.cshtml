@@ -1,0 +1,182 @@
+﻿@model List<Pk.Com.Jazz.ECP.Models.EmployeeTargets>
+
+@{
+    ViewData["Title"] = "Employee Targets";
+}
+
+<h1 class="text-center my-4">Employee Targets</h1>
+
+<div class="container">
+    <!-- Chart Container -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="mb-0">Target Status and Progress</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- Pie Chart: Target Status Overview -->
+                <div class="col-md-6">
+                    <canvas id="targetStatusChart" width="400" height="200"></canvas>
+                </div>
+                <!-- Line Chart: Target Progress Over Time -->
+                <div class="col-md-6">
+                    <canvas id="targetProgressChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Target Details Table -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3 class="mb-0">Target Details</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="targetsTable" class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Target Start Date</th>
+                            <th>Target End Date</th>
+                            <th>Status</th>
+                            <th>Target Amount</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            foreach (var target in Model)
+                            {
+                                <tr>
+                                    <td>@target.Id</td>
+                                    <td>@target.TargetStartDate.ToShortDateString()</td>
+                                    <td>@target.TargetEndDate.ToShortDateString()</td>
+                                    <td>@target.Status</td>
+                                    <td>@target.TargetAmount</td>
+                                    <td>@target.Comments</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9" class="text-center">No target data available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            $('#targetsTable').DataTable({
+                "paging": true,
+                "pageLength": 5,
+                "lengthChange": false,
+                "info": false
+            });
+
+            var targetStatusData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model != null ? Model.GroupBy(t => t.Status).Select(g => new { Status = g.Key, Count = g.Count() }).ToList() : new List<object>()));
+
+            // Extract target progress data for line chart
+            var targetProgressData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model != null ? Model.GroupBy(t => t.TargetStartDate).Select(g => new { Date = g.Key, Amount = g.Sum(t => t.TargetAmount) }).ToList() : new List<object>()));
+
+            // Pie Chart: Target Status Overview
+            var statusCtx = document.getElementById('targetStatusChart').getContext('2d');
+            var targetStatusChart = new Chart(statusCtx, {
+                type: 'pie',
+                data: {
+                    labels: targetStatusData.map(item => item.Status),
+                    datasets: [{
+                        label: 'Target Status',
+                        data: targetStatusData.map(item => item.Count),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)',
+                            'rgba(255, 159, 64, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Line Chart: Target Progress Over Time
+            var progressCtx = document.getElementById('targetProgressChart').getContext('2d');
+            var targetProgressChart = new Chart(progressCtx, {
+                type: 'line',
+                data: {
+                    labels: targetProgressData.map(item => item.Date),
+                    datasets: [{
+                        label: 'Target Progress',
+                        data: targetProgressData.map(item => item.Amount),
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            },
+                            ticks: {
+                                maxRotation: 90,
+                                minRotation: 45
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Target Amount'
+                            },
+                            min: 0,
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function (context) {
+                                    return context[0].label;
+                                },
+                                label: function (context) {
+                                    return `Amount: ${context.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

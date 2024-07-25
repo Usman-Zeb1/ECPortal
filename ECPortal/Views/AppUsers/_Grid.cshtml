@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Employee>
+
+
+@if (Model.Count() > 0)
+{
+    <div class="table-responsive">
+        <table id="datatable" class="table table-hover table-sm">
+            <caption>List of App Users</caption>
+            <thead class="thead-light">
+                <tr>
+                    <th data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.AppUserId)">
+                        @Html.DisplayShortNameFor(model => model.AppUserId)
+                    </th>
+                    <th data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.DisplayName)">
+                        @Html.DisplayNameFor(model => model.DisplayName)
+                    </th>
+                    <th data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.UserAdLogin)">
+                        @Html.DisplayNameFor(model => model.UserAdLogin)
+                    </th>
+                    @* <th data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.UserRole)">
+                        @Html.DisplayNameFor(model => model.UserRole)
+                    </th> *@
+                    <th data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.EditBy)">
+                        @Html.DisplayNameFor(model => model.EditBy)
+                    </th>
+                    <th data-bs-toggle="tooltip" data-bs-placement="top" title="Action pages">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="@(!item.IsEnabled ? "table-warning" : string.Empty)">
+                        <th>
+                            <span class="badge rounded-pill bg-light text-dark"> @Html.DisplayFor(modelItem => item.AppUserId)</span>
+                        </th>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DisplayName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserAdLoginShort)
+                        </td>
+                       @*  <td>
+                            @Html.DisplayFor(modelItem => item.UserRole)
+                        </td> *@
+                        <td>
+                            <span class="badge rounded-pill bg-light text-dark">@Html.DisplayFor(modelItem => item.EditByShort)</span>
+                        </td>
+                        <td>
+                            <a asp-controller="AppUsers" asp-action="Edit" asp-route-id="@item.AppUserId"><span class="badge rounded-pill bg-theme text-light">Edit</span></a>
+                            <a asp-controller="AppUsers" asp-action="Details" asp-route-id="@item.AppUserId"><span class="badge rounded-pill bg-light text-dark">Details</span></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <img src="~/images/norecordfound-600px.png" height="300" alt="welcome image">
+        <p><em>No records found</em></p>
+    </div>
+}

@@ -1,0 +1,33 @@
+﻿@model IEnumerable<AppUserToken>
+
+@{
+    ViewData["Title"] = "User Tokens";
+}
+
+<div class="display-4">
+    User Tokens
+    <div class="float-end">
+        <img src="~/images/header/usertokens-128px.png" height="80" />
+    </div>
+</div>
+
+<hr />
+
+@await Html.PartialAsync("_Grid", Model)
+
+
+@section Styles {
+
+    @{
+    await Html.RenderPartialAsync("_DataTableStylesPartial");
+}
+
+}
+
+@section Scripts {
+
+    @{
+    await Html.RenderPartialAsync("_DataTableScriptsPartial");
+}
+
+}

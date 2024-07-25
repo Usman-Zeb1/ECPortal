@@ -1,0 +1,53 @@
+﻿@model Employee
+
+
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<AppUser> _userManager
+
+<div asp-validation-summary="ModelOnly" class="invalid-feedback"></div>
+<input type="hidden" asp-for="AppUserId" />
+<div class="row gy-2 mb-3">
+    <div class="col-md-4">
+        <label asp-for="DisplayName" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayPromptFor(model => model.DisplayName)"></label>
+        <input asp-for="DisplayName" class="form-control" />
+        <span asp-validation-for="DisplayName" class="invalid-feedback"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="UserAdLogin" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayPromptFor(model => model.UserAdLogin)"></label>
+        <select asp-for="UserAdLogin" class="form-control selectpicker" data-live-search="true" asp-items="ViewBag.UserAdLogin"></select>
+        <span asp-validation-for="UserAdLogin" class="invalid-feedback"></span>
+    </div>
+    <div class="col-md-4">
+        <label asp-for="EmployeeId" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayPromptFor(model => model.EmployeeId)"></label>
+        <input asp-for="EmployeeId" class="form-control" />
+        <span asp-validation-for="EmployeeId" class="invalid-feedback"></span>
+    </div>
+</div>
+@* <div class="row gy-2 mb-3">
+    <div class="col-md-4">
+        <label asp-for="UserRole" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayPromptFor(model => model.UserRole)"></label>
+        <select asp-for="UserRole" class="form-control selectpicker" data-live-search="true" asp-items="ViewBag.UserRole"></select>
+        <span asp-validation-for="UserRole" class="invalid-feedback"></span>
+    </div>
+</div> *@
+<div class="row gy-2 mb-3">
+    <div class="col-12">
+        <label asp-for="Summary" class="form-label" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayPromptFor(model => model.Summary)"></label>
+        <textarea asp-for="Summary" class="form-control"></textarea>
+        <span asp-validation-for="Summary" class="invalid-feedback"></span>
+    </div>
+</div>
+<div class="row gy-2 mb-3">
+    <div class="col-12">
+        <label class="form-check-label" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayPromptFor(model => model.IsEnabled)">
+            <input class="form-check-input" asp-for="IsEnabled" /> @Html.DisplayNameFor(model => model.IsEnabled)
+        </label>
+    </div>
+</div>
+
+<div class="col">
+    <input type="submit" value="Save" class="btn btn-primary" />
+    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+    <input type="reset" value="Reset" class="btn btn-outline-secondary" />
+</div>
+

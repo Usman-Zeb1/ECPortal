@@ -1,0 +1,256 @@
+/* Sticky nav bar body needs space */
+body {
+    margin: 0;
+    
+    overflow: hidden; /* Ensure scrollbar is always present */
+}
+
+.content {
+    background-color: #e9ecef;
+    padding-top: 4.5rem;
+    padding-bottom: 0; /* Ensure padding-bottom is set to 0 */
+    overflow-y: scroll; /* Use overflow-y for vertical scrolling */
+    height: calc(100vh - 4.5rem);
+    box-sizing: border-box; /* Ensure padding is included in the element's total height/width */
+}
+
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Set the fixed navbar styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1030; /* Bootstrap default z-index for navbar */
+    width: 100%; /* Ensure it spans the full width of the viewport */
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+    width: 8px; /* Set the width of the scrollbar */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgba(155, 155, 155, 0.5); /* Set the scrollbar thumb color */
+}
+
+::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.5); /* Set the scrollbar track color */
+}
+
+/* For other browsers */
+scrollbar-width: thin; /* Set the width of the scrollbar for Firefox */
+scrollbar-color: rgba(155, 155, 155, 0.5) rgba(255, 255, 255, 0.5); /* Set the scrollbar colors for Firefox */
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+/* Sticky footer styles */
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.body-margin-bottom {
+    margin-bottom: 60px; /* Margin bottom by footer height */
+}
+
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+/* Footer styles */
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 35px; /* Vertically center the text there */
+}
+
+/* Dark mode */
+.dark-mode {
+    background-color: black;
+    color: white;
+}
+
+.light-mode {
+    background-color: white;
+    color: black;
+}
+
+/* Selection Theme */
+::-moz-selection {
+    /* Code for Firefox */
+    color: #086E7D;
+    background: #FFF89A;
+}
+
+::selection {
+    color: #086E7D;
+    background: #FFF89A;
+}
+
+/* App theme */
+.jazz-yellow {
+    background-color: #ffdd00;
+}
+
+.jazz-red {
+    background-color: #ed1d24;
+}
+
+.jazz-strip {
+    background-image: url(../images/jazz-strip.png);
+    background-position: bottom;
+    background-repeat: repeat-x;
+    background-size: 600px;
+}
+
+.active {
+    background-color: #1A5F7A !important;
+    color: #FFC900 !important;
+}
+
+.form-control:focus {
+    border-color: #086E7D;
+    box-shadow: 0 0 0 0.2rem rgba(8, 110, 125, 0.25);
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+    cursor: not-allowed;
+}
+
+.btn-primary,
+.btn-primary:hover {
+    background-color: #1A5F7A !important;
+    border-color: #086E7D;
+}
+
+    .btn-primary.focus,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary:visited {
+        box-shadow: 0 0 0 0.2rem rgba(8, 110, 125, 0.25) !important;
+    }
+
+    .btn-primary:not(:disabled):not(.disabled).active,
+    .btn-primary:not(:disabled):not(.disabled):active,
+    .show > .btn-primary.dropdown-toggle {
+        border-color: #086E7D;
+    }
+
+.btn-outline-primary {
+    color: #1A5F7A;
+    border-color: #086E7D;
+}
+
+    .btn-outline-primary:hover {
+        color: #fff;
+        background-color: #1A5F7A;
+        border-color: #086E7D;
+    }
+
+.HeaderButton {
+    font-family: 'Segoe UI';
+}
+
+    .HeaderButton .fas {
+        margin-top: -1px;
+        margin-bottom: 1px;
+    }
+
+.form-check-input:focus {
+    border-color: #086E7D;
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgba(8, 110, 125, 0.25);
+}
+
+.form-check-input:checked {
+    background-color: #086E7D;
+    border-color: #086E7D;
+}
+
+.border-theme {
+    border: 1px solid #086E7D;
+}
+
+.bg-theme {
+    background-color: #086E7D;
+}
+
+.bg-theme-light {
+    background-color: #5299a4;
+}
+
+.bg-theme-dark {
+    background-color: #1A5F7A;
+}
+
+.bg-yellow {
+    background-color: #FFF89A;
+}
+
+.bg-yellow-dark {
+    background-color: #FFC900;
+}
+
+.page-item.active .page-link {
+    background-color: #086E7D !important;
+    border: 1px solid #1A5F7A;
+    color: white !important;
+}
+
+.page-link {
+    color: black !important;
+}
+
+    .page-link:focus {
+        box-shadow: 0 0 0 0.2rem rgba(8, 110, 125, 0.25) !important;
+    }
+
+.bootstrap-select.form-control {
+    border: 1px solid #ced4da !important;
+}

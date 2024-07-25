@@ -1,0 +1,15 @@
+﻿@page
+@model ErrorModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+
+<div class="text-center">
+    <div class="text-danger display-4">@ViewData["Title"]</div>
+    <img src="~/images/accessdenied-3000px.png" height="300" alt="access denied image">
+    @if (Model.ShowRequestId)
+    {
+        <p class="text-danger"><em><strong>Request ID:</strong></em><code>@Model.RequestId</code></p>
+    }
+</div>

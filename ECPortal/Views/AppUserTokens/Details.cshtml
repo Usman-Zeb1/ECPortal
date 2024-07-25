@@ -1,0 +1,40 @@
+﻿@model AppUserToken
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<div class="display-4">
+    @ViewData["Title"]
+    <div class="float-end">
+        <img src="~/images/header/usertokens-128px.png" height="80" />
+    </div>
+</div>
+<hr />
+
+<div class="card border-theme shadow-sm rounded">
+
+    <div class="card-body">
+        @await Html.PartialAsync("_Detail", Model)
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    <a asp-controller="AppUserTokens" asp-action="Edit" asp-route-id="@Model.AppUserTokenId" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Edit</a>
+                    <a asp-controller="AppUserTokens" asp-action="Index" class="btn btn-outline-secondary btn-sm" role="button" aria-pressed="true">Back to List</a>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="float-end pt-2">
+                    <a data-spinner="no" data-bs-toggle="collapse" href="#MetaDetails" role="button" aria-expanded="false" aria-controls="MetaDetails">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

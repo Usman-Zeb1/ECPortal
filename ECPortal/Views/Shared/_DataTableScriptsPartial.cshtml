@@ -1,0 +1,47 @@
+﻿<!--datatable jquery js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/jquery.dataTables.min.js"
+        integrity="sha256-L4cf7m/cgC51e7BFPxQcKZcXryzSju7VYBKJLOKPHvQ=" crossorigin="anonymous"
+        asp-fallback-src="~/lib/datatables/js/jquery.dataTables.min.js" asp-append-version="true"
+        asp-fallback-test="jQuery.fn.dataTable">
+</script>
+
+<!--datatable bootstrap js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.20/js/dataTables.bootstrap4.min.js"
+        integrity="sha256-A8HQsn/9uXt+VRkaLhWtj7KMC8bYT76r3IB7iTqDtLo=" crossorigin="anonymous"
+        asp-fallback-src="~/lib/datatables/js/dataTables.bootstrap4.min.js" asp-append-version="true"
+        asp-fallback-test="jQuery.fn.extend">
+</script>
+
+<!--datatable buttons js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.2.0/js/dataTables.buttons.min.js"
+        integrity="sha256-LihvN97Df1J4da0DkSRuZfyixKNESW89Nd645G3yQc4=" crossorigin="anonymous"
+        asp-fallback-src="~/lib/datatables-buttons/js/dataTables.buttons.min.js" asp-append-version="true"
+        asp-fallback-test="jQuery.fn.dataTable.Buttons">
+</script>
+
+<!--datatable buttons HTML5 js-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables-buttons/2.2.0/js/buttons.html5.min.js"
+        integrity="sha256-wXkBJUp4hPuQJXCIwgIGI5Ng5EVyqr2z1cC/kJqQobc=" crossorigin="anonymous"
+        asp-fallback-src="~/lib/datatables-buttons/js/buttons.html5.min.js" asp-append-version="true"
+        asp-fallback-test="jQuery.fn.dataTable.ext.buttons.excelHtml5">
+</script>
+
+<!--datatable buttons styles js-->
+<script>
+    $(document).ready(function () {
+        $('#datatable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                {
+                    extend: 'csv',
+                    text: '<i class="fas fa-file-csv"></i> Export',
+                    className: 'csvButton'
+                }
+            ]
+        });
+
+        $(".csvButton").attr('class', 'btn btn-sm btn-outline-info');
+        $(".csvButton").attr('title', 'Export CSV file');
+    });
+
+</script>

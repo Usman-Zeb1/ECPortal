@@ -1,0 +1,204 @@
+﻿@model List<Pk.Com.Jazz.ECP.Models.ECAudits>
+@using Newtonsoft.Json;
+@{
+    ViewData["Title"] = "Experience Center Audits";
+    var auditDateData = Model != null
+        ? JsonConvert.SerializeObject(
+            Model.GroupBy(a => a.AuditDate.ToString("yyyy-MM"))
+                 .Select(g => new { AuditDate = g.Key, Count = g.Count() })
+                 .ToList(),
+            new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+    var auditorData = Model != null
+        ? JsonConvert.SerializeObject(
+            Model.GroupBy(a => a.Auditor)
+                 .Select(g => new { Auditor = g.Key, Count = g.Count() })
+                 .ToList(),
+            new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+}
+
+<h1 class="text-center my-4">Experience Center Audits</h1>
+
+<div class="container">
+    <!-- Chart Container -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="mb-0">Audit Overview</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- Bar Chart: Audit Dates -->
+                <div class="col-md-6">
+                    <canvas id="auditDateChart" width="400" height="200"></canvas>
+                </div>
+                <!-- Pie Chart: Auditors -->
+                <div class="col-md-6">
+                    <canvas id="auditorChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audit Details Table -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3 class="mb-0">Audit Details</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="auditsTable" class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Experience Center ID</th>
+                            <th>Audit Date</th>
+                            <th>Auditor</th>
+                            <th>Audited Area</th>
+                            <th>Findings</th>
+                            <th>Actions</th>
+                            <th>Comments</th>
+                            <th>Inserted Date</th>
+                            <th>Last Modified Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            foreach (var audit in Model)
+                            {
+                                <tr>
+                                    <td>@audit.Id</td>
+                                    <td>@audit.ECID</td>
+                                    <td>@audit.AuditDate.ToShortDateString()</td>
+                                    <td>@audit.Auditor</td>
+                                    <td>@audit.AuditedArea</td>
+                                    <td>@audit.Findings</td>
+                                    <td>@audit.Actions</td>
+                                    <td>@audit.Comments</td>
+                                    <td>@audit.InsertDate.ToShortDateString()</td>
+                                    <td>@audit.ModifiedDate.ToShortDateString()</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="10" class="text-center">No audit data available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#auditsTable').DataTable({
+                "paging": true,
+                "pageLength": 5,
+                "lengthChange": false,
+                "info": false
+            });
+
+            // Parse the audit date data
+            var auditDateData = @Html.Raw(auditDateData);
+
+            // Extract labels and data for the bar chart
+            var dateLabels = auditDateData.map(function (d) { return d.AuditDate; });
+            var dateCounts = auditDateData.map(function (d) { return d.Count; });
+
+            var ctxDate = document.getElementById('auditDateChart').getContext('2d');
+            new Chart(ctxDate, {
+                type: 'bar',
+                data: {
+                    labels: dateLabels,
+                    datasets: [{
+                        label: 'Audit Dates',
+                        data: dateCounts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month-Year'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Audit Count'
+                            },
+                            min: 0,
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function (context) {
+                                    return context[0].label;
+                                },
+                                label: function (context) {
+                                    return `Count: ${context.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Parse the auditor data
+            var auditorData = @Html.Raw(auditorData);
+
+            // Extract labels and data for the pie chart
+            var auditorLabels = auditorData.map(function (d) { return d.Auditor; });
+            var auditorCounts = auditorData.map(function (d) { return d.Count; });
+
+            var ctxAuditor = document.getElementById('auditorChart').getContext('2d');
+            new Chart(ctxAuditor, {
+                type: 'pie',
+                data: {
+                    labels: auditorLabels,
+                    datasets: [{
+                        label: 'Auditor',
+                        data: auditorCounts,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+        });
+    </script>
+}

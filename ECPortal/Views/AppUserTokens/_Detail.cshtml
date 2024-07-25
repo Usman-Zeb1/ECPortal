@@ -1,0 +1,45 @@
+﻿@model AppUserToken
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col">
+            <dl class="row">
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.UserAdLogin)">
+                    @Html.DisplayNameFor(model => model.UserAdLogin)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.UserAdLogin)
+                </dd>
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.Token)">
+                    @Html.DisplayNameFor(model => model.Token)
+                </dt>
+                <dd class="col-sm-8">
+                    <a href="@Model.Token">Click to activate</a>
+                </dd>
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.TokenType)">
+                    @Html.DisplayNameFor(model => model.TokenType)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.TokenType)
+                </dd>
+            </dl>
+        </div>
+        <div class="col">
+            <dl class="row collapse" id="MetaDetails">
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.EntryDate)">
+                    @Html.DisplayNameFor(model => model.EntryDate)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.EntryDate)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+}
+else
+{
+    <p><i>No records found</i></p>
+}
+

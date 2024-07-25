@@ -1,0 +1,42 @@
+﻿@model Employee
+
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<div class="display-4">
+    Create App User
+    <div class="float-end">
+        <img src="~/images/header/appusers-128px.png" height="80" />
+    </div>
+</div>
+<hr />
+
+<div class="card border-theme shadow rounded">
+    <div class="card-body">
+        <form asp-action="Create">
+            @await Html.PartialAsync("_Form", Model)
+        </form>
+    </div>
+</div>
+<hr />
+
+
+@section Styles {
+
+   @{
+    await Html.RenderPartialAsync("_SelectSearchStylesPartial");
+}
+
+}
+
+@section Scripts {
+
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+    @{
+    await Html.RenderPartialAsync("_SelectSearchScriptsPartial");
+}
+
+}

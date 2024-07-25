@@ -1,0 +1,190 @@
+﻿@model List<Pk.Com.Jazz.ECP.Models.QuizScores>
+@using Newtonsoft.Json;
+
+@{
+    ViewData["Title"] = "Employee Quiz Scores";
+
+    var quizStatusData = Model != null
+        ? JsonConvert.SerializeObject(Model.GroupBy(q => q.Status).Select(g => new { Status = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+
+    var quizProgressData = Model != null
+        ? JsonConvert.SerializeObject(Model.GroupBy(q => q.QuizDate).Select(g => new { Date = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+}
+
+<h1 class="text-center my-4">@ViewData["Title"]</h1>
+
+<div class="container">
+    <!-- Chart Container -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="mb-0">Quiz Status and Scores</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- Pie Chart: Quiz Status -->
+                <div class="col-md-6">
+                    <canvas id="quizStatusChart" width="400" height="200"></canvas>
+                </div>
+                <!-- Line Chart: Quiz Scores Over Time -->
+                <div class="col-md-6">
+                    <canvas id="quizProgressChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Scores Details Table -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3 class="mb-0">Quiz Scores Details</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="quizScoresTable" class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Quiz Date</th>
+                            <th>Status</th>
+                            <th>Score</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            foreach (var quiz in Model)
+                            {
+                                <tr>
+                                    <td>@quiz.Id</td>
+                                    <td>@quiz.QuizDate.ToShortDateString()</td>
+                                    <td>@quiz.Status</td>
+                                    <td>@quiz.Score</td>
+                                    <td>@quiz.Comments</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center">No quiz score data available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            $('#quizScoresTable').DataTable({
+                paging: true,
+                pageLength: 5,
+                lengthChange: false,
+                info: false
+            });
+
+            // Parse quiz status data
+            var quizStatusData = @Html.Raw(quizStatusData);
+            var quizProgressData = @Html.Raw(quizProgressData);
+
+            // Debug output
+            console.log('Quiz Status Data:', quizStatusData);
+            console.log('Quiz Progress Data:', quizProgressData);
+
+            // Pie Chart: Quiz Status
+            var ctxStatus = document.getElementById('quizStatusChart').getContext('2d');
+            new Chart(ctxStatus, {
+                type: 'pie',
+                data: {
+                    labels: quizStatusData.map(item => item.Status),
+                    datasets: [{
+                        label: 'Quiz Status',
+                        data: quizStatusData.map(item => item.Count),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Line Chart: Quiz Scores Over Time
+            var ctxProgress = document.getElementById('quizProgressChart').getContext('2d');
+            new Chart(ctxProgress, {
+                type: 'line',
+                data: {
+                    labels: quizProgressData.map(item => new Date(item.Date).toISOString().split('T')[0]),
+                    datasets: [{
+                        label: 'Quiz Count Over Time',
+                        data: quizProgressData.map(item => item.Count),
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            },
+                            ticks: {
+                                maxRotation: 90,
+                                minRotation: 45
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Count'
+                            },
+                            min: 0,
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function (context) {
+                                    return context[0].label;
+                                },
+                                label: function (context) {
+                                    return `Count: ${context.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

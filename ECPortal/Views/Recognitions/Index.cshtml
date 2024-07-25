@@ -1,0 +1,250 @@
+﻿@model List<Pk.Com.Jazz.ECP.Models.EmployeeRecognition>
+@using Newtonsoft.Json;
+@{
+    ViewData["Title"] = "Employee Recognitions";
+
+    var recognitionStatusData = Model != null
+        ? JsonConvert.SerializeObject(Model.GroupBy(r => r.Status).Select(g => new { Status = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+
+    var recognitionTypeData = Model != null
+        ? JsonConvert.SerializeObject(Model.GroupBy(r => r.RecognitionType).Select(g => new { Type = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+
+    var recognitionProgressData = Model != null
+        ? JsonConvert.SerializeObject(Model.GroupBy(r => r.RecognitionDate).Select(g => new { Date = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+}
+
+<h1 class="text-center my-4">Employee Recognitions</h1>
+
+<div class="container">
+    <!-- Chart Container -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="mb-0">Recognition Insights</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- Pie Chart: Recognition Status -->
+                <div class="col-md-4">
+                    <canvas id="recognitionStatusChart" width="400" height="200"></canvas>
+                </div>
+                <!-- Bar Chart: Recognition Types -->
+                <div class="col-md-4">
+                    <canvas id="recognitionTypeChart" width="400" height="200"></canvas>
+                </div>
+                <!-- Line Chart: Recognition Progress Over Time -->
+                <div class="col-md-4">
+                    <canvas id="recognitionProgressChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recognition Details Table -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3 class="mb-0">Recognition Details</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="recognitionsTable" class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Status</th>
+                            <th>Recognition Date</th>
+                            <th>Recognition Type</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            foreach (var recognition in Model)
+                            {
+                                <tr>
+                                    <td>@recognition.Id</td>
+                                    <td>@recognition.Status</td>
+                                    <td>@recognition.RecognitionDate.ToShortDateString()</td>
+                                    <td>@recognition.RecognitionType</td>
+                                    <td>@recognition.Comments</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="8" class="text-center">No recognition data available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            $('#recognitionsTable').DataTable({
+                paging: true,
+                pageLength: 5,
+                lengthChange: false,
+                info: false
+            });
+
+            // Parse recognition status data
+            var recognitionStatusData = @Html.Raw(recognitionStatusData);
+            var recognitionTypeData = @Html.Raw(recognitionTypeData);
+            var recognitionProgressData = @Html.Raw(recognitionProgressData);
+
+            // Pie Chart: Recognition Status
+            var ctxStatus = document.getElementById('recognitionStatusChart').getContext('2d');
+            new Chart(ctxStatus, {
+                type: 'pie',
+                data: {
+                    labels: recognitionStatusData.map(item => item.Status),
+                    datasets: [{
+                        label: 'Recognition Status',
+                        data: recognitionStatusData.map(item => item.Count),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Bar Chart: Recognition Types
+            var ctxType = document.getElementById('recognitionTypeChart').getContext('2d');
+            new Chart(ctxType, {
+                type: 'bar',
+                data: {
+                    labels: recognitionTypeData.map(item => item.Type),
+                    datasets: [{
+                        label: 'Recognition Types',
+                        data: recognitionTypeData.map(item => item.Count),
+                        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                        borderColor: 'rgba(75, 192, 192, 1',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Recognition Type'
+                            },
+                            ticks: {
+                                maxRotation: 90,
+                                minRotation: 45
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Count'
+                            },
+                            min: 0,
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function (context) {
+                                    return context[0].label;
+                                },
+                                label: function (context) {
+                                    return `Count: ${context.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Line Chart: Recognition Progress Over Time
+            var ctxProgress = document.getElementById('recognitionProgressChart').getContext('2d');
+            new Chart(ctxProgress, {
+                type: 'line',
+                data: {
+                    labels: recognitionProgressData.map(item => new Date(item.Date).toLocaleDateString()),
+                    datasets: [{
+                        label: 'Recognition Progress',
+                        data: recognitionProgressData.map(item => item.Count),
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            },
+                            ticks: {
+                                maxRotation: 90,
+                                minRotation: 45
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Count'
+                            },
+                            min: 0,
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function (context) {
+                                    return context[0].label;
+                                },
+                                label: function (context) {
+                                    return `Count: ${context.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

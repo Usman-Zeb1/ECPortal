@@ -1,0 +1,38 @@
+﻿@model AppUserToken
+
+@{
+    ViewData["Title"] = "Delete Token";
+}
+
+<div class="display-4">
+    @ViewData["Title"]
+    <div class="float-end">
+        <img src="~/images/header/usertokens-128px.png" height="80" />
+    </div>
+</div>
+<hr />
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    Are you sure you want to delete this?
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<div>
+    <div class="card border-theme shadow rounded">
+        <div class="card-body">
+
+            @await Html.PartialAsync("_Detail", Model)
+
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="AppUserTokenId" />
+                        <input type="submit" value="Delete" class="btn btn-danger btn-sm" />
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-sm">Cancel</a>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

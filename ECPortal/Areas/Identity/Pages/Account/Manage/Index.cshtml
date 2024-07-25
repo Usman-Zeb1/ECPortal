@@ -1,0 +1,129 @@
+﻿@page
+@model Pk.Com.Jazz.ECP.Areas.Identity.Pages.Account.Manage.IndexModel
+
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<script src="~/lib/tinymce/tinymce.js"></script>
+<script src="~/lib/editor.js-2.30.0-rc.10/"></script>
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+
+@* <script>
+    $(document).ready(function () {
+        tinymce.init({
+            selector: 'textarea#tiny',
+            statusbar: false,
+            plugins: [
+                'a11ychecker', 'advlist', 'advcode', 'advtable', 'autolink', 'checklist', 'markdown',
+                'lists', 'link', 'image', 'charmap', 'preview', 'anchor', 'searchreplace', 'visualblocks',
+                'powerpaste', 'fullscreen', 'formatpainter', 'insertdatetime', 'media', 'table', 'help', 'wordcount'
+            ],
+            toolbar: 'undo redo | a11ycheck casechange blocks | bold italic backcolor | alignleft aligncenter alignright alignjustify |' +
+                'bullist numlist checklist outdent indent | removeformat | code table help'
+        });
+    });
+</script> *@
+
+@* <style>
+
+
+    textarea {
+        
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        resize: vertical;
+        transition: border-color 0.3s;
+    }
+
+        textarea:focus {
+            border-color: #66afe9;
+            outline: none;
+            box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
+        }
+</style>
+ *@
+
+<style>
+    .form-control[disabled] {
+        background-color: #f8f9fa; /* Lighter background for better visibility */
+        color: #6c757d; /* Slightly darker text color */
+    }
+
+    .custom-file-input ~ .custom-file-label {
+        border: 1px solid #ced4da; /* Border to stand out */
+    }
+</style>
+<h4>@ViewData["Title"]</h4>
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <div class="text-center">
+            @if (Model.Employee.ProfilePicture != null)
+            {
+                var imageBase64 = Convert.ToBase64String(Model.Employee.ProfilePicture);
+                var imageSrc = $"data:image;base64,{imageBase64}";
+                <img src="@imageSrc" alt="Profile Image" class="img-thumbnail rounded-circle mb-3" style="width: 160px; height: 160px; object-fit: cover;" />
+            }
+            else
+            {
+                <img src="/images/default-profile.png" alt="Default Profile Image" class="img-thumbnail rounded-circle mb-3" style="width: 160px; height: 160px; object-fit: cover;" />
+            }
+        </div>
+        <form id="profile-form" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Input.Name" class="form-label"><i class="fas fa-user"></i> Name</label>
+                <input asp-for="Input.Name" class="form-control" />
+                <span asp-validation-for="Input.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Username" class="form-label"><i class="fas fa-user"></i> Username</label>
+                <input asp-for="Username" class="form-control" disabled />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Employee.EmployeeNumber" class="form-label"><i class="fas fa-id-card"></i> Employee Number</label>
+                <input asp-for="Employee.EmployeeNumber" class="form-control" disabled />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Employee.DOJ" class="form-label"><i class="fas fa-calendar-alt"></i> Date of Joining</label>
+                <input asp-for="Employee.DOJ" class="form-control" disabled />
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Input.PhoneNumber" class="form-label"><i class="fas fa-phone"></i> Phone Number</label>
+                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="Input.Summary" class="form-label"><i class="fas fa-info-circle"></i> Summary</label>
+                <textarea id="tiny" asp-for="Input.Summary" placeholder="Enter your Bio..." class="form-control"></textarea>
+                <span asp-validation-for="Input.Summary" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-4">
+                <label asp-for="Input.ProfilePicture" class="form-label"><i class="fas fa-image"></i> Profile Image</label>
+                <div class="custom-file">
+                    <input type="file" asp-for="Input.ProfilePicture" class="custom-file-input" id="profilePicture">
+                    
+                </div>
+                <span asp-validation-for="Input.ProfilePicture" class="text-danger"></span>
+            </div>
+
+            <button id="update-profile-button" type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-save"></i> Save
+            </button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,97 @@
+﻿@model Employee
+
+
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<AppUser> _userManager
+
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col">
+            <dl class="row">
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.DisplayName)">
+                    @Html.DisplayNameFor(model => model.DisplayName)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.DisplayName)
+                </dd>
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.UserAdLogin)">
+                    @Html.DisplayNameFor(model => model.UserAdLogin)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.UserAdLogin)
+                </dd>
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.EmployeeId)">
+                    @Html.DisplayNameFor(model => model.EmployeeId)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.EmployeeId)
+                </dd>
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="User Role">
+                    @Html.DisplayName("User Role")
+                </dt>
+                <dd class="col-sm-8">
+                    @{
+                        var user = await _userManager.FindByIdAsync(Model.AppUserId);
+                        if (user != null)
+                        {
+                            var roles = await _userManager.GetRolesAsync(user);
+                            if (roles.Any())
+                            {
+                                <text>@roles.First()</text>
+                            }
+                            else
+                            {
+                                <text>No role assigned</text>
+                            }
+                        }
+                        else
+                        {
+                            <text>User not found</text>
+                        }
+                    }
+                </dd>
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.Summary)">
+                    @Html.DisplayNameFor(model => model.Summary)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Summary)
+                </dd>
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.IsEnabled)">
+                    @Html.DisplayNameFor(model => model.IsEnabled)
+                </dt>
+                <dd class="col-sm-8">
+                    @Model.IsEnabled.ToYesNo()
+                </dd>
+            </dl>
+        </div>
+        <div class="col">
+            <dl class="row collapse" id="MetaDetails">
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.EditBy)">
+                    @Html.DisplayNameFor(model => model.EditBy)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.EditByShort)
+                </dd>
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.ModifiedDate)">
+                    @Html.DisplayNameFor(model => model.ModifiedDate)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.ModifiedDate)
+                </dd>
+                <dt class="col-sm-4" data-bs-toggle="tooltip" data-bs-placement="top" title="@Html.DisplayDescriptionFor(model => model.EntryDate)">
+                    @Html.DisplayNameFor(model => model.EntryDate)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.EntryDate)
+                </dd>
+            </dl>
+        </div>
+    </div>
+
+}
+else
+{
+    <p><i>No records found</i></p>
+}

@@ -1,0 +1,14 @@
+﻿
+@{
+    bool isPush = TempData["IsPush"] == null ? false : Convert.ToBoolean(TempData["IsPush"]);
+
+    if (isPush)
+    {
+    <div class="alert @TempData["PushType"] alert-dismissible fade show" role="alert">
+        @Html.Raw(TempData["PushMessage"])
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    }
+}

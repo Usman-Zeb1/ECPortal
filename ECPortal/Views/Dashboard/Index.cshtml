@@ -1,0 +1,178 @@
+﻿@using Pk.Com.Jazz.ECP.ViewModels;
+@model DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h1 class="text-center my-4">Employee Dashboard</h1>
+
+<div class="container">
+    <!-- Employee Details -->
+    <a href="Identity/Account/Manage" class="text-decoration-none">
+        <div class="card mb-4 shadow-sm">
+            <div class="card-header bg-secondary text-white">
+                <h3 class="mb-0">Employee Details</h3>
+            </div>
+            <div class="card-body text-black">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Name:</strong> @Model.Employee.EmployeeName</p>
+                        <p><strong>Employee Number:</strong> @Model.Employee.EmployeeNumber</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>User Login:</strong> @Model.Employee.UserAdLogin</p>
+                        <p><strong>Date of Joining:</strong> @Model.Employee.DOJ</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>Experience Center ID:</strong> @Model.Employee.ECID</p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Role Name:</strong> @Model.Role</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </a>
+
+    <!-- Summaries -->
+    <div class="row">
+        <!-- Employee Commissions Summary -->
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Index", "Commissions")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Commissions</h5>
+                    </div>
+                    <div class="card-body text-black">
+                        <p><strong>Total:</strong> @Model.EmployeeCommissionsCount</p>
+                        <p><strong>Last Date:</strong> @Model.LastCommissionDate?.ToShortDateString()</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Employee Feedback Summary -->
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Index", "Feedbacks")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Feedbacks</h5>
+                    </div>
+                    <div class="card-body text-black">
+                        <p><strong>Total:</strong> @Model.EmployeeFeedbacksCount</p>
+                        <p><strong>Last Date:</strong> @Model.LastFeedbackDate?.ToShortDateString()</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Employee Performance Summary -->
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Index", "Performance")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Performance</h5>
+                    </div>
+                    <div class="card-body text-black">
+                        <p><strong>Score:</strong> @Model.EmployeePerformanceScore</p>
+                        <p><strong>Last Date:</strong> @Model.LastPerformanceDate?.ToShortDateString()</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Employee Trainings Summary -->
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Index", "Trainings")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Trainings</h5>
+                    </div>
+                    <div class="card-body text-black">
+                        <p><strong>Total:</strong> @Model.EmployeeTrainingsCount</p>
+                        <p><strong>Last Date:</strong> @Model.LastTrainingDate?.ToShortDateString()</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <!-- Employee Sales Summary -->
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Index", "Sales")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Sales</h5>
+                    </div>
+                    <div class="card-body text-black">
+                        <p><strong>Total:</strong> @Model.EmployeeSalesCount</p>
+                        <p><strong>Last Date:</strong> @Model.LastSalesDate?.ToShortDateString()</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Employee Recognitions Summary -->
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Index", "Recognitions")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Recognitions</h5>
+                    </div>
+                    <div class="card-body text-black">
+                        <p><strong>Total:</strong> @Model.EmployeeRecognitionsCount</p>
+                        <p><strong>Last Date:</strong> @Model.LastRecognitionDate?.ToShortDateString()</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Employee Targets Summary -->
+        <div class="col-md-4 mb-4">
+            <a href="@Url.Action("Index", "Targets")" class="text-decoration-none">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-dark text-white">
+                        <h5 class="mb-0">Targets</h5>
+                    </div>
+                    <div class="card-body text-black">
+                        <p><strong>Total:</strong> @Model.EmployeeTargetsCount</p>
+                        <p><strong>Last Date:</strong> @Model.LastTargetDate?.ToShortDateString()</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        border-radius: 10px;
+    }
+
+    .card-header {
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .card-body p {
+        font-size: 1.1em;
+    }
+
+
+    h1 {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin-bottom: 30px
+    }
+
+    .a {
+        color: #0000;
+    }
+    </style>

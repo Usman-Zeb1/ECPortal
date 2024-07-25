@@ -1,0 +1,188 @@
+﻿@model List<Pk.Com.Jazz.ECP.Models.EmployeeEDA>
+@using Newtonsoft.Json;
+
+@{
+    ViewData["Title"] = "Employee EDAs";
+
+    var edaStatusData = Model != null
+        ? JsonConvert.SerializeObject(Model.GroupBy(e => e.Status).Select(g => new { Status = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+
+    var edaProgressData = Model != null
+        ? JsonConvert.SerializeObject(Model.GroupBy(e => e.EDAStartDate).Select(g => new { Date = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+}
+
+<h1 class="text-center my-4">@ViewData["Title"]</h1>
+
+<div class="container">
+    <!-- Chart Container -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="mb-0">EDA Status and Progress</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- Pie Chart: EDA Status -->
+                <div class="col-md-6">
+                    <canvas id="edaStatusChart" width="400" height="200"></canvas>
+                </div>
+                <!-- Line Chart: EDA Progress Over Time -->
+                <div class="col-md-6">
+                    <canvas id="edaProgressChart" width="400" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EDA Details Table -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3 class="mb-0">EDA Details</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="edasTable" class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>EDA Name</th>
+                            <th>Status</th>
+                            <th>EDA Start Date</th>
+                            <th>EDA End Date</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            foreach (var eda in Model)
+                            {
+                                <tr>
+                                    <td>@eda.Id</td>
+                                    <td>@eda.EDAName</td>
+                                    <td>@eda.Status</td>
+                                    <td>@eda.EDAStartDate.ToShortDateString()</td>
+                                    <td>@eda.EDAEndDate.ToShortDateString()</td>
+                                    <td>@eda.Comments</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9" class="text-center">No EDA data available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            // Initialize DataTable
+            $('#edasTable').DataTable({
+                paging: true,
+                pageLength: 5,
+                lengthChange: false,
+                info: false
+            });
+
+            // Parse EDA status data
+            var edaStatusData = @Html.Raw(edaStatusData);
+            var edaProgressData = @Html.Raw(edaProgressData);
+
+            // Pie Chart: EDA Status
+            var ctxStatus = document.getElementById('edaStatusChart').getContext('2d');
+            new Chart(ctxStatus, {
+                type: 'pie',
+                data: {
+                    labels: edaStatusData.map(item => item.Status),
+                    datasets: [{
+                        label: 'EDA Status',
+                        data: edaStatusData.map(item => item.Count),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Line Chart: EDA Progress Over Time
+            var ctxProgress = document.getElementById('edaProgressChart').getContext('2d');
+            new Chart(ctxProgress, {
+                type: 'line',
+                data: {
+                    labels: edaProgressData.map(item => item.Date.toString().split('T')[0]),
+                    datasets: [{
+                        label: 'EDA Progress',
+                        data: edaProgressData.map(item => item.Count),
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            },
+                            ticks: {
+                                maxRotation: 90,
+                                minRotation: 45
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Count'
+                            },
+                            min: 0,
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function (context) {
+                                    return context[0].label;
+                                },
+                                label: function (context) {
+                                    return `Count: ${context.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

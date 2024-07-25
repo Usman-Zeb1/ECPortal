@@ -1,0 +1,29 @@
+﻿
+@if (User.IsInRole("Admin"))
+{
+    <small><span class="badge rounded-pill bg-theme text-light">Admin</span></small>
+}
+else if (User.IsInRole("Agent"))
+{
+    <small><span class="badge rounded-pill bg-theme text-light">Agent</span></small>
+}
+else if (User.IsInRole("TeamLead"))
+{
+    <small><span class="badge rounded-pill bg-theme text-light">Lead</span></small>
+}
+else if (User.IsInRole("ECM"))
+{
+    <small><span class="badge rounded-pill bg-theme text-light">ECM</span></small>
+}
+else if (User.IsInRole("RCCH"))
+{
+    <small><span class="badge rounded-pill bg-theme text-light">RCCH</span></small>
+}
+else if (User.IsInRole("HOD"))
+{
+    <small><span class="badge rounded-pill bg-theme text-light">HOD</span></small>
+}
+else
+{
+    <small><span class="badge rounded-pill bg-theme text-light">Public</span></small>
+}
