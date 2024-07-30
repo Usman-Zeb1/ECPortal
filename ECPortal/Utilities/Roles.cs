@@ -8,6 +8,7 @@
         public const string ECM = "ECM";
         public const string RCCH = "RCCH";
         public const string HOD = "HOD";
+        public const string Trainer = "Trainer";
     }
 
 }

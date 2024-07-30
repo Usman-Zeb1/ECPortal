@@ -11,6 +11,7 @@ namespace Pk.Com.Jazz.ECP.Models
 
             ModifiedDate = DateTime.Now;
             InsertDate = DateTime.Now;
+            Status = "Pending";
 
         }
 

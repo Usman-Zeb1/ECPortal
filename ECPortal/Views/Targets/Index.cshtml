@@ -13,6 +13,12 @@
             <h3 class="mb-0">Target Status and Progress</h3>
         </div>
         <div class="card-body">
+            @if (Model == null || Model.Count == 0)
+            {
+                <div class="text-center mt-2">No targets data available for charts.</div>
+            }
+            else
+            {
             <div class="row">
                 <!-- Pie Chart: Target Status Overview -->
                 <div class="col-md-6">
@@ -23,6 +29,7 @@
                     <canvas id="targetProgressChart" width="400" height="200"></canvas>
                 </div>
             </div>
+            }
         </div>
     </div>
 

@@ -25,6 +25,12 @@
             <h3 class="mb-0">Recognition Insights</h3>
         </div>
         <div class="card-body">
+            @if (Model == null || Model.Count == 0)
+            {
+                <div class="text-center mt-2">No recognitions data available for charts.</div>
+            }
+
+            else{
             <div class="row">
                 <!-- Pie Chart: Recognition Status -->
                 <div class="col-md-4">
@@ -39,6 +45,7 @@
                     <canvas id="recognitionProgressChart" width="400" height="200"></canvas>
                 </div>
             </div>
+            }
         </div>
     </div>
 

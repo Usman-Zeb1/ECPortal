@@ -1,0 +1,16 @@
+﻿@* Views/Shared/_AgentNav.cshtml *@
+<nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color:#141212">
+    <div class="container">
+        <a data-spinner="no" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+            <img src="~/images/logo/logo-200px.png" height="35" alt="Experience Center" />
+        </a>
+        <a data-spinner="no" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Experience Center</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-sm-inline-flex flex-sm-row-reverse" id="navbarNav">
+            <partial name="_LoginPartial" />
+        </div>
+    </div>
+</nav>
+

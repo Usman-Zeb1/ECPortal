@@ -23,6 +23,12 @@
             <h3 class="mb-0">Training Overview</h3>
         </div>
         <div class="card-body">
+            @if (Model == null || Model.Count == 0)
+            {
+                <div class="text-center mt-2">No trainings data available for charts.</div>
+            }
+            else
+            {
             <div class="row">
                 <!-- Pie Chart: Training Status -->
                 <div class="col-md-6">
@@ -33,6 +39,7 @@
                     <canvas id="trainingProgressChart" width="400" height="200"></canvas>
                 </div>
             </div>
+            }
         </div>
     </div>
 

@@ -11,6 +11,7 @@ namespace Pk.Com.Jazz.ECP.Models
             ModifiedDate = DateTime.Now;
             InsertDate = DateTime.Now;
 
+
         }
 
         [Key]
@@ -21,7 +22,9 @@ namespace Pk.Com.Jazz.ECP.Models
         [Display(Name = "Experience Center ID")]
         public int? ECID { get; set; }
 
-        public EC EC { get; set; }
+
+        [ForeignKey("ECID")]
+        public virtual EC? EC { get; set; }
 
         [Required]
         [Display(Name = "Audit Date")]

@@ -1,0 +1,115 @@
+﻿@model Pk.Com.Jazz.ECP.Models.EmployeeFeedback
+
+@{
+    ViewData["Title"] = "Send Feedback";
+    var employees = ViewBag.Employees as Dictionary<int, string>;
+    var feedbackTypes = ViewBag.FeedbackTypes as List<string>;
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h2 class="card-title mb-0">@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select asp-for="EmployeeId" class="form-select" required>
+                                <option value="">-- Select Employee --</option>
+                                @foreach (var employee in employees)
+                                {
+                                    <option value="@employee.Key">@employee.Value</option>
+                                }
+                            </select>
+                            <label asp-for="EmployeeId">Select Employee</label>
+                            <div class="invalid-feedback">
+                                Please select an employee.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="FeedbackDate" class="form-control" type="date" placeholder="Feedback Date" required />
+                            <label asp-for="FeedbackDate">Feedback Date</label>
+                            <div class="invalid-feedback">
+                                Please provide a feedback date.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select asp-for="FeedbackType" class="form-select" required>
+                                <option value="">-- Select Feedback Type --</option>
+                                @foreach (var type in feedbackTypes)
+                                {
+                                    <option value="@type">@type</option>
+                                }
+                            </select>
+                            <label asp-for="FeedbackType">Feedback Type</label>
+                            <div class="invalid-feedback">
+                                Please provide a feedback type.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="ProvidedBy" class="form-control" placeholder="Provided By" readonly />
+                            <label asp-for="ProvidedBy">Provided By</label>
+                            <input asp-for="ProvidedBy" type="hidden" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="Feedback" class="form-control" placeholder="Feedback" style="height: 150px;" required></textarea>
+                            <label asp-for="Feedback">Feedback</label>
+                            <div class="invalid-feedback">
+                                Please provide the feedback.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="Comments" class="form-control" placeholder="Comments" style="height: 150px;"></textarea>
+                            <label asp-for="Comments">Comments</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary w-30">Submit Feedback</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+
+    <script>
+        (function () {
+            'use strict';
+
+            var forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+        })();
+    </script>
+}

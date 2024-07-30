@@ -6,11 +6,11 @@ namespace Pk.Com.Jazz.ECP.Models
 {
     public class ECStocks
     {
-        public ECStocks() {
-
+        public ECStocks()
+        {
             ModifiedDate = DateTime.Now;
             InsertDate = DateTime.Now;
-
+            Status = "Available"; // Set default status
         }
 
         [Key]
@@ -20,9 +20,6 @@ namespace Pk.Com.Jazz.ECP.Models
         [ForeignKey("EC")]
         [Display(Name = "Experience Center ID")]
         public int? ECID { get; set; }
-
-        public EC EC { get; set; }
-
 
         [Required]
         [Display(Name = "Inserted Date")]

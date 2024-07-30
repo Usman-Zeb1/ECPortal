@@ -1,0 +1,125 @@
+﻿@model Pk.Com.Jazz.ECP.Models.ECGiveaways
+
+@{
+    ViewData["Title"] = "Edit Giveaway";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h2 class="card-title mb-0">@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post" class="needs-validation" novalidate>
+                <input type="hidden" asp-for="Id" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select asp-for="ECID" class="form-select" asp-items="ViewBag.ECID" required>
+                                <option value="">-- Select Experience Center --</option>
+                            </select>
+                            <label asp-for="ECID">Experience Center</label>
+                            <div class="invalid-feedback">
+                                Please select an experience center.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="GiveawayItem" class="form-control" placeholder="Giveaway Item" required />
+                            <label asp-for="GiveawayItem">Giveaway Item</label>
+                            <div class="invalid-feedback">
+                                Please provide a giveaway item.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Availability" class="form-control" placeholder="Availability" required />
+                            <label asp-for="Availability">Availability</label>
+                            <div class="invalid-feedback">
+                                Please provide availability.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="QuantityAvailable" class="form-control" placeholder="Quantity Available" required />
+                            <label asp-for="QuantityAvailable">Quantity Available</label>
+                            <div class="invalid-feedback">
+                                Please provide the quantity available.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Price" class="form-control" placeholder="Price" required />
+                            <label asp-for="Price">Price</label>
+                            <div class="invalid-feedback">
+                                Please provide a price.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Status" class="form-control" placeholder="Status" required />
+                            <label asp-for="Status">Status</label>
+                            <div class="invalid-feedback">
+                                Please provide a status.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="Description" class="form-control" placeholder="Description" style="height: 150px;" required></textarea>
+                            <label asp-for="Description">Description</label>
+                            <div class="invalid-feedback">
+                                Please provide a description.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary w-30">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        (function () {
+            'use strict';
+
+            var forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+        })();
+    </script>
+}

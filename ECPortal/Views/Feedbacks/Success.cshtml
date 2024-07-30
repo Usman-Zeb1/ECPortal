@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Feedback Submitted";
+}
+
+<div class="container text-center my-5">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+    <p class="lead">Your feedback has been successfully submitted. Thank you!</p>
+    <a href="@Url.Action("Create", "Feedbacks")" class="btn btn-primary mt-4">Submit Another Feedback</a>
+</div>

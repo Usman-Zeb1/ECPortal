@@ -1,0 +1,120 @@
+﻿@model Pk.Com.Jazz.ECP.Models.ECAudits
+
+@{
+    ViewData["Title"] = "Create Audit";
+    var experienceCenters = ViewBag.ExperienceCenters as SelectList;
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h2 class="card-title mb-0">@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select asp-for="ECID" class="form-select" asp-items="ViewBag.ExperienceCenters" required>
+                                <option value="">-- Select Experience Center --</option>
+                            </select>
+                            <label asp-for="ECID">Experience Center</label>
+                            <div class="invalid-feedback">
+                                Please select an experience center.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="AuditDate" type="date" class="form-control" placeholder="Audit Date" required />
+                            <label asp-for="AuditDate">Audit Date</label>
+                            <div class="invalid-feedback">
+                                Please provide an audit date.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Auditor" class="form-control" placeholder="Auditor" required />
+                            <label asp-for="Auditor">Auditor</label>
+                            <div class="invalid-feedback">
+                                Please provide the auditor's name.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="AuditedArea" class="form-control" placeholder="Audited Area" required />
+                            <label asp-for="AuditedArea">Audited Area</label>
+                            <div class="invalid-feedback">
+                                Please provide the audited area.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="Findings" class="form-control" placeholder="Findings" style="height: 150px;" required></textarea>
+                            <label asp-for="Findings">Findings</label>
+                            <div class="invalid-feedback">
+                                Please provide the findings.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="Actions" class="form-control" placeholder="Actions" style="height: 150px;" required></textarea>
+                            <label asp-for="Actions">Actions</label>
+                            <div class="invalid-feedback">
+                                Please provide the actions.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="Comments" class="form-control" placeholder="Comments" style="height: 150px;"></textarea>
+                            <label asp-for="Comments">Comments</label>
+                        </div>
+                    </div>
+
+                    <input type="hidden" asp-for="InsertDate" value="@DateTime.Now" />
+                    <input type="hidden" asp-for="ModifiedDate" value="@DateTime.Now" />
+
+                    <div class="col-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary w-30">Submit Audit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            'use strict';
+
+            var forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+        })();
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

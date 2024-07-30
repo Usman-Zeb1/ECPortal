@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 ﻿.banner {
+=======
+﻿/*banner {
+>>>>>>> Stashed changes
     background-color: #e9ecef;
     padding: 20px;
     text-align: center;
@@ -6,11 +10,19 @@
     margin: 20px 0;
 }
 
+<<<<<<< Updated upstream
     .banner h2 {
         margin: 0;
         font-size: 24px;
         color: #343a40;
     }
+=======
+.banner h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #343a40;
+}
+>>>>>>> Stashed changes
 
 .form-group {
     margin-bottom: 20px;
@@ -19,11 +31,20 @@
     align-items: center;
 }
 
+<<<<<<< Updated upstream
     .form-group label {
         width: 100%;
         max-width: 800px;
         text-align: left;
     }
+=======
+.form-group label {
+        width: 100%;
+        max-width: 800px;
+        text-align: left;
+
+}
+>>>>>>> Stashed changes
 
     .form-group input,
     .form-group select,
@@ -39,3 +60,7 @@
     display: block;
     text-align: center;
 }
+<<<<<<< Updated upstream
+=======
+*/
+>>>>>>> Stashed changes

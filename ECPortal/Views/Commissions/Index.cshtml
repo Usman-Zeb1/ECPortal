@@ -22,16 +22,25 @@
             <h3 class="mb-0">Commission Status and Progress</h3>
         </div>
         <div class="card-body">
-            <div class="row">
-                <!-- Pie Chart: Commission Status -->
+            @if (Model == null || Model.Count == 0)
+            {
+                <div class="text-center mt-2">No commissions data available for charts.</div>
+            }
+
+            else
+            {
+                <div class="row">
+               
                 <div class="col-md-6">
                     <canvas id="commissionStatusChart" width="400" height="200"></canvas>
                 </div>
-                <!-- Line Chart: Commission Progress Over Time -->
+                
                 <div class="col-md-6">
                     <canvas id="commissionProgressChart" width="400" height="200"></canvas>
                 </div>
-            </div>
+                </div>
+            }
+            
         </div>
     </div>
 

@@ -1,0 +1,41 @@
+﻿@model Pk.Com.Jazz.ECP.Models.ECStocks
+
+@{
+    ViewData["Title"] = "Delete Stock";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h2 class="card-title mb-0">@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            <h4>Are you sure you want to delete this?</h4>
+            <hr />
+            <h4>Details</h4>
+            <dl class="row">
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ProductName)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ProductName)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Quantity)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Quantity)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Price)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Price)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.ECID)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.ECID)</dd>
+
+                <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Comments)</dt>
+                <dd class="col-sm-9">@Html.DisplayFor(model => model.Comments)</dd>
+            </dl>
+            <form asp-action="DeleteConfirmed" asp-controller="Stocks" method="post">
+                <input type="hidden" asp-for="Id" value="@Model.Id" />
+                <div class="d-flex justify-content-start">
+                    <button type="submit" class="btn btn-danger me-2">Delete</button>
+                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

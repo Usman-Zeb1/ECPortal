@@ -12,10 +12,13 @@
             <h3 class="mb-0">Feedback Chart</h3>
         </div>
         <div class="card-body">
-            <canvas id="feedbackChart" width="600" height="300"></canvas>
             @if (Model == null || Model.Count == 0)
             {
                 <div class="text-center mt-2">No feedback data available for chart.</div>
+            }
+            else
+            {
+                <canvas id="feedbackChart" width="600" height="300"></canvas>
             }
         </div>
     </div>
@@ -74,63 +77,74 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
-            var ctx = document.getElementById('feedbackChart').getContext('2d');
-            var feedbackDates = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model?.Select(f => f.FeedbackDate.ToShortDateString()).ToList() ?? new List<string>()));
-            var feedbackCounts = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model?.GroupBy(f => f.FeedbackDate).Select(g => g.Count()).ToList() ?? new List<int>()));
+            var feedbackData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
 
-            var feedbackChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: feedbackDates,
-                    datasets: [{
-                        label: 'Feedback Count',
-                        data: feedbackCounts,
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Date'
+            if (feedbackData && feedbackData.length > 0) {
+                var ctx = document.getElementById('feedbackChart').getContext('2d');
+                var feedbackDates = feedbackData.map(f => new Date(f.FeedbackDate).toLocaleDateString());
+                var feedbackCounts = feedbackData.reduce((acc, curr) => {
+                    var date = new Date(curr.FeedbackDate).toLocaleDateString();
+                    acc[date] = (acc[date] || 0) + 1;
+                    return acc;
+                }, {});
+
+                var labels = Object.keys(feedbackCounts);
+                var counts = Object.values(feedbackCounts);
+
+                var feedbackChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Feedback Count',
+                            data: counts,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date'
+                                },
+                                ticks: {
+                                    maxRotation: 90,
+                                    minRotation: 45
+                                }
                             },
-                            ticks: {
-                                maxRotation: 90,
-                                minRotation: 45
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Feedback Count'
+                                },
+                                min: 0,
+                                beginAtZero: true
                             }
                         },
-                        y: {
-                            title: {
+                        plugins: {
+                            legend: {
                                 display: true,
-                                text: 'Feedback Count'
+                                position: 'top'
                             },
-                            min: 0,
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                title: function (context) {
-                                    return context[0].label;
-                                },
-                                label: function (context) {
-                                    return `Count: ${context.raw}`;
+                            tooltip: {
+                                callbacks: {
+                                    title: function (context) {
+                                        return context[0].label;
+                                    },
+                                    label: function (context) {
+                                        return `Count: ${context.raw}`;
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            });
+                });
+            }
         });
     </script>
 }

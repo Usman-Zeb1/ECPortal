@@ -1,0 +1,86 @@
+﻿@model Pk.Com.Jazz.ECP.Models.TrainingRequests
+
+@{
+    ViewData["Title"] = "Create Training Request";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h2 class="card-title mb-0">@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" asp-controller="Trainings" method="post" class="needs-validation" novalidate>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="TrainingName" class="form-control" placeholder="Training Name" required />
+                            <label asp-for="TrainingName">Training Name</label>
+                            <span asp-validation-for="TrainingName" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Please provide a training name.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="RequestDate" type="date" class="form-control" placeholder="Request Date" required />
+                            <label asp-for="RequestDate">Request Date</label>
+                            <span asp-validation-for="RequestDate" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Please provide a request date.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="RequestDetails" class="form-control" placeholder="Request Details" style="height: 150px;" required></textarea>
+                            <label asp-for="RequestDetails">Request Details</label>
+                            <span asp-validation-for="RequestDetails" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Please provide the request details.
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" asp-for="SubmissionDate" value="@DateTime.Now" />
+
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="Comments" class="form-control" placeholder="Comments" style="height: 150px;"></textarea>
+                            <label asp-for="Comments">Comments</label>
+                            <span asp-validation-for="Comments" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary w-30">Submit Request</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            'use strict';
+
+            var forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+        })();
+    </script>
+
+}

@@ -1,0 +1,104 @@
+﻿@model Pk.Com.Jazz.ECP.Models.ECStocks
+
+@{
+    ViewData["Title"] = "Edit Stock";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h2 class="card-title mb-0">@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post" class="needs-validation" novalidate>
+                <input type="hidden" asp-for="Id" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select asp-for="ECID" class="form-select" asp-items="ViewBag.ECID" required>
+                                <option value="">-- Select Experience Center --</option>
+                            </select>
+                            <label asp-for="ECID">Experience Center</label>
+                            <div class="invalid-feedback">
+                                Please select an experience center.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="ProductName" class="form-control" placeholder="Product Name" required />
+                            <label asp-for="ProductName">Product Name</label>
+                            <div class="invalid-feedback">
+                                Please provide a product name.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Quantity" class="form-control" placeholder="Quantity" required />
+                            <label asp-for="Quantity">Quantity</label>
+                            <div class="invalid-feedback">
+                                Please provide the quantity.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Price" class="form-control" placeholder="Price" required />
+                            <label asp-for="Price">Price</label>
+                            <div class="invalid-feedback">
+                                Please provide a price.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="Comments" class="form-control" placeholder="Comments" style="height: 150px;"></textarea>
+                            <label asp-for="Comments">Comments</label>
+                            <div class="invalid-feedback">
+                                Please provide comments.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary w-30">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            'use strict';
+
+            var forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+        })();
+    </script>
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

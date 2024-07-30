@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -9,11 +13,15 @@
     <meta name="generator" content="EC v1 1.0">
     <meta name="keywords" content="ec,ecp">
     <title>@ViewData["Title"] - Experience Center</title>
+
     <!--bootstrap css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css"
           integrity="sha512-GQGU0fMMi238uA+a/bdWJfpUGKUkBdgfFdgBm72SUQ6BeyWjoY/ton0tEjH+OSH9iP4Dfh+7HM0I9f5eR0L/4w=="
           crossorigin="anonymous"
           referrerpolicy="no-referrer" />
+
+
+    <link rel="stylesheet" href="~/css/form.css" />
     <!--font awesome css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
@@ -28,13 +36,19 @@
             integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"></script>
+
+    <!--popper js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"
+            integrity="sha512-oBqDVmMz4fnFO9gybII3sA0F5tnaQQK8YJgd0QkB1EQ2kKFyShZzA6y4eJpKA5kM23yLGkGAf/6r9ExNHW11w=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
     <!--bootstrap js-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.bundle.min.js"
             integrity="sha512-pax4MlgXjHEPfCwcJLQhigY7+N8rt6bVvWLFyUMuxShv170X53TRzGPmPkZmGBhk+jikR8WBM4yl7A9WMHHqvg=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer"></script>
     <!--global script-->
-    <script src="~/js/site.js"></script>
+    <script src="~/js/site.js?v=@Guid.NewGuid()"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap5.min.css">
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
@@ -43,6 +57,7 @@
 </head>
 <body>
     <header>
+<<<<<<< Updated upstream
         <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color:#141212">
             <div class="container">
                 <a data-spinner="no" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
@@ -108,7 +123,47 @@
                 </div>
             </div>
         </nav>
+=======
+    @if(SignInManager.IsSignedIn(User))
+    {
+        if (User.IsInRole("Agent"))
+        {
+            <partial name="~/Views/Shared/Navigations/_AgentNav.cshtml" />
+        }
+        else if (User.IsInRole("RCCH"))
+        {
+            <partial name="~/Views/Shared/Navigations/_RCCHNav.cshtml" />
+        }
+        else if (User.IsInRole("HOD"))
+        {
+            <partial name="~/Views/Shared/Navigations/_HODNav.cshtml" />
+        }
+        else if (User.IsInRole("ECM"))
+        {
+            <partial name="~/Views/Shared/Navigations/_ECMNav.cshtml" />
+        }
+        else if (User.IsInRole("Admin"))
+        {
+            <partial name="~/Views/Shared/Navigations/_AdminNav.cshtml" />
+        }
+        else if (User.IsInRole("TeamLead"))
+        {
+            <partial name="~/Views/Shared/Navigations/_TeamLeadNav.cshtml" />
+        }
+        else if (User.IsInRole("Trainer"))
+        {
+            <partial name="~/Views/Shared/Navigations/_TrainerNav.cshtml" />
+        }
+    } 
+    
+    else
+    {
+        <partial name="~/Views/Shared/Navigations/_UnverifiedNav.cshtml"/>
+    }
+
+>>>>>>> Stashed changes
     </header>
+    
     <div class="content">
         <section class="container">
             <partial name="_PushMessage" />

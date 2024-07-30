@@ -10,6 +10,8 @@ namespace Pk.Com.Jazz.ECP.Models
 
             ModifiedDate = DateTime.Now;
             InsertDate = DateTime.Now;
+            FeedbackDate = DateTime.Now;
+            Status = "Pending";
 
         }
 
@@ -20,7 +22,6 @@ namespace Pk.Com.Jazz.ECP.Models
 
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
 
         [Required]
         public DateTime InsertDate { get; set; }
@@ -28,7 +29,7 @@ namespace Pk.Com.Jazz.ECP.Models
         [Required]
         public DateTime ModifiedDate { get; set; }
 
-        [Required]
+    
         [MaxLength(50)]
         public string Status { get; set; } // e.g., Pending, Reviewed, Resolved
 

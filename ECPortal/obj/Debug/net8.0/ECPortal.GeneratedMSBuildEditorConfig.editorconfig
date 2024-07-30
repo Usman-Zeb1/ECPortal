@@ -230,6 +230,13 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwVXNlclRva2Vuc1xfR3JpZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+<<<<<<< Updated upstream
+=======
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Audits/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXVkaXRzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+>>>>>>> Stashed changes
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Audits/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXVkaXRzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -246,14 +253,41 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRURBc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+<<<<<<< Updated upstream
+=======
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Feedbacks/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+>>>>>>> Stashed changes
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Feedbacks/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+<<<<<<< Updated upstream
+=======
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Feedbacks/Success.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmVlZGJhY2tzXFN1Y2Nlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Giveaways/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2l2ZWF3YXlzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Giveaways/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2l2ZWF3YXlzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Giveaways/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2l2ZWF3YXlzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+>>>>>>> Stashed changes
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Giveaways/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2l2ZWF3YXlzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+<<<<<<< Updated upstream
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Giveaways/Index1.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2l2ZWF3YXlzXEluZGV4MS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -266,6 +300,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGllcmFyY2h5XF9Gb3JtLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+=======
+>>>>>>> Stashed changes
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -286,6 +322,13 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUXVpelNjb3Jlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+<<<<<<< Updated upstream
+=======
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Recognitions/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2duaXRpb25zXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+>>>>>>> Stashed changes
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Recognitions/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2duaXRpb25zXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -298,6 +341,41 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+<<<<<<< Updated upstream
+=======
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Shared/Navigations/_AdminNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5hdmlnYXRpb25zXF9BZG1pbk5hdi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Shared/Navigations/_AgentNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5hdmlnYXRpb25zXF9BZ2VudE5hdi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Shared/Navigations/_ECMNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5hdmlnYXRpb25zXF9FQ01OYXYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Shared/Navigations/_HODNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5hdmlnYXRpb25zXF9IT0ROYXYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Shared/Navigations/_RCCHNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5hdmlnYXRpb25zXF9SQ0NITmF2LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Shared/Navigations/_TeamLeadNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5hdmlnYXRpb25zXF9UZWFtTGVhZE5hdi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Shared/Navigations/_TrainerNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5hdmlnYXRpb25zXF9UcmFpbmVyTmF2LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Shared/Navigations/_UnverifiedNav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5hdmlnYXRpb25zXF9VbnZlcmlmaWVkTmF2LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+>>>>>>> Stashed changes
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Shared/_DataTableScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9EYXRhVGFibGVTY3JpcHRzUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -338,6 +416,21 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+<<<<<<< Updated upstream
+=======
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Stocks/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Stocks/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Stocks/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+>>>>>>> Stashed changes
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Stocks/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -350,6 +443,13 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVE5Bc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+<<<<<<< Updated upstream
+=======
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Trainings/AddTraining.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhaW5pbmdzXEFkZFRyYWluaW5nLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+>>>>>>> Stashed changes
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Trainings/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhaW5pbmdzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Pk.Com.Jazz.ECP.Controllers
 {
@@ -35,5 +36,32 @@ namespace Pk.Com.Jazz.ECP.Controllers
 
             return View(trainings);
         }
+
+        // GET: Training/AddTraining
+        public IActionResult AddTraining()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(TrainingRequests trainingRequest)
+        {
+            if (ModelState.IsValid)
+            {
+                // Ensure SubmissionDate is set to the current date and time
+                trainingRequest.SubmissionDate = DateTime.Now;
+
+                //Set to Pending Status
+                trainingRequest.Status = "Pending";
+
+                _context.TrainingRequests.Add(trainingRequest);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index)); // Redirect to a list or index page
+            }
+
+            return View(trainingRequest);
+        }
     }
-}
+    }

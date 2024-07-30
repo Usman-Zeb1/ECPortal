@@ -1,5 +1,64 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Pk.Com.Jazz.ECP.Models.ECGiveaways>
+
 @{
+    ViewData["Title"] = "Manage Giveaways";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h1 class="card-title mb-0">@ViewData["Title"]</h1>
+        </div>
+        <div class="card-body">
+            <p>
+                <a asp-action="Create" class="btn btn-primary">Add New Giveaway</a>
+            </p>
+
+            <table class="table table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.First().ECID)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().GiveawayItem)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().QuantityAvailable)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Price)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Status)</th>
+                        <th>@Html.DisplayNameFor(model => model.First().Availability)</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@(item.ECID != null ? item.ECID.ToString() : "N/A")</td>
+                                <td>@(!string.IsNullOrEmpty(item.GiveawayItem) ? item.GiveawayItem : "N/A")</td>
+                                <td>@(item.QuantityAvailable.ToString())</td>
+                                <td>@(item.Price.ToString("0.00"))</td>
+                                <td>@(!string.IsNullOrEmpty(item.Status) ? item.Status : "N/A")</td>
+                                <td>@(item.Availability)</td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7" class="text-center">No giveaways available.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

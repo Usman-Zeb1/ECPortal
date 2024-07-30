@@ -816,7 +816,7 @@ namespace Pk.Com.Jazz.ECP.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int?>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("InsertDate")
@@ -829,6 +829,11 @@ namespace Pk.Com.Jazz.ECP.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("RecognitionType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("RecognizedBy")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -1051,6 +1056,46 @@ namespace Pk.Com.Jazz.ECP.Migrations
                     b.ToTable("QuizScores");
                 });
 
+            modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.TrainingRequests", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime?>("ApprovedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Comments")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("RequestDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RequestDetails")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("SubmissionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TrainingName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TrainingRequests");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -1115,24 +1160,20 @@ namespace Pk.Com.Jazz.ECP.Migrations
 
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.ECGiveaways", b =>
                 {
-                    b.HasOne("Pk.Com.Jazz.ECP.Models.EC", "EC")
+                    b.HasOne("Pk.Com.Jazz.ECP.Models.EC", null)
                         .WithMany("ECGiveaways")
                         .HasForeignKey("ECID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("EC");
                 });
 
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.ECStocks", b =>
                 {
-                    b.HasOne("Pk.Com.Jazz.ECP.Models.EC", "EC")
+                    b.HasOne("Pk.Com.Jazz.ECP.Models.EC", null)
                         .WithMany("ECStocks")
                         .HasForeignKey("ECID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("EC");
                 });
 
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.ECTNA", b =>
@@ -1183,13 +1224,11 @@ namespace Pk.Com.Jazz.ECP.Migrations
 
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeeFeedback", b =>
                 {
-                    b.HasOne("Pk.Com.Jazz.ECP.Models.Employee", "Employee")
+                    b.HasOne("Pk.Com.Jazz.ECP.Models.Employee", null)
                         .WithMany("EmployeeFeedbacks")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeePerformance", b =>
@@ -1207,9 +1246,7 @@ namespace Pk.Com.Jazz.ECP.Migrations
                 {
                     b.HasOne("Pk.Com.Jazz.ECP.Models.Employee", "Employee")
                         .WithMany("EmployeeRecognitions")
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("EmployeeId");
 
                     b.Navigation("Employee");
                 });

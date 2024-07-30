@@ -1,0 +1,102 @@
+﻿@model Pk.Com.Jazz.ECP.Models.EmployeeRecognition
+
+@{
+    ViewData["Title"] = "Add Recognition";
+    var employees = ViewBag.Employees as List<SelectListItem>;
+    var recognitionTypes = ViewBag.RecognitionTypes as SelectList;
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h2 class="card-title mb-0">@ViewData["Title"]</h2>
+        </div>
+        <div class="card-body">
+            <form asp-action="Create" asp-controller="Recognitions" method="post" class="needs-validation" novalidate>
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select asp-for="EmployeeId" class="form-select" asp-items="employees" required>
+                                <option value="">-- Select Employee --</option>
+                            </select>
+                            <label asp-for="EmployeeId">Employee</label>
+                            <span asp-validation-for="EmployeeId" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Please select an employee.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="RecognitionDate" type="date" class="form-control" placeholder="Recognition Date" required />
+                            <label asp-for="RecognitionDate">Recognition Date</label>
+                            <span asp-validation-for="RecognitionDate" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Please provide a recognition date.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <select asp-for="RecognitionType" class="form-select" asp-items="recognitionTypes" required>
+                                <option value="">-- Select Recognition Type --</option>
+                            </select>
+                            <label asp-for="RecognitionType">Recognition Type</label>
+                            <span asp-validation-for="RecognitionType" class="text-danger"></span>
+                            <div class="invalid-feedback">
+                                Please select a recognition type.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="RecognizedBy" class="form-control" placeholder="Recognized By" readonly />
+                            <label asp-for="RecognizedBy">Recognized By</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-floating mb-3">
+                            <textarea asp-for="Comments" class="form-control" placeholder="Comments" style="height: 150px;"></textarea>
+                            <label asp-for="Comments">Comments</label>
+                            <span asp-validation-for="Comments" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <input type="hidden" asp-for="InsertDate" value="@DateTime.Now" />
+                    <input type="hidden" asp-for="ModifiedDate" value="@DateTime.Now" />
+
+                    <div class="col-12 d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary w-30">Submit Recognition</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        (function () {
+            'use strict';
+
+            var forms = document.querySelectorAll('.needs-validation');
+
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+        })();
+    </script>
+
+}

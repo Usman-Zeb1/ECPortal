@@ -22,7 +22,14 @@
             <h3 class="mb-0">Quality Status and Scores</h3>
         </div>
         <div class="card-body">
-            <div class="row">
+
+            @if (Model == null || Model.Count == 0)
+            {
+                <div class="text-center mt-2">No quality scores data available for charts.</div>
+            }
+            else
+            {
+                <div class="row">
                 <!-- Pie Chart: Quality Status -->
                 <div class="col-md-6">
                     <canvas id="QualityStatusChart" width="400" height="200"></canvas>
@@ -31,7 +38,9 @@
                 <div class="col-md-6">
                     <canvas id="QualityProgressChart" width="400" height="200"></canvas>
                 </div>
-            </div>
+                </div>
+            }
+            
         </div>
     </div>
 

@@ -81,12 +81,14 @@ public class Startup
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
         });
+
+        CreateRoles(serviceProvider).Wait();
     }
 
     private async Task CreateRoles(IServiceProvider serviceProvider)
     {
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        string[] roleNames = { Roles.Admin, Roles.Agent, Roles.TeamLead, Roles.RCCH, Roles.ECM, Roles.HOD };
+        string[] roleNames = { Roles.Admin, Roles.Agent, Roles.TeamLead, Roles.RCCH, Roles.ECM, Roles.HOD, Roles.Trainer };
         IdentityResult roleResult;
 
         foreach (var roleName in roleNames)
