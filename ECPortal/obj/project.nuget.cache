@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< Updated upstream
-  "dgSpecHash": "VMU5N9fQ5Jg=",
-=======
   "dgSpecHash": "OF+GIo540MM=",
->>>>>>> Stashed changes
   "success": true,
   "projectFilePath": "C:\\Users\\usman.zeb1\\Desktop\\ECPortal\\ECPortal\\ECPortal.csproj",
   "expectedPackageFiles": [
@@ -191,14 +187,10 @@
   ],
   "logs": [
     {
-      "code": "NU1903",
+      "code": "Undefined",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'MimeKit' 4.6.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-gmc6-fwg3-75m5",
-      "libraryId": "MimeKit",
-      "targetGraphs": [
-        "net8.0"
-      ]
+      "message": "Problem reading the cache file C:\\Users\\usman.zeb1\\Desktop\\ECPortal\\ECPortal\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
     }
   ]
 }
