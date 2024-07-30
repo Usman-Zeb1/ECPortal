@@ -14,6 +14,7 @@ namespace Pk.Com.Jazz.ECP.Models
             ModifiedDate = DateTime.Now;
             EntryDate = DateTime.Now;
             IsEnabled = true;
+
         }
 
         [Key]
@@ -56,8 +57,11 @@ namespace Pk.Com.Jazz.ECP.Models
 
         [ForeignKey("AppUser")]
 
-        public string AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public string? AppUserId { get; set; }
+
+
+        [ForeignKey("AppUserId")]
+        public virtual AppUser? AppUser { get; set; }
 
         [ForeignKey("ExperienceCenter")]
         public int? ECID { get; set; }
@@ -74,7 +78,9 @@ namespace Pk.Com.Jazz.ECP.Models
         [Display(Name = "TL ID")]
         public int? TLID { get; set; }
 
-        public EC? ExperienceCenter { get; set; }
+
+        [ForeignKey("ECID")]
+        public virtual EC? ExperienceCenter { get; set; }
 
         // Navigation properties for related tables
         public ICollection<QualityScores>? QualityScores { get; set; }
@@ -95,9 +101,9 @@ namespace Pk.Com.Jazz.ECP.Models
         }
 
         [Display(Name = "Last Edit By", ShortName = "User")]
-        public string EditByShort
+        public string? EditByShort
         {
-            get { return EditBy.Replace("@jazz.com.pk", ""); }
+            get { return EditBy?.Replace("@jazz.com.pk", ""); }
         }
 
         [Display(Name = "User", ShortName = "User")]
@@ -112,7 +118,7 @@ namespace Pk.Com.Jazz.ECP.Models
         public string? Title { get; set; }
 
         [MaxLength(50)]
-        public string CNIC { get; set; }
+        public string CNIC { get; set; }   
 
         [MaxLength(50)]
         public string? DateOfJoiningBC { get; set; }

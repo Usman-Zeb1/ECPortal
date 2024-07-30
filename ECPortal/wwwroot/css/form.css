@@ -1,0 +1,41 @@
+﻿.banner {
+    background-color: #e9ecef;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    margin: 20px 0;
+}
+
+    .banner h2 {
+        margin: 0;
+        font-size: 24px;
+        color: #343a40;
+    }
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .form-group label {
+        width: 100%;
+        max-width: 800px;
+        text-align: left;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        max-width: 800px;
+    }
+
+.submit-button {
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    display: block;
+    text-align: center;
+}

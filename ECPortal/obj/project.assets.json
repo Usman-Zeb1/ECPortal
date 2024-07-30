@@ -8839,24 +8839,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\usman.zeb1\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\ghazzal.zaman\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\ECPortal.csproj",
+      "projectUniqueName": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\ECPortal.csproj",
       "projectName": "ECPortal",
-      "projectPath": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\ECPortal.csproj",
-      "packagesPath": "C:\\Users\\usman.zeb1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\obj\\",
+      "projectPath": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\ECPortal.csproj",
+      "packagesPath": "C:\\Users\\ghazzal.zaman\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\usman.zeb1\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\ghazzal.zaman\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8864,7 +8859,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8954,8 +8948,20 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'MimeKit' 4.6.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-gmc6-fwg3-75m5",
+      "libraryId": "MimeKit",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
 }

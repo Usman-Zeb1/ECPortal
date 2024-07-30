@@ -52,9 +52,11 @@ namespace Pk.Com.Jazz.ECP.Controllers
                                      .Any(ur => ur.RoleId == _context.Roles.FirstOrDefault(r => r.Name == "Dev").Id);
             }*/
 
-            var appUsers = _context.Employee
-                           // .Where(predicate)
-                            .Where(w => w.EmployeeId != 0)
+            //predicate = w => _context.AppUsers.Where()
+
+            var appUsers = _context.AppUsers
+                            // .Where(predicate)
+                            .Where(w => w.Id != null)
                             .OrderByDescending(o => o.ModifiedDate).ToList();
 
             return View(appUsers);

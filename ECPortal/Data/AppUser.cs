@@ -21,6 +21,8 @@ namespace Pk.Com.Jazz.ECP.Data
         [Display(Name = "Entry Date", ShortName = "Entry")]
         public DateTime EntryDate { get; set; }
 
+        public bool isEnabled {  get; set; }
+
         public static Dictionary<string, string> Types()
         {
             throw new NotImplementedException();

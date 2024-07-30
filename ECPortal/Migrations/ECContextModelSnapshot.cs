@@ -217,6 +217,9 @@ namespace Pk.Com.Jazz.ECP.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<bool>("isEnabled")
+                        .HasColumnType("bit");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -493,7 +496,6 @@ namespace Pk.Com.Jazz.ECP.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EmployeeId"));
 
                     b.Property<string>("AppUserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("CNIC")
@@ -890,6 +892,11 @@ namespace Pk.Com.Jazz.ECP.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<string>("Business_Center")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<string>("Comments")
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
@@ -902,6 +909,11 @@ namespace Pk.Com.Jazz.ECP.Migrations
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("RCCH_Region")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -1138,9 +1150,7 @@ namespace Pk.Com.Jazz.ECP.Migrations
                 {
                     b.HasOne("Pk.Com.Jazz.ECP.Data.AppUser", "AppUser")
                         .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AppUserId");
 
                     b.HasOne("Pk.Com.Jazz.ECP.Models.EC", "ExperienceCenter")
                         .WithMany("Employees")

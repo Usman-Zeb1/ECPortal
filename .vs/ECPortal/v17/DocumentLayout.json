@@ -1,258 +1,46 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\",
+  "WorkspaceRootPath": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\feedbackscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\feedbackscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\ghazzal.zaman\\desktop\\ecportal\\ecportal\\ecportal\\data\\eccontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\data\\eccontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\hierarchycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\ghazzal.zaman\\desktop\\ecportal\\ecportal\\ecportal\\views\\appusers\\_grid.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\appusers\\_grid.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\ghazzal.zaman\\desktop\\ecportal\\ecportal\\ecportal\\controllers\\hierarchycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\hierarchycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\views\\commissions\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\commissions\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\ghazzal.zaman\\desktop\\ecportal\\ecportal\\ecportal\\viewmodels\\employeeappuserviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\viewmodels\\employeeappuserviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\recognitionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\recognitionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\ghazzal.zaman\\desktop\\ecportal\\ecportal\\ecportal\\views\\hierarchy\\_form.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\hierarchy\\_form.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\views\\shared\\_getuserrole.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\shared\\_getuserrole.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\views\\audits\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\audits\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\areas\\identity\\pages\\account\\manage\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\areas\\identity\\pages\\account\\manage\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\dashboard\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\trainingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\trainingscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\tnascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\tnascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\targetscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\targetscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\stockscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\stockscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\salescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\salescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\quizscorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\quizscorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\qualityscorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\qualityscorescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\performancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\performancecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\giveawayscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\giveawayscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\edascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\edascontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\commissionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\commissionscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\appuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\appuserscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\migrations\\eccontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\migrations\\eccontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\migrations\\20240725070611_updated hierarchy datatypes 2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\migrations\\20240725070611_updated hierarchy datatypes 2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\migrations\\20240725070148_updated hierarchy datatypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\migrations\\20240725070148_updated hierarchy datatypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\models\\employee.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\migrations\\20240605163151_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\migrations\\20240605163151_initial.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\migrations\\20240606054618_third.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\migrations\\20240606054618_third.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\migrations\\20240605173829_second.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\migrations\\20240605173829_second.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\migrations\\20240610073612_added doj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\migrations\\20240610073612_added doj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\migrations\\20240612065203_added quizdate column to quizscores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\migrations\\20240612065203_added quizdate column to quizscores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\migrations\\20240613060750_added recorddate to qualityscores model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\migrations\\20240613060750_added recorddate to qualityscores model.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\data\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\ghazzal.zaman\\desktop\\ecportal\\ecportal\\ecportal\\data\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\data\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\wwwroot\\images\\jazz-strip.png||{177559E0-D141-11D0-92DF-00A0C9138C45}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\wwwroot\\images\\jazz-strip.png||{177559E0-D141-11D0-92DF-00A0C9138C45}"
+      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\ghazzal.zaman\\desktop\\ecportal\\ecportal\\ecportal\\views\\hierarchy\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\hierarchy\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\areas\\identity\\pages\\account\\manage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\areas\\identity\\pages\\account\\manage\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\ghazzal.zaman\\desktop\\ecportal\\ecportal\\ecportal\\views\\appusers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\appusers\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\ecportal.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\ecportal.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\.config\\dotnet-tools.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:ECPortal\\.config\\dotnet-tools.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\areas\\identity\\pages\\account\\manage\\twofactorauthentication.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\areas\\identity\\pages\\account\\manage\\twofactorauthentication.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\areas\\identity\\pages\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\areas\\identity\\pages\\_validationscriptspartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\areas\\identity\\pages\\account\\manage\\enableauthenticator.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\areas\\identity\\pages\\account\\manage\\enableauthenticator.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\areas\\identity\\pages\\account\\manage\\twofactorauthentication.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\areas\\identity\\pages\\account\\manage\\twofactorauthentication.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\utilities\\htmlhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\utilities\\htmlhelpers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\controllers\\auditscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\controllers\\auditscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\models\\qualityscores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\models\\qualityscores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\views\\qualityscores\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\qualityscores\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\views\\quizscores\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\quizscores\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\models\\quizscores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\models\\quizscores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\wwwroot\\css\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\areas\\identity\\pages\\account\\manage\\email.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\areas\\identity\\pages\\account\\manage\\email.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\utilities\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\utilities\\roles.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\utilities\\roleinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\utilities\\roleinitializer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\startup.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\views\\feedbacks\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\feedbacks\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\viewmodels\\dashboardviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\models\\employeerecognition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\models\\employeerecognition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\models\\employeeperformance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\models\\employeeperformance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\models\\employeefeedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\models\\employeefeedback.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\models\\employeeeda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\models\\employeeeda.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\models\\employeecommissions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\models\\employeecommissions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\models\\ec.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\models\\ec.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\usman.zeb1\\source\\repos\\ecportal\\ecportal\\models\\ecaudits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\models\\ecaudits.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|c:\\users\\ghazzal.zaman\\desktop\\ecportal\\ecportal\\ecportal\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{011C58A6-61A4-4820-ADA2-19A8BF5A50FE}|ECPortal\\ECPortal.csproj|solutionrelative:ecportal\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -262,807 +50,134 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "HierarchyController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\HierarchyController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\HierarchyController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\HierarchyController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\HierarchyController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T08:09:49.939Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8b06f52-6d01-11d2-aa7d-00c04f990343}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "_GetUserRole.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Shared\\_GetUserRole.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Views\\Shared\\_GetUserRole.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Shared\\_GetUserRole.cshtml",
-              "RelativeToolTip": "ECPortal\\Views\\Shared\\_GetUserRole.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-07-25T07:59:16.068Z",
+              "DocumentIndex": 0,
+              "Title": "ECContext.cs",
+              "DocumentMoniker": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Data\\ECContext.cs",
+              "RelativeDocumentMoniker": "ECPortal\\Data\\ECContext.cs",
+              "ToolTip": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Data\\ECContext.cs",
+              "RelativeToolTip": "ECPortal\\Data\\ECContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAuAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-29T12:55:52.948Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Audits\\Index.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Views\\Audits\\Index.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Audits\\Index.cshtml",
-              "RelativeToolTip": "ECPortal\\Views\\Audits\\Index.cshtml",
-              "ViewState": "AQIAABUAAAAAAAAAAAAAACYAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-12T09:30:25.372Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Commissions\\Index.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Views\\Commissions\\Index.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Commissions\\Index.cshtml",
-              "RelativeToolTip": "ECPortal\\Views\\Commissions\\Index.cshtml",
-              "ViewState": "AQIAAEsAAAAAAAAAAAAAAFEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-12T09:33:30.754Z",
-              "EditorCaption": ""
+              "Title": "AppUser.cs",
+              "DocumentMoniker": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Data\\AppUser.cs",
+              "RelativeDocumentMoniker": "ECPortal\\Data\\AppUser.cs",
+              "ToolTip": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Data\\AppUser.cs",
+              "RelativeToolTip": "ECPortal\\Data\\AppUser.cs",
+              "ViewState": "AQIAABcAAAAAAAAAAAAgwCYAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-29T12:49:19.312Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "RecognitionsController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\RecognitionsController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\RecognitionsController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\RecognitionsController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\RecognitionsController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAANAAAA",
+              "Title": "EmployeeAppUserViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\ViewModels\\EmployeeAppUserViewModel.cs",
+              "RelativeDocumentMoniker": "ECPortal\\ViewModels\\EmployeeAppUserViewModel.cs",
+              "ToolTip": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\ViewModels\\EmployeeAppUserViewModel.cs",
+              "RelativeToolTip": "ECPortal\\ViewModels\\EmployeeAppUserViewModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:29:38.304Z",
+              "WhenOpened": "2024-07-29T12:37:08.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_Form.cshtml",
+              "DocumentMoniker": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Views\\Hierarchy\\_Form.cshtml",
+              "RelativeDocumentMoniker": "ECPortal\\Views\\Hierarchy\\_Form.cshtml",
+              "ToolTip": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Views\\Hierarchy\\_Form.cshtml",
+              "RelativeToolTip": "ECPortal\\Views\\Hierarchy\\_Form.cshtml",
+              "ViewState": "AQIAAEsAAAAAAAAAAAAnwFUAAABFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-29T12:24:03.846Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "HierarchyController.cs",
+              "DocumentMoniker": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Controllers\\HierarchyController.cs",
+              "RelativeDocumentMoniker": "ECPortal\\Controllers\\HierarchyController.cs",
+              "ToolTip": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Controllers\\HierarchyController.cs",
+              "RelativeToolTip": "ECPortal\\Controllers\\HierarchyController.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAYwCsAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-25T10:45:38.768Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "FeedbacksController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\FeedbacksController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\FeedbacksController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\FeedbacksController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\FeedbacksController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAdAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:27:48.915Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Index.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
-              "RelativeToolTip": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml.cs",
-              "ViewState": "AQIAADYAAAAAAAAAAAAAAEEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T10:27:56.894Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "DashboardController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\DashboardController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\DashboardController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\DashboardController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\DashboardController.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAxwEgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T09:52:14.294Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "TrainingsController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\TrainingsController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\TrainingsController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\TrainingsController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\TrainingsController.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAxwCUAAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:30:06.539Z",
+              "DocumentIndex": 1,
+              "Title": "_Grid.cshtml",
+              "DocumentMoniker": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Views\\AppUsers\\_Grid.cshtml",
+              "RelativeDocumentMoniker": "ECPortal\\Views\\AppUsers\\_Grid.cshtml",
+              "ToolTip": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Views\\AppUsers\\_Grid.cshtml",
+              "RelativeToolTip": "ECPortal\\Views\\AppUsers\\_Grid.cshtml",
+              "ViewState": "AQIAACoAAAAAAAAAAAAkwDAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-29T11:41:11.835Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Dashboard\\Index.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Views\\Dashboard\\Index.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Dashboard\\Index.cshtml",
-              "RelativeToolTip": "ECPortal\\Views\\Dashboard\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAdAAAA",
+              "DocumentMoniker": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Views\\AppUsers\\Index.cshtml",
+              "RelativeDocumentMoniker": "ECPortal\\Views\\AppUsers\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Views\\AppUsers\\Index.cshtml",
+              "RelativeToolTip": "ECPortal\\Views\\AppUsers\\Index.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABEAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-12T09:52:31.612Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-29T11:40:35.331Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "TNAsController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\TNAsController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\TNAsController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\TNAsController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\TNAsController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T12:11:30.105Z",
-              "EditorCaption": ""
+              "DocumentIndex": 6,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Views\\Hierarchy\\Create.cshtml",
+              "RelativeDocumentMoniker": "ECPortal\\Views\\Hierarchy\\Create.cshtml",
+              "ToolTip": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Views\\Hierarchy\\Create.cshtml",
+              "RelativeToolTip": "ECPortal\\Views\\Hierarchy\\Create.cshtml",
+              "ViewState": "AQIAABAAAAAAAAAAAAAYwBcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-07-25T10:46:16.892Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "TargetsController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\TargetsController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\TargetsController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\TargetsController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\TargetsController.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAB4AAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:29:58.047Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "StocksController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\StocksController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\StocksController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\StocksController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\StocksController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:17:44.9Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "SalesController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\SalesController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\SalesController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\SalesController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\SalesController.cs",
-              "ViewState": "AQIAABIAAAAAAAAAAAAYwB0AAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:29:44.118Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "QuizScoresController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\QuizScoresController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\QuizScoresController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\QuizScoresController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\QuizScoresController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:14:43.341Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "QualityScoresController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\QualityScoresController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\QualityScoresController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\QualityScoresController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\QualityScoresController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAA4AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T05:28:43.155Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "PerformanceController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\PerformanceController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\PerformanceController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\PerformanceController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\PerformanceController.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAQwBcAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:28:05.463Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\HomeController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAAAgAAAAAAAAAAAAxwAcAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:27:58.72Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "GiveawaysController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\GiveawaysController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\GiveawaysController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\GiveawaysController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\GiveawaysController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:18:17.533Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "EDAsController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\EDAsController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\EDAsController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\EDAsController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\EDAsController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAB0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:27:38.208Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "CommissionsController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\CommissionsController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\CommissionsController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\CommissionsController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\CommissionsController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABgAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:27:12.843Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "AppUsersController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\AppUsersController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\AppUsersController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\AppUsersController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\AppUsersController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T07:29:01.685Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "ECContextModelSnapshot.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\ECContextModelSnapshot.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Migrations\\ECContextModelSnapshot.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\ECContextModelSnapshot.cs",
-              "RelativeToolTip": "ECPortal\\Migrations\\ECContextModelSnapshot.cs",
-              "ViewState": "AQIAABQFAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T07:05:23.372Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "20240605163151_initial.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240605163151_initial.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Migrations\\20240605163151_initial.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240605163151_initial.cs",
-              "RelativeToolTip": "ECPortal\\Migrations\\20240605163151_initial.cs",
-              "ViewState": "AQIAABkAAAAAAAAAAAAQwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T07:02:12.714Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "20240725070611_updated hierarchy datatypes 2.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240725070611_updated hierarchy datatypes 2.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Migrations\\20240725070611_updated hierarchy datatypes 2.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240725070611_updated hierarchy datatypes 2.cs",
-              "RelativeToolTip": "ECPortal\\Migrations\\20240725070611_updated hierarchy datatypes 2.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T07:06:13.059Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "20240725070148_updated hierarchy datatypes.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240725070148_updated hierarchy datatypes.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Migrations\\20240725070148_updated hierarchy datatypes.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240725070148_updated hierarchy datatypes.cs",
-              "RelativeToolTip": "ECPortal\\Migrations\\20240725070148_updated hierarchy datatypes.cs",
-              "ViewState": "AQIAAIAAAAAAAAAAAAAlwJkAAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T07:01:49.761Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "20240606054618_third.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240606054618_third.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Migrations\\20240606054618_third.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240606054618_third.cs",
-              "RelativeToolTip": "ECPortal\\Migrations\\20240606054618_third.cs",
+              "DocumentIndex": 8,
+              "Title": "dotnet-tools.json",
+              "DocumentMoniker": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\.config\\dotnet-tools.json",
+              "RelativeDocumentMoniker": "ECPortal\\.config\\dotnet-tools.json",
+              "ToolTip": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\.config\\dotnet-tools.json",
+              "RelativeToolTip": "ECPortal\\.config\\dotnet-tools.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T07:02:21.859Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "20240605173829_second.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240605173829_second.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Migrations\\20240605173829_second.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240605173829_second.cs",
-              "RelativeToolTip": "ECPortal\\Migrations\\20240605173829_second.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T07:02:15.259Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "Employee.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\Employee.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Models\\Employee.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\Employee.cs",
-              "RelativeToolTip": "ECPortal\\Models\\Employee.cs",
-              "ViewState": "AQIAAIgAAAAAAAAAAAAIwKUAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T10:41:10.207Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "20240610073612_added DOJ.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240610073612_added DOJ.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Migrations\\20240610073612_added DOJ.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240610073612_added DOJ.cs",
-              "RelativeToolTip": "ECPortal\\Migrations\\20240610073612_added DOJ.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAjAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T07:01:56.851Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "20240612065203_added quizdate column to quizscores.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240612065203_added quizdate column to quizscores.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Migrations\\20240612065203_added quizdate column to quizscores.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240612065203_added quizdate column to quizscores.cs",
-              "RelativeToolTip": "ECPortal\\Migrations\\20240612065203_added quizdate column to quizscores.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T07:01:54.302Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "20240613060750_added recordDate to QualityScores model.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240613060750_added recordDate to QualityScores model.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Migrations\\20240613060750_added recordDate to QualityScores model.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Migrations\\20240613060750_added recordDate to QualityScores model.cs",
-              "RelativeToolTip": "ECPortal\\Migrations\\20240613060750_added recordDate to QualityScores model.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T07:01:52.011Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "AppUser.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Data\\AppUser.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Data\\AppUser.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Data\\AppUser.cs",
-              "RelativeToolTip": "ECPortal\\Data\\AppUser.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAkAAAAYAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-25T06:03:06.159Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "jazz-strip.png -  [English (United States)] - PNG [1559x46, 24 bit, PNG]",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\wwwroot\\images\\jazz-strip.png",
-              "RelativeDocumentMoniker": "ECPortal\\wwwroot\\images\\jazz-strip.png",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\wwwroot\\images\\jazz-strip.png -  [English (United States)] - PNG [1559x46, 24 bit, PNG]",
-              "RelativeToolTip": "ECPortal\\wwwroot\\images\\jazz-strip.png -  [English (United States)] - PNG [1559x46, 24 bit, PNG]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001533|",
-              "WhenOpened": "2024-07-03T12:53:32.589Z",
-              "EditorCaption": " -  [English (United States)] - PNG [1559x46, 24 bit, PNG]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
-              "RelativeToolTip": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-13T05:12:16.284Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Views\\Home\\Index.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "ECPortal\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAAC8AAAAAAAAAAAAcwF4AAAARAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-20T11:28:11.088Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "ECPortal",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\ECPortal.csproj",
-              "RelativeDocumentMoniker": "ECPortal\\ECPortal.csproj",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\ECPortal.csproj",
-              "RelativeToolTip": "ECPortal\\ECPortal.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-06-13T10:12:11.767Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "TwoFactorAuthentication.cshtml.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\TwoFactorAuthentication.cshtml.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\TwoFactorAuthentication.cshtml.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\TwoFactorAuthentication.cshtml.cs",
-              "RelativeToolTip": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\TwoFactorAuthentication.cshtml.cs",
-              "ViewState": "AQIAACMAAAAAAAAAAAAgwDMAAAABAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T10:17:14.241Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "_ValidationScriptsPartial.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
-              "RelativeToolTip": "ECPortal\\Areas\\Identity\\Pages\\_ValidationScriptsPartial.cshtml",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-13T10:17:00.285Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
-              "Title": "EnableAuthenticator.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\EnableAuthenticator.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\EnableAuthenticator.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\EnableAuthenticator.cshtml",
-              "RelativeToolTip": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\EnableAuthenticator.cshtml",
-              "ViewState": "AQIAABIAAAAAAAAAAAAAADsAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-13T10:18:10.099Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\appsettings.json",
-              "RelativeDocumentMoniker": "ECPortal\\appsettings.json",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\appsettings.json",
-              "RelativeToolTip": "ECPortal\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-13T10:11:25.589Z"
+              "WhenOpened": "2024-07-29T10:07:45.702Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
-              "Title": "TwoFactorAuthentication.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\TwoFactorAuthentication.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\TwoFactorAuthentication.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\TwoFactorAuthentication.cshtml",
-              "RelativeToolTip": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\TwoFactorAuthentication.cshtml",
-              "ViewState": "AQIAACcAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 9,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "ECPortal\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\ghazzal.zaman\\Desktop\\ECPortal\\ECPortal\\ECPortal\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "ECPortal\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAGgAAACdAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-13T10:09:46.561Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 42,
-              "Title": "HtmlHelpers.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Utilities\\HtmlHelpers.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Utilities\\HtmlHelpers.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Utilities\\HtmlHelpers.cs",
-              "RelativeToolTip": "ECPortal\\Utilities\\HtmlHelpers.cs",
-              "ViewState": "AQIAAHAAAAAAAAAAAAAmwIYAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T09:48:25.171Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 43,
-              "Title": "AuditsController.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\AuditsController.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Controllers\\AuditsController.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Controllers\\AuditsController.cs",
-              "RelativeToolTip": "ECPortal\\Controllers\\AuditsController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:18:24.665Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 46,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\QuizScores\\Index.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Views\\QuizScores\\Index.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\QuizScores\\Index.cshtml",
-              "RelativeToolTip": "ECPortal\\Views\\QuizScores\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAK4AAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-13T06:05:08.074Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 47,
-              "Title": "QuizScores.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\QuizScores.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Models\\QuizScores.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\QuizScores.cs",
-              "RelativeToolTip": "ECPortal\\Models\\QuizScores.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAYwCEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T06:02:48.731Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 44,
-              "Title": "QualityScores.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\QualityScores.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Models\\QualityScores.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\QualityScores.cs",
-              "RelativeToolTip": "ECPortal\\Models\\QualityScores.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAYwCMAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-13T05:28:50.274Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 45,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\QualityScores\\Index.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Views\\QualityScores\\Index.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\QualityScores\\Index.cshtml",
-              "RelativeToolTip": "ECPortal\\Views\\QualityScores\\Index.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAPAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-13T06:05:11.64Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 49,
-              "Title": "Email.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Email.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Email.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Email.cshtml",
-              "RelativeToolTip": "ECPortal\\Areas\\Identity\\Pages\\Account\\Manage\\Email.cshtml",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAQwCYAAAAGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-13T05:13:07.01Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 48,
-              "Title": "site.css",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\wwwroot\\css\\site.css",
-              "RelativeDocumentMoniker": "ECPortal\\wwwroot\\css\\site.css",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\wwwroot\\css\\site.css",
-              "RelativeToolTip": "ECPortal\\wwwroot\\css\\site.css",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAAADgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-06-13T04:53:43.606Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 53,
-              "Title": "Startup.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Startup.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Startup.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Startup.cs",
-              "RelativeToolTip": "ECPortal\\Startup.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAAAkwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T12:16:01.063Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 52,
-              "Title": "RoleInitializer.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Utilities\\RoleInitializer.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Utilities\\RoleInitializer.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Utilities\\RoleInitializer.cs",
-              "RelativeToolTip": "ECPortal\\Utilities\\RoleInitializer.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAABXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T12:15:22.576Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 51,
-              "Title": "Roles.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Utilities\\Roles.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Utilities\\Roles.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Utilities\\Roles.cs",
-              "RelativeToolTip": "ECPortal\\Utilities\\Roles.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T12:15:14.664Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 50,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Program.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Program.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Program.cs",
-              "RelativeToolTip": "ECPortal\\Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAABGAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T12:11:01.321Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 54,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Feedbacks\\Index.cshtml",
-              "RelativeDocumentMoniker": "ECPortal\\Views\\Feedbacks\\Index.cshtml",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Views\\Feedbacks\\Index.cshtml",
-              "RelativeToolTip": "ECPortal\\Views\\Feedbacks\\Index.cshtml",
-              "ViewState": "AQIAAF4AAAAAAAAAAAAUwIgAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-06-12T10:30:31.206Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 55,
-              "Title": "DashboardViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\ViewModels\\DashboardViewModel.cs",
-              "RelativeDocumentMoniker": "ECPortal\\ViewModels\\DashboardViewModel.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\ViewModels\\DashboardViewModel.cs",
-              "RelativeToolTip": "ECPortal\\ViewModels\\DashboardViewModel.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAAA4AAAApAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T09:55:45.702Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 56,
-              "Title": "EmployeeRecognition.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EmployeeRecognition.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Models\\EmployeeRecognition.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EmployeeRecognition.cs",
-              "RelativeToolTip": "ECPortal\\Models\\EmployeeRecognition.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAAAIwC0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T09:43:06.26Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 57,
-              "Title": "EmployeePerformance.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EmployeePerformance.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Models\\EmployeePerformance.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EmployeePerformance.cs",
-              "RelativeToolTip": "ECPortal\\Models\\EmployeePerformance.cs",
-              "ViewState": "AQIAAAoAAAAAAAAAAAAIwDQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T09:41:41.533Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 58,
-              "Title": "EmployeeFeedback.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EmployeeFeedback.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Models\\EmployeeFeedback.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EmployeeFeedback.cs",
-              "RelativeToolTip": "ECPortal\\Models\\EmployeeFeedback.cs",
-              "ViewState": "AQIAAAsAAAAAAAAAAADwvzQAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T09:40:06.566Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 59,
-              "Title": "EmployeeEDA.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EmployeeEDA.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Models\\EmployeeEDA.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EmployeeEDA.cs",
-              "RelativeToolTip": "ECPortal\\Models\\EmployeeEDA.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAywDMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T09:34:25.543Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 60,
-              "Title": "EmployeeCommissions.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EmployeeCommissions.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Models\\EmployeeCommissions.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EmployeeCommissions.cs",
-              "RelativeToolTip": "ECPortal\\Models\\EmployeeCommissions.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACoAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T09:34:04.795Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 61,
-              "Title": "EC.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EC.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Models\\EC.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\EC.cs",
-              "RelativeToolTip": "ECPortal\\Models\\EC.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T09:33:47.12Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 62,
-              "Title": "ECAudits.cs",
-              "DocumentMoniker": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\ECAudits.cs",
-              "RelativeDocumentMoniker": "ECPortal\\Models\\ECAudits.cs",
-              "ToolTip": "C:\\Users\\usman.zeb1\\source\\repos\\ECPortal\\ECPortal\\Models\\ECAudits.cs",
-              "RelativeToolTip": "ECPortal\\Models\\ECAudits.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAwwDkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-12T09:27:14.358Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-07-25T10:51:47.306Z"
             }
           ]
         }
