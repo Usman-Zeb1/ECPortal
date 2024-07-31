@@ -8,6 +8,39 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20240605173829_second.cs" />
+    <Compile Remove="Migrations\20240605173829_second.Designer.cs" />
+    <Compile Remove="Migrations\20240606054618_third.cs" />
+    <Compile Remove="Migrations\20240606054618_third.Designer.cs" />
+    <Compile Remove="Migrations\20240606062709_added tables.cs" />
+    <Compile Remove="Migrations\20240606062709_added tables.Designer.cs" />
+    <Compile Remove="Migrations\20240606062831_added decimal properties.cs" />
+    <Compile Remove="Migrations\20240606062831_added decimal properties.Designer.cs" />
+    <Compile Remove="Migrations\20240606063502_added EC foreign key to Employee.cs" />
+    <Compile Remove="Migrations\20240606063502_added EC foreign key to Employee.Designer.cs" />
+    <Compile Remove="Migrations\20240606070231_added nullability and constructor values.cs" />
+    <Compile Remove="Migrations\20240606070231_added nullability and constructor values.Designer.cs" />
+    <Compile Remove="Migrations\20240610073612_added DOJ.cs" />
+    <Compile Remove="Migrations\20240610073612_added DOJ.Designer.cs" />
+    <Compile Remove="Migrations\20240612065203_added quizdate column to quizscores.cs" />
+    <Compile Remove="Migrations\20240612065203_added quizdate column to quizscores.Designer.cs" />
+    <Compile Remove="Migrations\20240613060750_added recordDate to QualityScores model.cs" />
+    <Compile Remove="Migrations\20240613060750_added recordDate to QualityScores model.Designer.cs" />
+    <Compile Remove="Migrations\20240725070148_updated hierarchy datatypes.cs" />
+    <Compile Remove="Migrations\20240725070148_updated hierarchy datatypes.Designer.cs" />
+    <Compile Remove="Migrations\20240725114323_added trainings request model.cs" />
+    <Compile Remove="Migrations\20240725114323_added trainings request model.Designer.cs" />
+    <Compile Remove="Migrations\20240729111206_changed emp nullability.cs" />
+    <Compile Remove="Migrations\20240729111206_changed emp nullability.Designer.cs" />
+    <Compile Remove="Migrations\20240729112826_Changed emp table.cs" />
+    <Compile Remove="Migrations\20240729112826_Changed emp table.Designer.cs" />
+    <Compile Remove="Migrations\20240729114908_Changed appuser tbl.cs" />
+    <Compile Remove="Migrations\20240729114908_Changed appuser tbl.Designer.cs" />
+    <Compile Remove="Migrations\20240729142540_updated Recognitions model.cs" />
+    <Compile Remove="Migrations\20240729142540_updated Recognitions model.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MailKit" Version="4.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.4" />
@@ -22,10 +55,6 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.2" />
     <PackageReference Include="MimeKit" Version="4.7.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

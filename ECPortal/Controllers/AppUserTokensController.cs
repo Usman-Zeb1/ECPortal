@@ -7,7 +7,7 @@ using Pk.Com.Jazz.ECP.Data;
 
 namespace Pk.Com.Jazz.ECP.Controllers
 {
-    [Authorize(Roles = "TeanLead, Admin, Agent")]
+    [Authorize(Roles = "Admin, TeamLead, RCCH, HOD, ECM")]
     public class AppUserTokensController : Controller
     {
         private readonly ECContext _context;

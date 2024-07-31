@@ -10,7 +10,7 @@ using System.Security.Claims;
 
 namespace Pk.Com.Jazz.ECP.Controllers
 {
-    [Authorize(Roles = "Admin, TeamLead, Agent")]
+    [Authorize(Roles = "Admin, TeamLead, RCCH, HOD, ECM")]
     public class AppUsersController : Controller
     {
         private readonly ECContext _context;

@@ -31,6 +31,10 @@ namespace Pk.Com.Jazz.ECP.Models
         public DateTime? ApprovedDate { get; set; }
 
         [Required]
+        [MaxLength(50)]
+        public string RequestedBy { get; set; }
+
+        [Required]
         [MaxLength(10)]
         public string Status { get; set; }
 

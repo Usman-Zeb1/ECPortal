@@ -37,31 +37,44 @@ namespace Pk.Com.Jazz.ECP.Controllers
             return View(trainings);
         }
 
-        // GET: Training/AddTraining
+
+        public IActionResult RequestedTrainings()
+        {
+            // var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var requestedTrainings = _context.TrainingRequests
+                .Where(rt => rt.RequestedBy == User.Identity.Name) // Assuming there's a RequestedById field
+                .OrderBy(rt => rt.RequestDate)
+                .ToList();
+
+            return View(requestedTrainings);
+        }
+
+
         public IActionResult AddTraining()
         {
-            
-            return View();
+
+            return View(new TrainingRequests());
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(TrainingRequests trainingRequest)
+        public async Task<IActionResult> AddTraining(TrainingRequests trainingRequests)
         {
+            trainingRequests.RequestedBy = User.Identity.Name;
             if (ModelState.IsValid)
             {
                 // Ensure SubmissionDate is set to the current date and time
-                trainingRequest.SubmissionDate = DateTime.Now;
+                trainingRequests.SubmissionDate = DateTime.Now;
 
                 //Set to Pending Status
-                trainingRequest.Status = "Pending";
+                trainingRequests.Status = "Pending";
 
-                _context.TrainingRequests.Add(trainingRequest);
+                _context.TrainingRequests.Add(trainingRequests);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index)); // Redirect to a list or index page
             }
 
-            return View(trainingRequest);
+            return View(trainingRequests);
         }
     }
     }

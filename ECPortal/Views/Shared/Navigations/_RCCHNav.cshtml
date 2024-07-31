@@ -1,5 +1,4 @@
-﻿@* Views/Shared/_AgentNav.cshtml *@
-<nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color:#141212">
+﻿<nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color:#141212">
     <div class="container">
         <a data-spinner="no" class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
             <img src="~/images/logo/logo-200px.png" height="35" alt="Experience Center" />
@@ -30,22 +29,56 @@
                 <li class="nav-item">
                     <a data-spinner="no" class="nav-link text-light" asp-area="" asp-controller="Performance" asp-action="Index"><i class="fas fa-chart-line"></i> Performance</a>
                 </li>
+                <li class="nav-item">
+                    <a data-spinner="no" class="nav-link text-light" asp-area="" asp-controller="Trainings" asp-action="Index"><i class="fas fa-graduation-cap"></i> Trainings</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a data-spinner="no" class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-tasks"></i> Work
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Targets" asp-action="Index"><i class="fas fa-bullseye"></i> Targets</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Trainings" asp-action="Index"><i class="fas fa-graduation-cap"></i> Trainings</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Recognitions" asp-action="Index"><i class="fas fa-award"></i> Recognitions</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EDAs" asp-action="Index"><i class="fas fa-handshake"></i> EDAs</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Commissions" asp-action="Index"><i class="fas fa-dollar-sign"></i> Commissions</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Sales" asp-action="Index"><i class="fas fa-shopping-cart"></i> Sales</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="TNAs" asp-action="Index"><i class="fas fa-calendar-alt"></i> TNAs</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Audits" asp-action="Index"><i class="fas fa-clipboard-check"></i> Audits</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Giveaways" asp-action="Index"><i class="fas fa-gift"></i> Giveaways</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Stocks" asp-action="Index"><i class="fas fa-boxes"></i> Stocks</a>
-                    </div>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Targets" asp-action="Index"><i class="fas fa-bullseye"></i> Targets</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item dropdown-toggle text-dark" href="#"><i class="fas fa-award"></i> Recognitions</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Recognitions" asp-action="Index"><i class="fas fa-list"></i> All Recognitions</a></li>
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Recognitions" asp-action="Create"><i class="fas fa-plus"></i> Create Recognition</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-dark" asp-area="" asp-controller="EDAs" asp-action="Index"><i class="fas fa-handshake"></i> EDAs</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Commissions" asp-action="Index"><i class="fas fa-dollar-sign"></i> Commissions</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Sales" asp-action="Index"><i class="fas fa-shopping-cart"></i> Sales</a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item dropdown-toggle text-dark" href="#"><i class="fas fa-clipboard-check"></i> Audits</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Audits" asp-action="Index"><i class="fas fa-list"></i> All Audits</a></li>
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Audits" asp-action="Create"><i class="fas fa-plus"></i> Create Audit</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown-item dropdown-toggle text-dark" href="#"><i class="fas fa-gift"></i> TNAs</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="TNAs" asp-action="Index"><i class="fas fa-list"></i> All TNAs</a></li>
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="TNAs" asp-action="Create"><i class="fas fa-plus"></i> Create TNA</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Giveaways" asp-action="Index"><i class="fas fa-gift"></i> Giveaways</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Stocks" asp-action="Index"><i class="fas fa-boxes"></i> Stocks</a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="nav-item dropdown">
                     <a data-spinner="no" id="A" class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Scores</a>
@@ -54,11 +87,18 @@
                         <a class="dropdown-item text-dark" asp-area="" asp-controller="QualityScores" asp-action="Index"><i class="fas fa-check-square"></i> Quality Scores</a>
                     </div>
                 </li>
+
+                <li class="nav-item dropdown">
+                    <a data-spinner="no" id="Feedbacksdropdown" class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-comments"></i> Feedback</a>
+                    <div class="dropdown-menu" aria-labelledby="Feedbacksdropdown">
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Feedbacks" asp-action="Index"><i class="fas fa-list"></i> All Feedbacks</a>
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Feedbacks" asp-action="Create"><i class="fas fa-plus"></i> Create Feedback</a>
+                    </div>
+                </li>
                 <li class="nav-item">
-                    <a data-spinner="no" class="nav-link text-light" asp-area="" asp-controller="Feedbacks" asp-action="Index"><i class="fas fa-comments"></i> Feedback</a>
+                    <a data-spinner="no" class="nav-link text-light" asp-area="" asp-controller="Hierarchy" asp-action="Create"><i class="fas fa-sitemap"></i> Update Hierarchy</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
-

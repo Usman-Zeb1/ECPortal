@@ -17,9 +17,6 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="SettingsMenu">
                         <a class="dropdown-item text-dark" asp-area="Identity" asp-page="/Account/Manage/Index">Account <partial name="_GetUserRole" /></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="AppUsers" asp-action="Index">App Users</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="AppUserTokens" asp-action="Index">User Tokens</a>
                     </div>
                 </li>
             </ul>
@@ -34,42 +31,15 @@
                     <a data-spinner="no" class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-tasks"></i> Work
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Targets" asp-action="Index"><i class="fas fa-bullseye"></i> Targets</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item dropdown-toggle text-dark" href="#"><i class="fas fa-graduation-cap"></i> Trainings</a>
-                            <ul class="dropdown-menu dropdown-submenu">
-                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Trainings" asp-action="Index"><i class="fas fa-list"></i> All Trainings</a></li>
-                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Trainings" asp-action="AddTraining"><i class="fas fa-plus"></i> Add Training</a></li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Recognitions" asp-action="Index"><i class="fas fa-award"></i> Recognitions</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="EDAs" asp-action="Index"><i class="fas fa-handshake"></i> EDAs</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Commissions" asp-action="Index"><i class="fas fa-dollar-sign"></i> Commissions</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Sales" asp-action="Index"><i class="fas fa-shopping-cart"></i> Sales</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="TNAs" asp-action="Index"><i class="fas fa-calendar-alt"></i> TNAs</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Audits" asp-action="Index"><i class="fas fa-clipboard-check"></i> Audits</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Giveaways" asp-action="Index"><i class="fas fa-gift"></i> Giveaways</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Stocks" asp-action="Index"><i class="fas fa-boxes"></i> Stocks</a>
-                        </li>
-                    </ul>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Targets" asp-action="Index"><i class="fas fa-bullseye"></i> Targets</a>
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Trainings" asp-action="Index"><i class="fas fa-graduation-cap"></i> Trainings</a>
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Recognitions" asp-action="Index"><i class="fas fa-award"></i> Recognitions</a>
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="EDAs" asp-action="Index"><i class="fas fa-handshake"></i> EDAs</a>
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Commissions" asp-action="Index"><i class="fas fa-dollar-sign"></i> Commissions</a>
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Sales" asp-action="Index"><i class="fas fa-shopping-cart"></i> Sales</a>
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="TNAs" asp-action="Index"><i class="fas fa-calendar-alt"></i> TNAs</a>
+                    </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a data-spinner="no" id="A" class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tasks"></i> Scores</a>
@@ -85,3 +55,4 @@
         </div>
     </div>
 </nav>
+

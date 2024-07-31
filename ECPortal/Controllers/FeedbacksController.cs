@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Pk.Com.Jazz.ECP.Data;
 using Pk.Com.Jazz.ECP.Models;
+using Pk.Com.Jazz.ECP.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -22,22 +23,59 @@ namespace Pk.Com.Jazz.ECP.Controllers
         // GET: Feedbacks/Index
         public IActionResult Index()
         {
-            
+            var viewModel = new FeedbacksViewModel();
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var agentId = _context.Employee.FirstOrDefault(a => a.AppUserId == userId)?.EmployeeId;
 
-            if (agentId == null)
+            if (User.IsInRole("Agent"))
             {
-                return RedirectToAction("Index", "Home"); // Or handle the case appropriately
+                var agentId = _context.Employee.FirstOrDefault(a => a.AppUserId == userId)?.EmployeeId;
+
+                if (agentId == null)
+                {
+                    return RedirectToAction("Index", "Home"); // Or handle the case appropriately
+                }
+
+                viewModel.Feedbacks = _context.EmployeeFeedbacks
+                    .Where(fb => fb.EmployeeId == agentId)
+                    .OrderBy(fb => fb.FeedbackDate)
+                    .Select(fb => new FeedbacksViewModel.FeedbackDetail
+                    {
+                        Id = fb.Id,
+                        FeedbackDate = fb.FeedbackDate,
+                        FeedbackType = fb.FeedbackType,
+                        Feedback = fb.Feedback,
+                        ProvidedBy = fb.ProvidedBy,
+                        Comments = fb.Comments,
+                        EmailAddress = _context.Employee.FirstOrDefault(e => e.EmployeeId == fb.EmployeeId).EmailAddress
+                    })
+                    .ToList();
+
+                viewModel.IsAgent = true;
+            }
+            else
+            {
+                
+                viewModel.Feedbacks = _context.EmployeeFeedbacks
+                    .Where(fb => fb.ProvidedBy == User.Identity.Name) // Assuming CreatedBy is the user who gave the feedback
+                    .OrderBy(fb => fb.FeedbackDate)
+                    .Select(fb => new FeedbacksViewModel.FeedbackDetail
+                    {
+                        Id = fb.Id,
+                        FeedbackDate = fb.FeedbackDate,
+                        FeedbackType = fb.FeedbackType,
+                        Feedback = fb.Feedback,
+                        ProvidedBy = fb.ProvidedBy,
+                        Comments = fb.Comments,
+                        EmailAddress = _context.Employee.FirstOrDefault(e => e.EmployeeId == fb.EmployeeId).EmailAddress
+                    })
+                    .ToList();
+
+                viewModel.IsAgent = false;
             }
 
-            var feedbacks = _context.EmployeeFeedbacks
-                .Where(fb => fb.EmployeeId == agentId)
-                .OrderBy(fb => fb.FeedbackDate)
-                .ToList();
-
-            return View(feedbacks);
+            return View(viewModel);
         }
+
 
         // GET: Feedbacks/Create
         public IActionResult Create()

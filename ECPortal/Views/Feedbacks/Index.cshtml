@@ -1,4 +1,4 @@
-﻿@model List<Pk.Com.Jazz.ECP.Models.EmployeeFeedback>
+﻿@model Pk.Com.Jazz.ECP.ViewModels.FeedbacksViewModel
 
 @{
     ViewData["Title"] = "Feedbacks";
@@ -12,7 +12,7 @@
             <h3 class="mb-0">Feedback Chart</h3>
         </div>
         <div class="card-body">
-            @if (Model == null || Model.Count == 0)
+            @if (Model == null || Model.Feedbacks == null || Model.Feedbacks.Count == 0)
             {
                 <div class="text-center mt-2">No feedback data available for chart.</div>
             }
@@ -34,20 +34,20 @@
                             <th>Feedback Date</th>
                             <th>Feedback Type</th>
                             <th>Feedback</th>
-                            <th>Provided By</th>
+                            <th>@(Model.IsAgent ? "Provided By" : "Employee Address")</th>
                             <th>Comments</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model != null && Model.Count > 0)
+                        @if (Model.Feedbacks != null && Model.Feedbacks.Count > 0)
                         {
-                            foreach (var feedback in Model)
+                            foreach (var feedback in Model.Feedbacks)
                             {
                                 <tr>
                                     <td>@feedback.FeedbackDate.ToShortDateString()</td>
                                     <td>@feedback.FeedbackType</td>
                                     <td>@feedback.Feedback</td>
-                                    <td>@feedback.ProvidedBy</td>
+                                    <td>@(Model.IsAgent ? feedback.ProvidedBy : feedback.EmailAddress)</td>
                                     <td>@feedback.Comments</td>
                                 </tr>
                             }
@@ -77,7 +77,7 @@
         });
 
         document.addEventListener('DOMContentLoaded', function () {
-            var feedbackData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+            var feedbackData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.Feedbacks));
 
             if (feedbackData && feedbackData.length > 0) {
                 var ctx = document.getElementById('feedbackChart').getContext('2d');
@@ -122,7 +122,6 @@
                                     display: true,
                                     text: 'Feedback Count'
                                 },
-                                min: 0,
                                 beginAtZero: true
                             }
                         },

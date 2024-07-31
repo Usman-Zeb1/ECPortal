@@ -1,0 +1,223 @@
+﻿@model List<Pk.Com.Jazz.ECP.Models.TrainingRequests>
+@using Newtonsoft.Json;
+@{
+    ViewData["Title"] = "Requested Trainings";
+    var trainingStatusData = Model != null
+        ? JsonConvert.SerializeObject(
+            Model.GroupBy(t => t.Status)
+                 .Select(g => new { Status = g.Key, Count = g.Count() })
+                 .ToList(),
+            new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+    var trainingProgressData = Model != null
+        ? JsonConvert.SerializeObject(Model, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+}
+
+<h1 class="text-center my-4">Requested Trainings</h1>
+
+<div class="container">
+
+    <!-- Add Training Button -->
+    <div class="d-flex justify-content-start mb-3">
+        <a class="btn btn-primary" asp-action="AddTraining" asp-controller="Trainings">
+            <i class="fas fa-plus-circle"></i> Request New Training
+        </a>
+    </div>
+
+    <!-- Chart Container -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="mb-0">Training Overview</h3>
+        </div>
+        <div class="card-body">
+            @if (Model == null || Model.Count == 0)
+            {
+                <div class="text-center mt-2">No trainings data available for charts.</div>
+            }
+            else
+            {
+                <div class="row">
+                    <!-- Pie Chart: Training Status -->
+                    <div class="col-md-6">
+                        <canvas id="trainingStatusChart" width="400" height="200"></canvas>
+                    </div>
+                    <!-- Line Graph: Training Progress -->
+                    <div class="col-md-6">
+                        <canvas id="trainingProgressChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+   
+
+    <!-- Training Details Table -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3 class="mb-0">Training Details</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="trainingsTable" class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Id</th>
+                            <th>Training Name</th>
+                            <th>Requested Date</th>
+                            <th>Status</th>
+                            <th>Comments</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            foreach (var training in Model)
+                            {
+                                <tr>
+                                    <td>@training.Id</td>
+                                    <td>@training.TrainingName</td>
+                                    <td>@(training.RequestDate != null ? training.RequestDate.ToShortDateString() : "")</td>
+                                    <td>@training.Status</td>
+                                    <td>@training.Comments</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="6" class="text-center">No training data available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#trainingsTable').DataTable({
+                "paging": true,
+                "pageLength": 5,
+                "lengthChange": false,
+                "info": false
+            });
+
+            // Parse the training status data
+            var trainingStatusData = @Html.Raw(trainingStatusData);
+
+            // Extract labels and data for the pie chart
+            var statusLabels = trainingStatusData.map(function (d) { return d.Status; });
+            var statusCounts = trainingStatusData.map(function (d) { return d.Count; });
+
+            var ctxStatus = document.getElementById('trainingStatusChart').getContext('2d');
+            new Chart(ctxStatus, {
+                type: 'pie',
+                data: {
+                    labels: statusLabels,
+                    datasets: [{
+                        label: 'Training Status',
+                        data: statusCounts,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.5)',
+                            'rgba(54, 162, 235, 0.5)',
+                            'rgba(255, 206, 86, 0.5)',
+                            'rgba(75, 192, 192, 0.5)',
+                            'rgba(153, 102, 255, 0.5)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
+
+            // Parse the training progress data
+            var trainingProgressData = @Html.Raw(trainingProgressData);
+
+            // Process cumulative training progress
+            var trainingProgressGroups = trainingProgressData
+                .map(function (t) { return { Date: new Date(t.RequestedDate), Count: 1 }; })
+                .sort((a, b) => a.Date - b.Date);
+
+            var cumulativeData = [];
+            var cumulativeCount = 0;
+
+            trainingProgressGroups.forEach(function (d) {
+                cumulativeCount += d.Count;
+                cumulativeData.push({ Date: d.Date, Count: cumulativeCount });
+            });
+
+            var ctxProgress = document.getElementById('trainingProgressChart').getContext('2d');
+            var progressLabels = cumulativeData.map(function (d) { return d.Date.toLocaleDateString(); });
+            var progressCounts = cumulativeData.map(function (d) { return d.Count; });
+
+            new Chart(ctxProgress, {
+                type: 'line',
+                data: {
+                    labels: progressLabels,
+                    datasets: [{
+                        label: 'Cumulative Training Progress',
+                        data: progressCounts,
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            },
+                            ticks: {
+                                maxRotation: 90,
+                                minRotation: 45
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Training Count'
+                            },
+                            min: 0,
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function (context) {
+                                    return context[0].label;
+                                },
+                                label: function (context) {
+                                    return `Cumulative Count: ${context.raw}`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+}

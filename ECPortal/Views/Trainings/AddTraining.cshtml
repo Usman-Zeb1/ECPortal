@@ -4,13 +4,18 @@
     ViewData["Title"] = "Create Training Request";
 }
 
-<div class="container mt-5">
-    <div class="card shadow-sm">
+<div class="container">
+    <div class="mt-2">
+        <a href="@Url.Action("RequestedTrainings", "Trainings")" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Requests Page
+        </a>
+    </div>
+    <div class="card shadow-sm mt-3">
         <div class="card-header">
             <h2 class="card-title mb-0">@ViewData["Title"]</h2>
         </div>
         <div class="card-body">
-            <form asp-action="Create" asp-controller="Trainings" method="post" class="needs-validation" novalidate>
+            <form method="post" class="needs-validation" novalidate>
                 <div class="row g-3">
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
@@ -32,6 +37,10 @@
                             </div>
                         </div>
                     </div>
+
+                   
+                    <!-- Hidden field for RequestedBy -->
+                    <input type="hidden" asp-for="RequestedBy" value="@User.Identity.Name" />
                     <div class="col-12">
                         <div class="form-floating mb-3">
                             <textarea asp-for="RequestDetails" class="form-control" placeholder="Request Details" style="height: 150px;" required></textarea>
@@ -53,11 +62,22 @@
                         </div>
                     </div>
 
+                    <div class="col-12 text-center mb-3">
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle"></i> The request will be forwarded to the training team for evaluation.
+                        </small>
+                    </div>
+
+
                     <div class="col-12 d-flex justify-content-center">
                         <button type="submit" class="btn btn-primary w-30">Submit Request</button>
                     </div>
+
+                
                 </div>
             </form>
+
+
         </div>
     </div>
 </div>
