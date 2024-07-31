@@ -101,8 +101,20 @@
                         <li class="nav-item">
                             <a data-spinner="no" class="nav-link text-light" asp-area="" asp-controller="Feedbacks" asp-action="Index"><i class="fas fa-comments"></i> Feedback</a>
                         </li>
-                        <li class="nav-item">
-                            <a data-spinner="no" class="nav-link text-light" asp-area="" asp-controller="Hierarchy" asp-action="Create"><i class="fas fa-user"></i> Profile</a>
+                        @* <li class="nav-item">
+                            <a data-spinner="no" class="nav-link text-light" asp-area="" asp-controller="Hierarchy" asp-action="Create"><i class="fas fa-user"></i>Manage Hierarchy</a>
+                        </li> *@
+
+
+                        <li class="nav-item dropdown">
+                            <a data-spinner="no" class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-tasks"></i> Manage Hierachy
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Hierarchy" asp-action="Create"><i class="fas fa-user"></i> View Hierarchy</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Hierarchy" asp-action="NonProfilerList"><i class="fas fa-add"></i> Add Hierachy</a>
+                                <a class="dropdown-item text-dark" asp-area="" asp-controller="Hierarchy" asp-action="Index"><i class="fas fa-comments"></i> Update Hierarchy</a>
+                            </div>
                         </li>
                     </ul>
                 </div>

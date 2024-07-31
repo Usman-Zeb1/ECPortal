@@ -1,0 +1,337 @@
+﻿@model EmployeeAppUserViewModel
+
+@{
+    ViewData["Title"] = "Create Profile";
+
+}
+<html>
+<head>
+    <style>
+        .banner {
+            background-color: #e9ecef;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #dee2e6;
+            margin: 20px 0;
+        }
+
+            .banner h2 {
+                margin: 0;
+                font-size: 24px;
+                color: #343a40;
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .input-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px; /* Space between the fields */
+        }
+
+        .input-group {
+            flex: 1; /* Grow to fill available space */
+            min-width: 0; /* Prevent overflow */
+        }
+
+            .input-group label {
+                width: 100%;
+                max-width: 800px;
+                text-align: left;
+            }
+
+            .input-group input,
+            .input-group select,
+            .input-group textarea {
+                width: 100%;
+                max-width: 800px;
+            }
+
+        .submit-button {
+            width: 100%;
+            max-width: 300px;
+            margin: 20px auto;
+            display: block;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    @if (ViewBag.UploadStatus != null)
+    {
+        if (ViewBag.UploadStatus == "Success")
+        {
+            <span class="row row-cols align-items-center alert alert-success">Profile Added Successfully</span>
+        }
+        else
+        {
+            <span class="row row-cols align-items-center alert alert-danger">Profile addition Failed</span>
+        }
+    }
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data" id="employeeForm">
+
+        <div class="banner">
+            <h2>Personal Details</h2>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.EmployeeNumber" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeNumber" class="form-control"
+                           value="@((Model.Employee != null && Model.Employee.EmployeeNumber != 0) ? Model.Employee.EmployeeNumber.ToString() : string.Empty)"
+                           maxlength="20" pattern="\d{20}" required readonly />
+                    <span asp-validation-for="Employee.EmployeeNumber" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.EmployeeName" class="control-label"></label>
+                    <input asp-for="Employee.EmployeeName" class="form-control"
+                           value="@Model.AppUser.UserName"
+                           type="text" required readonly />
+                    <span asp-validation-for="Employee.EmployeeName" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.CNIC" class="control-label"></label>
+                    <input asp-for="Employee.CNIC" class="form-control"
+                           value="@(!string.IsNullOrEmpty(Model.Employee?.CNIC) ? Model.Employee.CNIC : string.Empty)"
+                           minlength="13" maxlength="13" pattern="\d{13}" title="CNIC must be a 13-digit number." required readonly />
+                    <span asp-validation-for="Employee.CNIC" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.MobileNumber" class="control-label">Mobile Number</label>
+                    <input asp-for="Employee.MobileNumber" class="form-control" minlength="11" maxlength="11" value="@Model.AppUser.PhoneNumber" pattern="\d{11}" title="Please enter exactly 11 digits" required readonly />
+                    <span asp-validation-for="Employee.MobileNumber" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.UserAdLogin" class="control-label"></label>
+                    <input asp-for="Employee.UserAdLogin" class="form-control"
+                           value="@(!string.IsNullOrEmpty(Model.Employee?.UserAdLogin) ? Model.Employee.UserAdLogin : string.Empty)"
+                           type="text" required readonly />
+                    <span asp-validation-for="Employee.UserAdLogin" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.Title" class="control-label">Title</label>
+                    <input asp-for="Employee.Title" class="form-control"
+                           value="@(!string.IsNullOrEmpty(Model.Employee?.Title) ? Model.Employee.Title : string.Empty)"
+                           type="text" required readonly />
+                    <span asp-validation-for="Employee.Title" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.IsEnabled" class="control-label">Status</label>
+                    <select asp-for="Employee.IsEnabled" class="form-control" required readonly>
+                        <option value="">Select...</option>
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                    <span asp-validation-for="Employee.IsEnabled" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.DOJ" class="control-label"></label>
+                    <input asp-for="Employee.DOJ" class="form-control"
+                           value="@(!string.IsNullOrEmpty(Model.Employee?.DOJ) ? Model.Employee.DOJ : string.Empty)"
+                           type="date" required readonly />
+                    <span asp-validation-for="Employee.DOJ" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.DateOfJoiningBC" class="control-label"></label>
+                    <input asp-for="Employee.DateOfJoiningBC" class="form-control"
+                           value="@(!string.IsNullOrEmpty(Model.Employee?.DateOfJoiningBC) ? Model.Employee.DateOfJoiningBC : string.Empty)"
+                           type="date" required readonly />
+                    <span asp-validation-for="Employee.DateOfJoiningBC" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.DateOfLeaving" class="control-label"></label>
+                    <input asp-for="Employee.DateOfLeaving" class="form-control"
+                           value="@(!string.IsNullOrEmpty(Model.Employee?.DateOfLeaving) ? Model.Employee.DateOfLeaving : string.Empty)"
+                           type="date" required readonly />
+                    <span asp-validation-for="Employee.DateOfLeaving" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.EmailAddress" class="control-label"></label>
+                    <input asp-for="Employee.EmailAddress" class="form-control" type="email" value="@Model.AppUser.Email" data-val="true" data-val-email="Please enter a valid email address." required readonly />
+                    <span asp-validation-for="Employee.EmailAddress" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="banner">
+            <h2>Location And Reporting</h2>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.ECID" class="control-label">Experience Centre</label>
+                    <select asp-for="Employee.ECID" class="form-control" required readonly>
+                        <option value="">Select...</option>
+                        <option value=1>EC1</option>
+                        <option value=2>EC2</option>
+                        <option value=3>EC3</option>
+                    </select>
+                    <span asp-validation-for="Employee.ECID" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.ManagerID" class="control-label">Line Manager</label>
+                    <select asp-for="Employee.ManagerID" class="form-control" required readonly>
+                        <option value="">Select...</option>
+                        <option value=1>M1</option>
+                        <option value=2>M2</option>
+                        <option value=3>M3</option>
+                    </select>
+                    <span asp-validation-for="Employee.ManagerID" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="banner">
+            <h2>Account Identifiers</h2>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.DeviceIMIE" class="control-label">Device IMIE</label>
+                    <input asp-for="Employee.DeviceIMIE" class="form-control" type="number" required readonly />
+                    <span asp-validation-for="Employee.DeviceIMIE" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.PosIds" class="control-label">Pos IDs</label>
+                    <input asp-for="Employee.PosIds" class="form-control" type="number" required readonly />
+                    <span asp-validation-for="Employee.PosIds" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.PosName" class="control-label">Pos Name</label>
+                    <input asp-for="Employee.PosName" class="form-control" type="text" required readonly />
+                    <span asp-validation-for="Employee.PosName" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.SalesId" class="control-label">Sales Id</label>
+                    <input asp-for="Employee.SalesId" class="form-control" type="number" required readonly />
+                    <span asp-validation-for="Employee.SalesId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.WaridSalesId" class="control-label"></label>
+                    <input asp-for="Employee.WaridSalesId" class="form-control" type="number" required readonly />
+                    <span asp-validation-for="Employee.WaridSalesId" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.TabsId" class="control-label"></label>
+                    <input asp-for="Employee.TabsId" class="form-control" type="number" required readonly />
+                    <span asp-validation-for="Employee.TabsId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.MfsId" class="control-label"></label>
+                    <input asp-for="Employee.MfsId" class="form-control" type="number" required readonly />
+                    <span asp-validation-for="Employee.MfsId" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.SiebelId" class="control-label"></label>
+                    <input asp-for="Employee.SiebelId" class="form-control" type="number" required readonly />
+                    <span asp-validation-for="Employee.SiebelId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.EficsId" class="control-label"></label>
+                    <input asp-for="Employee.EficsId" class="form-control" type="number" required readonly />
+                    <span asp-validation-for="Employee.EficsId" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.EficsId2" class="control-label"></label>
+                    <input asp-for="Employee.EficsId2" class="form-control" type="number" required readonly />
+                    <span asp-validation-for="Employee.EficsId2" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-row">
+                <div class="input-group">
+                    <label asp-for="Employee.QmaticLogin" class="control-label"></label>
+                    <input asp-for="Employee.QmaticLogin" class="form-control" type="number" required readonly />
+                    <span asp-validation-for="Employee.QmaticLogin" class="text-danger"></span>
+                </div>
+
+                <div class="input-group">
+                    <label asp-for="Employee.QmaticPowerLogin" class="control-label"></label>
+                    <input asp-for="Employee.QmaticPowerLogin" class="form-control" type="number" required readonly />
+                    <span asp-validation-for="Employee.QmaticPowerLogin" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label asp-for="Employee.AppUserId" class="control-label" style="display:none;"></label>
+            <input asp-for="Employee.AppUserId" class="form-control" type="hidden" value="@Model.AppUser.Id" required readonly/>
+            <span asp-validation-for="Employee.AppUserId" class="text-danger" style="display:none;"></span>
+        </div>
+
+        
+    </form>
+</body>
+</html>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
