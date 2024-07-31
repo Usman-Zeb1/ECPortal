@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using Pk.Com.Jazz.ECP.Data;
 using Pk.Com.Jazz.ECP.Models;
 using System.Linq.Expressions;
@@ -26,6 +28,9 @@ namespace Pk.Com.Jazz.ECP.Controllers
             _roleManager = roleManager;
         }
 
+
+       
+
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -38,29 +43,43 @@ namespace Pk.Com.Jazz.ECP.Controllers
 
             // Expression to filter AppUsers based on role
             Expression<Func<Employee, bool>> predicate;
-            /*if (isAdmin)
-            {
-                // Assuming Role and UserRole were meant to be something else, like checking if user is in 'Dev' role
-                predicate = w => _context.UserRoles
-                                     .Where(ur => ur.UserId == w.AppUserId)
-                                     .Any(ur => ur.RoleId == _context.Roles.FirstOrDefault(r => r.Name == "Admin").Id);
-            }
-            else
-            {
-                predicate = w => !_context.UserRoles
-                                     .Where(ur => ur.UserId == w.AppUserId)
-                                     .Any(ur => ur.RoleId == _context.Roles.FirstOrDefault(r => r.Name == "Dev").Id);
-            }*/
 
-            //predicate = w => _context.AppUsers.Where()
-
-            var appUsers = _context.AppUsers
+            var Users = _context.AppUsers
                             // .Where(predicate)
                             .Where(w => w.Id != null)
                             .OrderByDescending(o => o.ModifiedDate).ToList();
 
-            return View(appUsers);
+            return View(Users);
+
         }
+
+
+        //public async Task<IActionResult> NonProfilerList()
+        //{
+        //    var user = await _userManager.GetUserAsync(User);
+        //    if (user == null)
+        //    {
+        //        return Unauthorized(); // or handle it as per your requirement
+        //    }
+
+        //    var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+
+        //    // Expression to filter AppUsers based on role
+        //    Expression<Func<Employee, bool>> predicate;
+
+        //    //var appUsers = _context.AppUsers
+        //    //                // .Where(predicate)
+        //    //                .Where(w => w.Id != null)
+        //    //                .OrderByDescending(o => o.ModifiedDate).ToList();
+
+        //    //return View(appUsers);
+        //    var appUsers = await _context.AppUsers
+        //    .Where(appUser => !_context.Employee.Any(e => e.AppUserId == appUser.Id))
+        //    .OrderByDescending(o => o.ModifiedDate)
+        //    .ToListAsync();
+
+        //    return View("Index", appUsers);
+        //}
 
         // GET: AppUsers/Details/5
         public async Task<IActionResult> Details(int? id)

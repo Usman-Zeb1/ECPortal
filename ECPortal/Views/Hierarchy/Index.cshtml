@@ -1,0 +1,34 @@
+﻿@model IEnumerable<AppUser>
+
+@{
+    ViewData["Title"] = "Employees";
+}
+
+<div class="display-4">
+    @ViewData["Title"]
+    <div class="float-end">
+        <form asp-action="Create" method="get">
+            <button type="submit" id="CreateButton" class="btn btn-outline-primary" role="button" aria-pressed="true"><i class="fas fa-plus"></i> Create New</button>
+        </form>
+    </div>
+</div>
+<hr />
+
+
+@await Html.PartialAsync("_Grid", Model)
+
+@section Styles {
+
+    @{
+        await Html.RenderPartialAsync("_DataTableStylesPartial");
+    }
+
+}
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_DataTableScriptsPartial");
+    }
+
+}
