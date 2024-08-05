@@ -1,18 +1,14 @@
-﻿@model List<Pk.Com.Jazz.ECP.Models.EmployeeRecognition>
+﻿@model Pk.Com.Jazz.ECP.ViewModels.RecognitionsViewModel
 @using Newtonsoft.Json;
 @{
     ViewData["Title"] = "Employee Recognitions";
 
-    var recognitionStatusData = Model != null
-        ? JsonConvert.SerializeObject(Model.GroupBy(r => r.Status).Select(g => new { Status = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+    var recognitionTypeData = Model.Recognitions != null
+        ? JsonConvert.SerializeObject(Model.Recognitions.GroupBy(r => r.RecognitionType).Select(g => new { Type = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
         : "[]";
 
-    var recognitionTypeData = Model != null
-        ? JsonConvert.SerializeObject(Model.GroupBy(r => r.RecognitionType).Select(g => new { Type = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
-        : "[]";
-
-    var recognitionProgressData = Model != null
-        ? JsonConvert.SerializeObject(Model.GroupBy(r => r.RecognitionDate).Select(g => new { Date = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+    var recognitionProgressData = Model.Recognitions != null
+        ? JsonConvert.SerializeObject(Model.Recognitions.GroupBy(r => r.RecognitionDate).Select(g => new { Date = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
         : "[]";
 }
 
@@ -25,26 +21,22 @@
             <h3 class="mb-0">Recognition Insights</h3>
         </div>
         <div class="card-body">
-            @if (Model == null || Model.Count == 0)
+            @if (Model.Recognitions == null || Model.Recognitions.Count == 0)
             {
                 <div class="text-center mt-2">No recognitions data available for charts.</div>
             }
-
-            else{
-            <div class="row">
-                <!-- Pie Chart: Recognition Status -->
-                <div class="col-md-4">
-                    <canvas id="recognitionStatusChart" width="400" height="200"></canvas>
+            else
+            {
+                <div class="row">
+                    <!-- Bar Chart: Recognition Types -->
+                    <div class="col-md-6">
+                        <canvas id="recognitionTypeChart" width="400" height="200"></canvas>
+                    </div>
+                    <!-- Line Chart: Recognition Progress Over Time -->
+                    <div class="col-md-6">
+                        <canvas id="recognitionProgressChart" width="400" height="200"></canvas>
+                    </div>
                 </div>
-                <!-- Bar Chart: Recognition Types -->
-                <div class="col-md-4">
-                    <canvas id="recognitionTypeChart" width="400" height="200"></canvas>
-                </div>
-                <!-- Line Chart: Recognition Progress Over Time -->
-                <div class="col-md-4">
-                    <canvas id="recognitionProgressChart" width="400" height="200"></canvas>
-                </div>
-            </div>
             }
         </div>
     </div>
@@ -60,30 +52,49 @@
                     <thead class="table-dark">
                         <tr>
                             <th>Id</th>
-                            <th>Status</th>
                             <th>Recognition Date</th>
                             <th>Recognition Type</th>
-                            <th>Comments</th>
+                            @if (Model.IsAgent)
+                            {
+                                <th>Provided By</th>
+                            }
+                            else
+                            {
+                                <th>Recognized Agent</th>
+                            }
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model != null && Model.Count > 0)
+                        @if (Model.Recognitions != null && Model.Recognitions.Count > 0)
                         {
-                            foreach (var recognition in Model)
+                            foreach (var recognition in Model.Recognitions)
                             {
+                                var formattedDate = recognition.RecognitionDate.ToString("yyyy-MM-dd");
                                 <tr>
                                     <td>@recognition.Id</td>
-                                    <td>@recognition.Status</td>
-                                    <td>@recognition.RecognitionDate.ToShortDateString()</td>
+                                    <td>@formattedDate</td>
                                     <td>@recognition.RecognitionType</td>
-                                    <td>@recognition.Comments</td>
+                                    @if (Model.IsAgent)
+                                    {
+                                        <td>@recognition.ProvidedBy</td>
+                                    }
+                                    else
+                                    {
+                                        <td>@recognition.RecognizedAgent</td>
+                                    }
+                                    <td>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#recognitionModal" data-id="@recognition.Id" data-recognition="@recognition.Recognition" data-date="@recognition.RecognitionDate.ToShortDateString()" data-type="@recognition.RecognitionType" data-comments="@recognition.Comments">
+                                            View Details
+                                        </button>
+                                    </td>
                                 </tr>
                             }
                         }
                         else
                         {
                             <tr>
-                                <td colspan="8" class="text-center">No recognition data available.</td>
+                                <td colspan="7" class="text-center">No recognition data available.</td>
                             </tr>
                         }
                     </tbody>
@@ -93,9 +104,30 @@
     </div>
 </div>
 
+<!-- Recognition Details Modal -->
+<div class="modal fade" id="recognitionModal" tabindex="-1" aria-labelledby="recognitionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="recognitionModalLabel">Recognition Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Recognition:</strong> <span id="modalRecognition"></span></p>
+                <p><strong>Date:</strong> <span id="modalDate"></span></p>
+                <p><strong>Type:</strong> <span id="modalType"></span></p>
+                <p><strong>Comments:</strong> <span id="modalComments"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     <script>
-        $(document).ready(function () {
+        document.addEventListener('DOMContentLoaded', function () {
             // Initialize DataTable
             $('#recognitionsTable').DataTable({
                 paging: true,
@@ -105,41 +137,8 @@
             });
 
             // Parse recognition status data
-            var recognitionStatusData = @Html.Raw(recognitionStatusData);
-            var recognitionTypeData = @Html.Raw(recognitionTypeData);
-            var recognitionProgressData = @Html.Raw(recognitionProgressData);
-
-            // Pie Chart: Recognition Status
-            var ctxStatus = document.getElementById('recognitionStatusChart').getContext('2d');
-            new Chart(ctxStatus, {
-                type: 'pie',
-                data: {
-                    labels: recognitionStatusData.map(item => item.Status),
-                    datasets: [{
-                        label: 'Recognition Status',
-                        data: recognitionStatusData.map(item => item.Count),
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
+            var recognitionTypeData = JSON.parse('@Html.Raw(recognitionTypeData)');
+            var recognitionProgressData = JSON.parse('@Html.Raw(recognitionProgressData)');
 
             // Bar Chart: Recognition Types
             var ctxType = document.getElementById('recognitionTypeChart').getContext('2d');
@@ -151,7 +150,7 @@
                         label: 'Recognition Types',
                         data: recognitionTypeData.map(item => item.Count),
                         backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                        borderColor: 'rgba(75, 192, 192, 1',
+                        borderColor: 'rgba(75, 192, 192, 1)',
                         borderWidth: 1
                     }]
                 },
@@ -252,6 +251,31 @@
                     }
                 }
             });
+
+            // Modal Event Handler
+            var recognitionModal = document.getElementById('recognitionModal');
+            recognitionModal.addEventListener('show.bs.modal', function (event) {
+                var button = event.relatedTarget; // Button that triggered the modal
+                var id = button.getAttribute('data-id');
+                var recognition = button.getAttribute('data-recognition');
+                var date = button.getAttribute('data-date');
+                var type = button.getAttribute('data-type');
+                var comments = button.getAttribute('data-comments');
+
+                var modalRecognition = recognitionModal.querySelector('#modalRecognition');
+                var modalDate = recognitionModal.querySelector('#modalDate');
+                var modalType = recognitionModal.querySelector('#modalType');
+                var modalComments = recognitionModal.querySelector('#modalComments');
+
+                modalRecognition.textContent = recognition;
+                modalDate.textContent = date;
+                modalType.textContent = type;
+                modalComments.textContent = comments;
+            });
         });
     </script>
+
+
 }
+
+

@@ -282,8 +282,20 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGllcmFyY2h5XENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Hierarchy/Hierarchy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGllcmFyY2h5XEhpZXJhcmNoeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Hierarchy/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGllcmFyY2h5XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Hierarchy/_Form.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGllcmFyY2h5XF9Gb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Hierarchy/_Grid.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGllcmFyY2h5XF9HcmlkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Home/Index.cshtml]
@@ -424,6 +436,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Trainings/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhaW5pbmdzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Trainings/RequestedTrainings.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHJhaW5pbmdzXFJlcXVlc3RlZFRyYWluaW5ncy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/_ViewImports.cshtml]

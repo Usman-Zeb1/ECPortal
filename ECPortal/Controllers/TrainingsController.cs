@@ -22,13 +22,13 @@ namespace Pk.Com.Jazz.ECP.Controllers
         public IActionResult Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var agentId = _context.Employee.FirstOrDefault(a => a.AppUserId == userId)?.EmployeeId;
+            /*var agentId = _context.Employee.FirstOrDefault(a => a.AppUserId == userId)?.EmployeeId;*/
 
-            if (agentId == null)
+            if (userId == null)
             {
                 return RedirectToAction("Index", "Home"); // Or handle the case appropriately
             }
-
+            var agentId = _context.Employee.FirstOrDefault(a => a.AppUserId == userId)?.EmployeeId;
             var trainings = _context.EmployeeTrainings
                 .Where(t => t.EmployeeId == agentId)
                 .OrderBy(t => t.TrainingDate)

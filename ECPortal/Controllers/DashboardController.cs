@@ -71,9 +71,9 @@ namespace Pk.Com.Jazz.ECP.Controllers
                                            .OrderByDescending(t => t.TrainingDate)
                                            .FirstOrDefault()?.TrainingDate ?? null,
 
-                EmployeeSalesCount = _context.EmployeeSales.Count(s => s.EmployeeId == employee.EmployeeId),
+                EmployeeSalesCount = _context.EmployeeSales.Count(s => s.EmployeeNumber == employee.EmployeeNumber),
                 LastSalesDate = _context.EmployeeSales
-                                        .Where(s => s.EmployeeId == employee.EmployeeId)
+                                        .Where(s => s.EmployeeNumber == employee.EmployeeNumber)
                                         .OrderByDescending(s => s.SalesDate)
                                         .FirstOrDefault()?.SalesDate ?? null,
 
@@ -83,11 +83,11 @@ namespace Pk.Com.Jazz.ECP.Controllers
                                               .OrderByDescending(r => r.RecognitionDate)
                                               .FirstOrDefault()?.RecognitionDate ?? null,
 
-                EmployeeTargetsCount = _context.EmployeeTargets.Count(t => t.EmployeeId == employee.EmployeeId),
+                EmployeeTargetsCount = _context.EmployeeTargets.Count(t => t.EmployeeNumber == employee.EmployeeId),
                 LastTargetDate = _context.EmployeeTargets
-                                         .Where(t => t.EmployeeId == employee.EmployeeId)
-                                         .OrderByDescending(t => t.TargetEndDate)
-                                         .FirstOrDefault()?.TargetEndDate ?? null,
+                                         .Where(t => t.EmployeeNumber == employee.EmployeeNumber)
+                                         .OrderByDescending(t => t.Month)
+                                         .FirstOrDefault()?.InsertDate ?? null,
             };
 
             return View(viewModel);

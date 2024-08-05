@@ -1,0 +1,189 @@
+﻿@model Pk.Com.Jazz.ECP.Models.EmployeeTargets
+
+@{
+    ViewData["Title"] = "Agent Targets";
+
+    var monthName = Model != null ? System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) : string.Empty;
+}
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="container mt-5">
+    <form method="get" asp-action="Index">
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <label for="agent" class="form-label">Select Agent</label>
+                <select id="agent" name="employeeNumber" class="form-select">
+                    @foreach (var agent in ViewBag.Agents)
+                    {
+                        <option value="@agent.Value">@agent.Text</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="month" class="form-label">Month</label>
+                <select id="month" name="month" class="form-select">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        var monthNameOption = new DateTime(2024, i, 1).ToString("MMMM");
+                        <option value="@i" selected="@(i == Model?.Month)">@monthNameOption</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="year" class="form-label">Year</label>
+                <select id="year" name="year" class="form-select">
+                    @for (int i = DateTime.Now.Year; i >= DateTime.Now.Year - 5; i--)
+                    {
+                        <option value="@i" selected="@(i == Model?.Year)">@i</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-3 align-self-end">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
+    @if (Model != null)
+    {
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h3>@monthName @Model.Year Targets for Agent</h3>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Prepaid Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeePrepaidSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Postpaid Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeePostpaidSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Device Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeeDeviceSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                M-Wallet Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeeMWalletSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                4G Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeeFourGSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Rox New Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeeRoxNewSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Rox Conversion Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeeRoxConversionSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Status
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.Status</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <canvas id="targetsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var ctx = document.getElementById('targetsChart').getContext('2d');
+                var targetsChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Prepaid', 'Postpaid', 'Device', 'M-Wallet', '4G', 'Rox New', 'Rox Conversion'],
+                        datasets: [{
+                            label: 'Sales Targets',
+                            data: [
+            @Model.EmployeePrepaidSaleTarget,
+            @Model.EmployeePostpaidSaleTarget,
+            @Model.EmployeeDeviceSaleTarget,
+            @Model.EmployeeMWalletSaleTarget,
+            @Model.EmployeeFourGSaleTarget,
+            @Model.EmployeeRoxNewSaleTarget,
+            @Model.EmployeeRoxConversionSaleTarget
+                                        ],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    }
+    else
+    {
+        <div class="alert alert-warning mt-4 text-center" role="alert">
+            <strong>No targets data available for the selected time period.</strong>
+        </div>
+    }
+</div>

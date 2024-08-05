@@ -8,56 +8,43 @@ namespace Pk.Com.Jazz.ECP.Models
     {
         public EmployeeTargets() {
 
-            ModifiedDate = DateTime.Now;
             InsertDate = DateTime.Now;
+            ModifiedDate = DateTime.Now;
 
         }
 
 
         [Key]
         public int Id { get; set; }
-
         [ForeignKey("Employee")]
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        [Column("EmployeeNumber")]
+        public int EmployeeNumber { get; set; }
+        public virtual Employee Employee { get; set; }
+
+        public int EmployeePrepaidSaleTarget { get; set; }
+        public int EmployeePostpaidSaleTarget { get; set; }
+        public int EmployeeDeviceSaleTarget { get; set; }
+        public int EmployeeMWalletSaleTarget { get; set; }
+        public int EmployeeFourGSaleTarget { get; set; }
+        public int EmployeeRoxNewSaleTarget { get; set; }
+        public int EmployeeRoxConversionSaleTarget { get; set; }
 
         [Required]
-        [Display(Name = "RCCH Region (City/Location)")]
-        [MaxLength(500)]
-        public string RCCH_Region { get; set; }
+        public int Month { get; set; }
 
         [Required]
-        [Display(Name = "Business Center")]
-        [MaxLength(500)]
-        public string Business_Center { get; set; }
+        public int Year { get; set; }
 
         [Required]
-        [Display(Name = "Inserted Date")]
-        public DateTime InsertDate { get; set; }
+        public DateTime InsertDate { get; set; } = DateTime.Now;
 
         [Required]
-        [Display(Name = "Last Modified Date")]
-        public DateTime ModifiedDate { get; set; }
+        public DateTime ModifiedDate { get; set; } = DateTime.Now;
 
         [Required]
         [MaxLength(50)]
         public string Status { get; set; } // e.g., Pending, Approved, Rejected
 
-        [Required]
-        [Display(Name = "Target Start Date")]
-        public DateTime TargetStartDate { get; set; }
-
-        [Required]
-        [Display(Name = "Target End Date")]
-        public DateTime TargetEndDate { get; set; }
-
-        [Required]
-        [DataType(DataType.Currency)]
-        [Column(TypeName = "decimal(18, 2)")]
-        [Display(Name = "Target Amount")]
-        public decimal TargetAmount { get; set; }
-
-        [MaxLength(500)]
-        public string? Comments { get; set; } // Any additional comments
+      
     }
 }

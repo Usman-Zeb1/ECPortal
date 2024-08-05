@@ -43,6 +43,21 @@ public class ECContext : IdentityDbContext<AppUser>
 
     public virtual DbSet<EmployeeSales> EmployeeSales { get; set; }
 
+    public virtual DbSet<EmployeeDeviceSale> EmployeeDeviceSales { get; set; }
+
+    public virtual DbSet<EmployeeFourGSale> EmployeeFourGSales { get; set; }
+
+    public virtual DbSet<EmployeeMWalletSale> EmployeeMWalletSales { get; set; }
+
+    public virtual DbSet<EmployeePostpaidSale> EmployeePostpaidSales { get; set; }
+
+    public virtual DbSet<EmployeePrepaidSale> EmployeePrepaidSales { get; set; }
+
+
+    public virtual DbSet<EmployeeRoxConversionSale> EmployeeRoxConversionSales { get; set; }
+
+    public virtual DbSet<EmployeeRoxNewSale> EmployeeRoxNewSales { get; set; }
+
     public virtual DbSet<EmployeeTargets> EmployeeTargets { get; set; }
 
     public virtual DbSet<EmployeeTrainings> EmployeeTrainings { get; set; }
@@ -84,9 +99,7 @@ public class ECContext : IdentityDbContext<AppUser>
         .Property(e => e.CommissionAmount)
         .HasColumnType("decimal(18,2)");
 
-        modelBuilder.Entity<EmployeeSales>()
-            .Property(e => e.SalesAmount)
-            .HasColumnType("decimal(18,2)");
+        
 
         modelBuilder.Entity<AppUserToken>(entity =>
         {
@@ -98,5 +111,19 @@ public class ECContext : IdentityDbContext<AppUser>
 
             entity.Property(e => e.TokenType).HasMaxLength(50);
         });
+
+        modelBuilder.Entity<Employee>()
+            .HasIndex(e => e.EmployeeNumber)
+            .IsUnique();
+
+        modelBuilder.Entity<EmployeeSales>()
+            .HasOne(es => es.Employee)
+            .WithMany(e => e.EmployeeSales)
+            .HasForeignKey(es => es.EmployeeNumber);
+
+       /* modelBuilder.Entity<EmployeeTargets>()
+            .HasOne(et => et.Employee)
+            .WithMany(e => e.EmployeeTargets)
+            .HasForeignKey(et => et.EmployeeNumber);*/
     }
 }

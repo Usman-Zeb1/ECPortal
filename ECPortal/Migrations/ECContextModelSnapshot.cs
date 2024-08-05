@@ -626,6 +626,9 @@ namespace Pk.Com.Jazz.ECP.Migrations
 
                     b.HasIndex("ECID");
 
+                    b.HasIndex("EmployeeNumber")
+                        .IsUnique();
+
                     b.ToTable("Employee");
                 });
 
@@ -666,6 +669,32 @@ namespace Pk.Com.Jazz.ECP.Migrations
                     b.HasIndex("EmployeeId");
 
                     b.ToTable("EmployeeCommissions");
+                });
+
+            modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeeDeviceSale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Handsets")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MBB")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Target")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployeeDeviceSales");
                 });
 
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeeEDA", b =>
@@ -762,6 +791,40 @@ namespace Pk.Com.Jazz.ECP.Migrations
                     b.ToTable("EmployeeFeedbacks");
                 });
 
+            modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeeFourGSale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Total")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployeeFourGSales");
+                });
+
+            modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeeMWalletSale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Total")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployeeMWalletSales");
+                });
+
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeePerformance", b =>
                 {
                     b.Property<int>("Id")
@@ -804,6 +867,58 @@ namespace Pk.Com.Jazz.ECP.Migrations
                     b.ToTable("EmployeePerformances");
                 });
 
+            modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeePostpaidSale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FreshSales")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PortIN")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PreToPost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RedRedZ")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployeePostpaidSales");
+                });
+
+            modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeePrepaidSale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("NewSales")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PrepaidMNP")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployeePrepaidSales");
+                });
+
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeeRecognition", b =>
                 {
                     b.Property<int>("Id")
@@ -828,6 +943,11 @@ namespace Pk.Com.Jazz.ECP.Migrations
                     b.Property<DateTime>("RecognitionDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("RecognitionDetail")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
                     b.Property<string>("RecognitionType")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -850,6 +970,64 @@ namespace Pk.Com.Jazz.ECP.Migrations
                     b.ToTable("EmployeeRecognitions");
                 });
 
+            modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeeRoxConversionSale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BasicVibe")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CrazyVibe")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InsaneVibe")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NoVibe")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployeeRoxConversionSales");
+                });
+
+            modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeeRoxNewSale", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("BasicVibe")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Boost")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CrazyVibe")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InsaneVibe")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("EmployeeRoxNewSales");
+                });
+
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeeSales", b =>
                 {
                     b.Property<int>("Id")
@@ -858,11 +1036,28 @@ namespace Pk.Com.Jazz.ECP.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Comments")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                    b.Property<int>("EmployeeDeviceSaleId")
+                        .HasColumnType("int");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int>("EmployeeFourGSaleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeMWalletSaleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeePostpaidSaleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeePrepaidSaleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeRoxConversionSaleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeRoxNewSaleId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("InsertDate")
@@ -870,9 +1065,6 @@ namespace Pk.Com.Jazz.ECP.Migrations
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<decimal>("SalesAmount")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("SalesDate")
                         .HasColumnType("datetime2");
@@ -884,7 +1076,21 @@ namespace Pk.Com.Jazz.ECP.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
+                    b.HasIndex("EmployeeDeviceSaleId");
+
+                    b.HasIndex("EmployeeFourGSaleId");
+
+                    b.HasIndex("EmployeeMWalletSaleId");
+
+                    b.HasIndex("EmployeeNumber");
+
+                    b.HasIndex("EmployeePostpaidSaleId");
+
+                    b.HasIndex("EmployeePrepaidSaleId");
+
+                    b.HasIndex("EmployeeRoxConversionSaleId");
+
+                    b.HasIndex("EmployeeRoxNewSaleId");
 
                     b.ToTable("EmployeeSales");
                 });
@@ -897,16 +1103,29 @@ namespace Pk.Com.Jazz.ECP.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Business_Center")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                    b.Property<int>("EmployeeDeviceSaleTarget")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Comments")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                    b.Property<int>("EmployeeFourGSaleTarget")
+                        .HasColumnType("int");
 
-                    b.Property<int>("EmployeeId")
+                    b.Property<int>("EmployeeMWalletSaleTarget")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeNumber")
+                        .HasColumnType("int")
+                        .HasColumnName("EmployeeNumber");
+
+                    b.Property<int>("EmployeePostpaidSaleTarget")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeePrepaidSaleTarget")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeRoxConversionSaleTarget")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmployeeRoxNewSaleTarget")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("InsertDate")
@@ -915,28 +1134,20 @@ namespace Pk.Com.Jazz.ECP.Migrations
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("RCCH_Region")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
+                    b.Property<int>("Month")
+                        .HasColumnType("int");
 
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal>("TargetAmount")
-                        .HasColumnType("decimal(18, 2)");
-
-                    b.Property<DateTime>("TargetEndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("TargetStartDate")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("Year")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EmployeeId");
+                    b.HasIndex("EmployeeNumber");
 
                     b.ToTable("EmployeeTargets");
                 });
@@ -1258,20 +1469,76 @@ namespace Pk.Com.Jazz.ECP.Migrations
 
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeeSales", b =>
                 {
+                    b.HasOne("Pk.Com.Jazz.ECP.Models.EmployeeDeviceSale", "EmployeeDeviceSale")
+                        .WithMany()
+                        .HasForeignKey("EmployeeDeviceSaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pk.Com.Jazz.ECP.Models.EmployeeFourGSale", "EmployeeFourGSale")
+                        .WithMany()
+                        .HasForeignKey("EmployeeFourGSaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pk.Com.Jazz.ECP.Models.EmployeeMWalletSale", "EmployeeMWalletSale")
+                        .WithMany()
+                        .HasForeignKey("EmployeeMWalletSaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Pk.Com.Jazz.ECP.Models.Employee", "Employee")
                         .WithMany("EmployeeSales")
-                        .HasForeignKey("EmployeeId")
+                        .HasForeignKey("EmployeeNumber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pk.Com.Jazz.ECP.Models.EmployeePostpaidSale", "EmployeePostpaidSale")
+                        .WithMany()
+                        .HasForeignKey("EmployeePostpaidSaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pk.Com.Jazz.ECP.Models.EmployeePrepaidSale", "EmployeePrepaidSale")
+                        .WithMany()
+                        .HasForeignKey("EmployeePrepaidSaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pk.Com.Jazz.ECP.Models.EmployeeRoxConversionSale", "EmployeeRoxConversionSale")
+                        .WithMany()
+                        .HasForeignKey("EmployeeRoxConversionSaleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Pk.Com.Jazz.ECP.Models.EmployeeRoxNewSale", "EmployeeRoxNewSale")
+                        .WithMany()
+                        .HasForeignKey("EmployeeRoxNewSaleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employee");
+
+                    b.Navigation("EmployeeDeviceSale");
+
+                    b.Navigation("EmployeeFourGSale");
+
+                    b.Navigation("EmployeeMWalletSale");
+
+                    b.Navigation("EmployeePostpaidSale");
+
+                    b.Navigation("EmployeePrepaidSale");
+
+                    b.Navigation("EmployeeRoxConversionSale");
+
+                    b.Navigation("EmployeeRoxNewSale");
                 });
 
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EmployeeTargets", b =>
                 {
                     b.HasOne("Pk.Com.Jazz.ECP.Models.Employee", "Employee")
                         .WithMany("EmployeeTargets")
-                        .HasForeignKey("EmployeeId")
+                        .HasForeignKey("EmployeeNumber")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

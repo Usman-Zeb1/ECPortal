@@ -1,189 +1,180 @@
-﻿@model List<Pk.Com.Jazz.ECP.Models.EmployeeTargets>
+﻿@model Pk.Com.Jazz.ECP.Models.EmployeeTargets
 
 @{
-    ViewData["Title"] = "Employee Targets";
+    ViewData["Title"] = "Monthly Targets";
+
+    var monthName = Model != null ? System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) : string.Empty;
 }
 
-<h1 class="text-center my-4">Employee Targets</h1>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<div class="container">
-    <!-- Chart Container -->
-    <div class="card mb-4">
-        <div class="card-header">
-            <h3 class="mb-0">Target Status and Progress</h3>
-        </div>
-        <div class="card-body">
-            @if (Model == null || Model.Count == 0)
-            {
-                <div class="text-center mt-2">No targets data available for charts.</div>
-            }
-            else
-            {
-            <div class="row">
-                <!-- Pie Chart: Target Status Overview -->
-                <div class="col-md-6">
-                    <canvas id="targetStatusChart" width="400" height="200"></canvas>
-                </div>
-                <!-- Line Chart: Target Progress Over Time -->
-                <div class="col-md-6">
-                    <canvas id="targetProgressChart" width="400" height="200"></canvas>
-                </div>
+<div class="container mt-5">
+    <form method="get" asp-action="Index">
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <label for="month" class="form-label">Month</label>
+                <select id="month" name="month" class="form-select">
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        var monthNameOption = new DateTime(2024, i, 1).ToString("MMMM");
+                        <option value="@i" selected="@(i == Model?.Month)">@monthNameOption</option>
+                    }
+                </select>
             </div>
-            }
-        </div>
-    </div>
-
-    <!-- Target Details Table -->
-    <div class="card mt-4">
-        <div class="card-header">
-            <h3 class="mb-0">Target Details</h3>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table id="targetsTable" class="table table-striped table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Id</th>
-                            <th>Target Start Date</th>
-                            <th>Target End Date</th>
-                            <th>Status</th>
-                            <th>Target Amount</th>
-                            <th>Comments</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model != null && Model.Count > 0)
-                        {
-                            foreach (var target in Model)
-                            {
-                                <tr>
-                                    <td>@target.Id</td>
-                                    <td>@target.TargetStartDate.ToShortDateString()</td>
-                                    <td>@target.TargetEndDate.ToShortDateString()</td>
-                                    <td>@target.Status</td>
-                                    <td>@target.TargetAmount</td>
-                                    <td>@target.Comments</td>
-                                </tr>
-                            }
-                        }
-                        else
-                        {
-                            <tr>
-                                <td colspan="9" class="text-center">No target data available.</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+            <div class="col-md-3">
+                <label for="year" class="form-label">Year</label>
+                <select id="year" name="year" class="form-select">
+                    @for (int i = DateTime.Now.Year; i >= DateTime.Now.Year - 5; i--)
+                    {
+                        <option value="@i" selected="@(i == Model?.Year)">@i</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-2 align-self-end">
+                <button type="submit" class="btn btn-primary">Load</button>
             </div>
         </div>
-    </div>
-</div>
+    </form>
 
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            // Initialize DataTable
-            $('#targetsTable').DataTable({
-                "paging": true,
-                "pageLength": 5,
-                "lengthChange": false,
-                "info": false
-            });
+    @if (Model != null)
+    {
+        <div class="card mb-4">
+            <div class="card-header text-center">
+                <h3>@monthName @Model.Year Targets</h3>
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Prepaid Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeePrepaidSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Postpaid Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeePostpaidSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Device Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeeDeviceSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                M-Wallet Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeeMWalletSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                4G Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeeFourGSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Rox New Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeeRoxNewSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Rox Conversion Sales Target
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.EmployeeRoxConversionSaleTarget</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-header text-center">
+                                Status
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="card-text display-6">@Model.Status</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-            var targetStatusData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model != null ? Model.GroupBy(t => t.Status).Select(g => new { Status = g.Key, Count = g.Count() }).ToList() : new List<object>()));
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <canvas id="targetsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-            // Extract target progress data for line chart
-            var targetProgressData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model != null ? Model.GroupBy(t => t.TargetStartDate).Select(g => new { Date = g.Key, Amount = g.Sum(t => t.TargetAmount) }).ToList() : new List<object>()));
-
-            // Pie Chart: Target Status Overview
-            var statusCtx = document.getElementById('targetStatusChart').getContext('2d');
-            var targetStatusChart = new Chart(statusCtx, {
-                type: 'pie',
-                data: {
-                    labels: targetStatusData.map(item => item.Status),
-                    datasets: [{
-                        label: 'Target Status',
-                        data: targetStatusData.map(item => item.Count),
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)',
-                            'rgba(255, 159, 64, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)',
-                            'rgba(255, 159, 64, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-
-            // Line Chart: Target Progress Over Time
-            var progressCtx = document.getElementById('targetProgressChart').getContext('2d');
-            var targetProgressChart = new Chart(progressCtx, {
-                type: 'line',
-                data: {
-                    labels: targetProgressData.map(item => item.Date),
-                    datasets: [{
-                        label: 'Target Progress',
-                        data: targetProgressData.map(item => item.Amount),
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Date'
-                            },
-                            ticks: {
-                                maxRotation: 90,
-                                minRotation: 45
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Target Amount'
-                            },
-                            min: 0,
-                            beginAtZero: true
-                        }
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var ctx = document.getElementById('targetsChart').getContext('2d');
+                var targetsChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Prepaid', 'Postpaid', 'Device', 'M-Wallet', '4G', 'Rox New', 'Rox Conversion'],
+                        datasets: [{
+                            label: 'Sales Targets',
+                            data: [
+            @Model.EmployeePrepaidSaleTarget,
+            @Model.EmployeePostpaidSaleTarget,
+            @Model.EmployeeDeviceSaleTarget,
+            @Model.EmployeeMWalletSaleTarget,
+            @Model.EmployeeFourGSaleTarget,
+            @Model.EmployeeRoxNewSaleTarget,
+            @Model.EmployeeRoxConversionSaleTarget
+                                        ],
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
                     },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                title: function (context) {
-                                    return context[0].label;
-                                },
-                                label: function (context) {
-                                    return `Amount: ${context.raw}`;
-                                }
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
                             }
                         }
                     }
-                }
+                });
             });
-        });
-    </script>
-}
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    }
+    else
+    {
+        <div class="alert alert-warning mt-4 text-center" role="alert">
+            <strong>No targets data available for the selected time period.</strong>
+        </div>
+    }
+</div>

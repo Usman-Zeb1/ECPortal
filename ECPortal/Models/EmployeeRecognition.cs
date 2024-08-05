@@ -28,6 +28,16 @@ namespace Pk.Com.Jazz.ECP.Models
         public virtual Employee? Employee { get; set; }
 
         [Required]
+        [MaxLength(500)]
+        [Display(Name = "Recognition Detail")]
+        public string RecognitionDetail { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        [Display(Name = "Recognition Type")]
+        public string RecognitionType { get; set; } // e.g., Employee of the Month, Outstanding Performance
+
+        [Required]
         [Display(Name = "Insert Date")]
         public DateTime InsertDate { get; set; }
 
@@ -45,10 +55,7 @@ namespace Pk.Com.Jazz.ECP.Models
         [Display(Name = "Recognition Date")]
         public DateTime RecognitionDate { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        [Display(Name = "Recognition Type")]
-        public string RecognitionType { get; set; } // e.g., Employee of the Month, Outstanding Performance
+      
 
         [Required]
         [MaxLength(100)]

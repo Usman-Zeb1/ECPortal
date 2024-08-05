@@ -1,4 +1,5 @@
-﻿using Pk.Com.Jazz.ECP.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using Pk.Com.Jazz.ECP.Data;
 using Pk.Com.Jazz.ECP.Models;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,10 @@ namespace Pk.Com.Jazz.ECP.Models
         [Key]
         public int EmployeeId { get; set; }
 
+
+        [Required]
         [Display(Name = "Employee Number", ShortName = "Employee")]
+
         public int EmployeeNumber { get; set; }
 
         [Display(Name = "Employee Name", ShortName = "Name")]

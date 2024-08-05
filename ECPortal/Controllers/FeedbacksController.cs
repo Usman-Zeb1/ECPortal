@@ -30,7 +30,7 @@ namespace Pk.Com.Jazz.ECP.Controllers
             {
                 var agentId = _context.Employee.FirstOrDefault(a => a.AppUserId == userId)?.EmployeeId;
 
-                if (agentId == null)
+                if (userId == null)
                 {
                     return RedirectToAction("Index", "Home"); // Or handle the case appropriately
                 }

@@ -17,15 +17,15 @@ namespace Pk.Com.Jazz.ECP.Controllers
         public IActionResult Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var agentId = _context.Employee.FirstOrDefault(a => a.AppUserId == userId)?.EmployeeId;
+            var agentId = _context.Employee.FirstOrDefault(a => a.AppUserId == userId)?.EmployeeNumber;
 
-            if (agentId == null)
+            if (userId == null)
             {
                 return RedirectToAction("Index", "Home"); // Or handle the case appropriately
             }
 
             var sales = _context.EmployeeSales
-                .Where(e => e.EmployeeId == agentId)
+                .Where(e => e.EmployeeNumber == agentId)
                 .OrderBy(e => e.SalesDate)
                 .ToList() ?? null;
             

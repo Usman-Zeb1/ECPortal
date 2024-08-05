@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Pk.Com.Jazz.ECP.Data;
 using Pk.Com.Jazz.ECP.Models;
+using Pk.Com.Jazz.ECP.ViewModels;
 using System.Security.Claims;
 
 namespace Pk.Com.Jazz.ECP.Controllers
@@ -21,19 +22,53 @@ namespace Pk.Com.Jazz.ECP.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var agentId = _context.Employee.FirstOrDefault(a => a.AppUserId == userId)?.EmployeeId;
 
-            if (agentId == null)
+            if (userId == null)
             {
                 return RedirectToAction("Index", "Home"); // Or handle the case appropriately
             }
 
+            RecognitionsViewModel viewModel = new RecognitionsViewModel();
 
-            var recognitions = _context.EmployeeRecognitions
-                .Where(t => t.EmployeeId == agentId)
-                .OrderBy(t => t.RecognitionDate)
-                .ToList() ?? null;
+            if (User.IsInRole("Agent"))
+            {
+                viewModel.Recognitions = _context.EmployeeRecognitions
+                    .Where(t => t.EmployeeId == agentId)
+                    .OrderBy(t => t.RecognitionDate)
+                    .Select(t => new RecognitionsViewModel.RecognitionDetail
+                    {
+                        Id = t.Id,
+                        RecognitionDate = t.RecognitionDate,
+                        RecognitionType = t.RecognitionType,
+                        Recognition = t.RecognitionDetail,
+                        ProvidedBy = t.RecognizedBy,
+                        Comments = t.Comments,
+                        RecognizedAgent = _context.Employee.FirstOrDefault(e => e.EmployeeId == t.EmployeeId).EmailAddress
+                    })
+                    .ToList();
+                viewModel.IsAgent = true;
+            }
+            else
+            {
+                viewModel.Recognitions = _context.EmployeeRecognitions
+                    .Where(t => t.RecognizedBy == User.Identity.Name)
+                    .OrderBy(t => t.RecognitionDate)
+                    .Select(t => new RecognitionsViewModel.RecognitionDetail
+                    {
+                        Id = t.Id,
+                        RecognitionDate = t.RecognitionDate,
+                        RecognitionType = t.RecognitionType,
+                        Recognition = t.RecognitionDetail,
+                        ProvidedBy = t.RecognizedBy,
+                        Comments = t.Comments,
+                        RecognizedAgent = _context.Employee.FirstOrDefault(e => e.EmployeeId == t.EmployeeId).EmailAddress
+                    })
+                    .ToList();
+                viewModel.IsAgent = false;
+            }
 
-            return View(recognitions);
+            return View(viewModel);
         }
+
 
 
         // GET: EmployeeRecognition/Create
