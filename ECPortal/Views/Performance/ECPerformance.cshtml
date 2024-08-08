@@ -1,9 +1,8 @@
-﻿@model Pk.Com.Jazz.ECP.ViewModels.EmployeePerformanceViewModel
+﻿@model Pk.Com.Jazz.ECP.ViewModels.ECPerformanceViewModel
 @using Newtonsoft.Json
 
-
 @{
-    ViewData["Title"] = "Agent Performance";
+    ViewData["Title"] = "EC Performance";
 
     var performanceData = Model != null
         ? JsonConvert.SerializeObject(new[]
@@ -15,11 +14,11 @@
             new { Name = "4G Sales", Target = Model.FourGSalesTarget, TotalSales = Model.TotalFourGSales, Performance = Model.FourGSalesPerformance },
             new { Name = "Rox New Sales", Target = Model.RoxNewSalesTarget, TotalSales = Model.TotalRoxNewSales, Performance = Model.RoxNewSalesPerformance },
             new { Name = "Rox Conversion Sales", Target = Model.RoxConversionSalesTarget, TotalSales = Model.TotalRoxConversionSales, Performance = Model.RoxConversionSalesPerformance }
-                        }, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+                }, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
         : "[]";
 
     var dailyPerformanceData = Model != null
-        ? JsonConvert.SerializeObject(Model.DailyPerformances.Select(dp => new
+        ? JsonConvert.SerializeObject(Model.DailyPerformances?.Select(dp => new
         {
             Date = dp.Date.ToShortDateString(),
             TotalSales = dp.TotalSales,
@@ -27,21 +26,25 @@
         }), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
         : "[]";
 
-    var monthYear = new { MonthName = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model?.Month ?? 1), Year = Model?.Year ?? DateTime.Now.Year };
+    var monthYear = new
+    {
+        MonthName = Model != null ? System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) : string.Empty,
+        Year = Model != null ? Model.Year : DateTime.Now.Year
+    };
 }
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="container mt-5">
-    <form method="get" asp-action="Index">
+    <form method="get">
         <div class="row mb-4">
             <div class="col-md-3">
-                <label for="agent" class="form-label">Agent</label>
-                <select id="agent" name="employeeNumber" class="form-select" data-placeholder="Select an Agent">
+                <label for="ec" class="form-label">Experience Center</label>
+                <select id="ec" name="ECID" class="form-select" data-placeholder="Select an EC">
                     <option></option>
-                    @foreach (var agent in ViewBag.Agents)
+                    @foreach (var ec in ViewBag.ECs)
                     {
-                        <option value="@agent.Value">@agent.Text</option>
+                        <option value="@ec.Value">@ec.Text</option>
                     }
                 </select>
             </div>
@@ -89,76 +92,28 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4 mb-3">
-                        <div class="card text-white bg-primary">
-                            <div class="card-body">
-                                <h5 class="card-title">Prepaid Sales</h5>
-                                <p class="card-text">Target: @Model.PrepaidSalesTarget</p>
-                                <p class="card-text">Total Sales: @Model.TotalPrepaidSales</p>
-                                <p class="card-text">Performance: @Model.PrepaidSalesPerformance%</p>
+                    @foreach (var item in new[]
+                   {
+                new { Title = "Prepaid Sales", Target = Model.PrepaidSalesTarget, TotalSales = Model.TotalPrepaidSales, Performance = Model.PrepaidSalesPerformance },
+                new { Title = "Postpaid Sales", Target = Model.PostpaidSalesTarget, TotalSales = Model.TotalPostpaidSales, Performance = Model.PostpaidSalesPerformance },
+                new { Title = "Device Sales", Target = Model.DeviceSalesTarget, TotalSales = Model.TotalDeviceSales, Performance = Model.DeviceSalesPerformance },
+                new { Title = "M-Wallet Sales", Target = Model.MWalletSalesTarget, TotalSales = Model.TotalMWalletSales, Performance = Model.MWalletSalesPerformance },
+                new { Title = "4G Sales", Target = Model.FourGSalesTarget, TotalSales = Model.TotalFourGSales, Performance = Model.FourGSalesPerformance },
+                new { Title = "Rox New Sales", Target = Model.RoxNewSalesTarget, TotalSales = Model.TotalRoxNewSales, Performance = Model.RoxNewSalesPerformance },
+                new { Title = "Rox Conversion Sales", Target = Model.RoxConversionSalesTarget, TotalSales = Model.TotalRoxConversionSales, Performance = Model.RoxConversionSalesPerformance }
+                })
+                    {
+                        <div class="col-md-4 mb-3">
+                            <div class="card text-white bg-primary">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Title</h5>
+                                    <p class="card-text">Target: @item.Target</p>
+                                    <p class="card-text">Total Sales: @item.TotalSales</p>
+                                    <p class="card-text">Performance: @item.Performance%</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card text-white bg-success">
-                            <div class="card-body">
-                                <h5 class="card-title">Postpaid Sales</h5>
-                                <p class="card-text">Target: @Model.PostpaidSalesTarget</p>
-                                <p class="card-text">Total Sales: @Model.TotalPostpaidSales</p>
-                                <p class="card-text">Performance: @Model.PostpaidSalesPerformance%</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card text-white bg-info">
-                            <div class="card-body">
-                                <h5 class="card-title">Device Sales</h5>
-                                <p class="card-text">Target: @Model.DeviceSalesTarget</p>
-                                <p class="card-text">Total Sales: @Model.TotalDeviceSales</p>
-                                <p class="card-text">Performance: @Model.DeviceSalesPerformance%</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card text-white bg-warning">
-                            <div class="card-body">
-                                <h5 class="card-title">M-Wallet Sales</h5>
-                                <p class="card-text">Target: @Model.MWalletSalesTarget</p>
-                                <p class="card-text">Total Sales: @Model.TotalMWalletSales</p>
-                                <p class="card-text">Performance: @Model.MWalletSalesPerformance%</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card text-white bg-danger">
-                            <div class="card-body">
-                                <h5 class="card-title">4G Sales</h5>
-                                <p class="card-text">Target: @Model.FourGSalesTarget</p>
-                                <p class="card-text">Total Sales: @Model.TotalFourGSales</p>
-                                <p class="card-text">Performance: @Model.FourGSalesPerformance%</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card text-white bg-secondary">
-                            <div class="card-body">
-                                <h5 class="card-title">Rox New Sales</h5>
-                                <p class="card-text">Target: @Model.RoxNewSalesTarget</p>
-                                <p class="card-text">Total Sales: @Model.TotalRoxNewSales</p>
-                                <p class="card-text">Performance: @Model.RoxNewSalesPerformance%</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-3">
-                        <div class="card text-white bg-dark">
-                            <div class="card-body">
-                                <h5 class="card-title">Rox Conversion Sales</h5>
-                                <p class="card-text">Target: @Model.RoxConversionSalesTarget</p>
-                                <p class="card-text">Total Sales: @Model.TotalRoxConversionSales</p>
-                                <p class="card-text">Performance: @Model.RoxConversionSalesPerformance%</p>
-                            </div>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
@@ -195,7 +150,6 @@
             <div class="col-md-4 text-center">
                 <button id="exportGraphsBtn" class="btn btn-secondary w-100">Export Graphs</button>
             </div>
-            
         </div>
     }
     else
@@ -205,6 +159,7 @@
         </div>
     }
 </div>
+
 <!-- Bulk Export Modal -->
 <div class="modal fade" id="bulkExportModal" tabindex="-1" aria-labelledby="bulkExportModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -216,13 +171,13 @@
             <div class="modal-body">
                 <form id="bulkExportForm" method="post">
                     <div class="mb-3">
-                        <label for="bulkAgent" class="form-label">Agent</label>
-                    
-                        <select id="bulkAgent" name="employeeNumber" class="form-select" data-placeholder="Select an Agent">
+                        <label for="bulkEC" class="form-label">Experience Center</label>
+
+                        <select id="bulkEC" name="ECID" class="form-select" data-placeholder="Select an EC">
                             <option></option>
-                            @foreach (var agent in ViewBag.Agents)
+                            @foreach (var ec in ViewBag.ECs)
                             {
-                                <option value="@agent.Value">@agent.Text</option>
+                                <option value="@ec.Value">@ec.Text</option>
                             }
                         </select>
                     </div>
@@ -236,7 +191,7 @@
                     </div>
                     <div class="mb-3 d-flex justify-content-between">
                         <button type="button" class="btn btn-success" id="saveSelectionBtn">Save Selection</button>
-                        <select id="savedSelections" class="form-select w-50" data-placeholder="Saved Selections">
+                        <select id="savedSelectionsbulkEC" class="form-select w-50" data-placeholder="Saved Selections">
                             <option></option>
                         </select>
                         <button type="button" class="btn btn-danger" id="deleteSelectionBtn">Delete</button>
@@ -247,58 +202,50 @@
         </div>
     </div>
 </div>
+
 @section Scripts {
     <script>
-       
         $(document).ready(function () {
-            $('#agent').select2({
+            $('#ec').select2({
                 width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
                 placeholder: $(this).data('placeholder'),
                 theme: "bootstrap-5",
-
             });
-        });
 
-        $(document).ready(function () {
             $('#month').select2({
                 width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
                 placeholder: $(this).data('placeholder'),
                 theme: "bootstrap-5",
-
             });
-        });
 
-        $(document).ready(function () {
             $('#year').select2({
                 width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
                 placeholder: $(this).data('placeholder'),
                 theme: "bootstrap-5",
-
             });
-        });
 
-        $(document).ready(function () {
-            $("#bulkAgent").select2({
-                dropdownParent: $("#bulkExportModal"),
-                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-                placeholder: $(this).data('placeholder'),
-                theme: "bootstrap-5",
-              
+
+            $(document).ready(function () {
+                $("#bulkEC").select2({
+                    dropdownParent: $("#bulkExportModal"),
+                    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                    placeholder: $(this).data('placeholder'),
+                    theme: "bootstrap-5",
+
+                });
             });
-        });
 
-
-
-        document.addEventListener("DOMContentLoaded", function () {
             var performanceData = @Html.Raw(performanceData);
             var dailyPerformanceData = @Html.Raw(dailyPerformanceData);
             var monthYear = @Html.Raw(JsonConvert.SerializeObject(monthYear));
             var year = '@Model?.Year ?? DateTime.Now.Year';
 
+
+
             // Function to load saved selections from localStorage
             function loadSavedSelections() {
-                var savedSelections = JSON.parse(localStorage.getItem('savedSelections')) || [];
-                var selectElement = document.getElementById('savedSelections');
+                var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsbulkEC')) || [];
+                var selectElement = document.getElementById('savedSelectionsbulkEC');
                 selectElement.innerHTML = '<option value="">Saved Selections</option>';
                 savedSelections.forEach((selection, index) => {
                     var option = document.createElement('option');
@@ -310,15 +257,15 @@
 
             // Save selection button click event
             document.getElementById('saveSelectionBtn').addEventListener('click', function () {
-                var agent = document.getElementById('bulkAgent').value;
+                var agent = document.getElementById('bulkEC').value;
                 var startDate = document.getElementById('startDate').value;
                 var endDate = document.getElementById('endDate').value;
 
                 if (agent && startDate && endDate) {
-                    var savedSelections = JSON.parse(localStorage.getItem('savedSelections')) || [];
+                    var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsbulkEC')) || [];
                     if (savedSelections.length < 5) {
                         savedSelections.push({ agent, startDate, endDate });
-                        localStorage.setItem('savedSelections', JSON.stringify(savedSelections));
+                        localStorage.setItem('savedSelectionsbulkEC', JSON.stringify(savedSelections));
                         loadSavedSelections();
                     } else {
                         alert('You can save up to 5 selections only.');
@@ -330,11 +277,11 @@
 
             // Delete selection button click event
             document.getElementById('deleteSelectionBtn').addEventListener('click', function () {
-                var savedSelections = JSON.parse(localStorage.getItem('savedSelections')) || [];
-                var selectedIndex = document.getElementById('savedSelections').value;
+                var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsbulkEC')) || [];
+                var selectedIndex = document.getElementById('savedSelectionsbulkEC').value;
                 if (selectedIndex) {
                     savedSelections.splice(selectedIndex, 1);
-                    localStorage.setItem('savedSelections', JSON.stringify(savedSelections));
+                    localStorage.setItem('savedSelectionsbulkEC', JSON.stringify(savedSelections));
                     loadSavedSelections();
                 } else {
                     alert('Please select a saved selection to delete.');
@@ -342,12 +289,12 @@
             });
 
             // Load saved selection when selected
-            document.getElementById('savedSelections').addEventListener('change', function () {
-                var savedSelections = JSON.parse(localStorage.getItem('savedSelections')) || [];
+            document.getElementById('savedSelectionsbulkEC').addEventListener('change', function () {
+                var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsbulkEC')) || [];
                 var selectedIndex = this.value;
                 if (selectedIndex) {
                     var selection = savedSelections[selectedIndex];
-                    document.getElementById('bulkAgent').value = selection.agent;
+                    document.getElementById('bulkEC').value = selection.agent;
                     document.getElementById('startDate').value = selection.startDate;
                     document.getElementById('endDate').value = selection.endDate;
                 }
@@ -355,6 +302,7 @@
 
             // Initial load of saved selections
             loadSavedSelections();
+
 
             // Chart rendering code
             if (performanceData.length > 0) {
@@ -513,40 +461,8 @@
                 });
             }
         });
-
-        $(document).ready(function () {
-            $("#bulkExportForm").submit(function (event) {
-                event.preventDefault(); // Prevent default form submission
-
-                var formData = $(this).serialize();
-
-                $.ajax({
-                    url: '@Url.Action("BulkExport", "Performance")',
-                    type: 'POST',
-                    data: formData,
-                    success: function (response) {
-                        if (response.success) {
-                            var link = document.createElement('a');
-                            link.href = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,' + response.fileContent;
-                            link.download = response.fileName;
-                            link.click();
-                        } else {
-                            // Show an alert or modal
-                            alert(response.message);
-                        }
-                    },
-                    error: function () {
-                        alert("An error occurred while processing the request.");
-                    }
-                });
-            });
-        });
-
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
- 
-    }
-
-
+}

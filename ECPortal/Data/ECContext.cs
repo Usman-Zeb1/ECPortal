@@ -23,6 +23,8 @@ public class ECContext : IdentityDbContext<AppUser>
 
     public virtual DbSet<EC> ECs { get; set; }
 
+    public virtual DbSet<ECRegions> ECRegions { get; set; }
+
     public virtual DbSet<ECAudits> ECAudits { get; set; }
 
     public virtual DbSet<ECGiveaways> ECGiveaways { get; set; }
@@ -54,11 +56,33 @@ public class ECContext : IdentityDbContext<AppUser>
     public virtual DbSet<EmployeePrepaidSale> EmployeePrepaidSales { get; set; }
 
 
+    public virtual DbSet<ECRoxConversionSale> ECRoxConversionSales { get; set; }
+
+    public virtual DbSet<ECRoxNewSale> ECRoxNewSales { get; set; }
+
+
+    public virtual DbSet<ECSales> ECSales { get; set; }
+
+    public virtual DbSet<ECDeviceSale> ECDeviceSales { get; set; }
+
+    public virtual DbSet<ECFourGSale> ECFourGSales { get; set; }
+
+    public virtual DbSet<ECMWalletSale> ECMWalletSales { get; set; }
+
+    public virtual DbSet<ECPostpaidSale> ECPostpaidSales { get; set; }
+
+    public virtual DbSet<ECPrepaidSale> ECPrepaidSales { get; set; }
+
+
     public virtual DbSet<EmployeeRoxConversionSale> EmployeeRoxConversionSales { get; set; }
 
     public virtual DbSet<EmployeeRoxNewSale> EmployeeRoxNewSales { get; set; }
 
+
+
     public virtual DbSet<EmployeeTargets> EmployeeTargets { get; set; }
+
+    public virtual DbSet<ECTargets> ECTargets { get; set; }
 
     public virtual DbSet<EmployeeTrainings> EmployeeTrainings { get; set; }
 
@@ -93,13 +117,18 @@ public class ECContext : IdentityDbContext<AppUser>
                 .HasMaxLength(50)
                 .IsUnicode(false);*/
 
+
+
         });
 
         modelBuilder.Entity<EmployeeCommission>()
         .Property(e => e.CommissionAmount)
         .HasColumnType("decimal(18,2)");
 
-        
+        modelBuilder.Entity<EC>()
+                .HasOne(e => e.ECRegion)  // EC has one ECRegion
+                .WithMany(r => r.ECs)     // ECRegion has many ECs
+                .HasForeignKey(e => e.ECRegionID);
 
         modelBuilder.Entity<AppUserToken>(entity =>
         {

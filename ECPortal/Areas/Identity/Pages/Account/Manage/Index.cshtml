@@ -61,7 +61,7 @@
 <div class="row">
     <div class="col-md-6">
         <div class="text-center">
-            @if (Model.Employee.ProfilePicture != null)
+            @if (Model.Employee?.ProfilePicture != null)
             {
                 var imageBase64 = Convert.ToBase64String(Model.Employee.ProfilePicture);
                 var imageSrc = $"data:image;base64,{imageBase64}";

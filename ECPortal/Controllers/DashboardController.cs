@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Pk.Com.Jazz.ECP.Data;
 using Pk.Com.Jazz.ECP.ViewModels;
 using System.Linq;
@@ -25,10 +26,14 @@ namespace Pk.Com.Jazz.ECP.Controllers
         public async Task<IActionResult> Index()
         {
             var employeeId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var employee = _context.Employee.FirstOrDefault(e => e.AppUserId == employeeId);
-            if (employee == null)
+            var employee = await _context.Employee.FirstOrDefaultAsync(e => e.AppUserId == employeeId);
+            var EC = new Models.EC();
+
+            if (employee != null)
             {
-                return NotFound();
+                EC = await _context.ECs?
+                    .Include(e => e.ECRegion)  // Include the related ECRegion entity
+                    .FirstOrDefaultAsync(t => t.ECID == employee.ECID);
             }
 
             var user = await _userManager.FindByIdAsync(employeeId);
@@ -41,57 +46,37 @@ namespace Pk.Com.Jazz.ECP.Controllers
             var viewModel = new DashboardViewModel
             {
                 Employee = employee,
+                EC = EC,
                 Role = roles?.FirstOrDefault(), // Assuming a user has at least one role and taking the first one
 
-                EmployeeCommissionsCount = _context.EmployeeCommissions.Count(c => c.EmployeeId == employee.EmployeeId),
-                LastCommissionDate = _context.EmployeeCommissions
-                                              .Where(c => c.EmployeeId == employee.EmployeeId)
-                                              .OrderByDescending(c => c.CommissionDate)
-                                              .FirstOrDefault()?.CommissionDate ?? null,
+                EmployeeCommissionsCount = employee != null ? _context.EmployeeCommissions.Count(c => c.EmployeeId == employee.EmployeeId) : 0,
+                LastCommissionDate = employee != null ? _context.EmployeeCommissions
+                                                      .Where(c => c.EmployeeId == employee.EmployeeId)
+                                                      .OrderByDescending(c => c.CommissionDate)
+                                                      .FirstOrDefault()?.CommissionDate : (DateTime?)null,
 
-                EmployeeFeedbacksCount = _context.EmployeeFeedbacks.Count(f => f.EmployeeId == employee.EmployeeId),
-                LastFeedbackDate = _context.EmployeeFeedbacks
-                                           .Where(f => f.EmployeeId == employee.EmployeeId)
-                                           .OrderByDescending(f => f.FeedbackDate)
-                                           .FirstOrDefault()?.FeedbackDate ?? null,
+                EmployeeFeedbacksCount = employee != null ? _context.EmployeeFeedbacks.Count(f => f.EmployeeId == employee.EmployeeId) : 0,
+                LastFeedbackDate = employee != null ? _context.EmployeeFeedbacks
+                                                    .Where(f => f.EmployeeId == employee.EmployeeId)
+                                                    .OrderByDescending(f => f.FeedbackDate)
+                                                    .FirstOrDefault()?.FeedbackDate : (DateTime?)null,
 
-                EmployeePerformancesCount = _context.EmployeePerformances.Count(p => p.EmployeeId == employee.EmployeeId),
-                EmployeePerformanceScore = _context.EmployeePerformances
-                                                   .Where(p => p.EmployeeId == employee.EmployeeId)
-                                                   .OrderByDescending(p => p.PerformanceEndDate)
-                                                   .FirstOrDefault()?.PerformanceScore ?? 0,
-                LastPerformanceDate = _context.EmployeePerformances
-                                              .Where(p => p.EmployeeId == employee.EmployeeId)
-                                              .OrderByDescending(p => p.PerformanceEndDate)
-                                              .FirstOrDefault()?.PerformanceEndDate ?? null,
+                EmployeeTrainingsCount = employee != null ? _context.EmployeeTrainings.Count(t => t.EmployeeId == employee.EmployeeId) : 0,
+                LastTrainingDate = employee != null ? _context.EmployeeTrainings
+                                                    .Where(t => t.EmployeeId == employee.EmployeeId)
+                                                    .OrderByDescending(t => t.TrainingDate)
+                                                    .FirstOrDefault()?.TrainingDate : (DateTime?)null,
 
-                EmployeeTrainingsCount = _context.EmployeeTrainings.Count(t => t.EmployeeId == employee.EmployeeId),
-                LastTrainingDate = _context.EmployeeTrainings
-                                           .Where(t => t.EmployeeId == employee.EmployeeId)
-                                           .OrderByDescending(t => t.TrainingDate)
-                                           .FirstOrDefault()?.TrainingDate ?? null,
-
-                EmployeeSalesCount = _context.EmployeeSales.Count(s => s.EmployeeNumber == employee.EmployeeNumber),
-                LastSalesDate = _context.EmployeeSales
-                                        .Where(s => s.EmployeeNumber == employee.EmployeeNumber)
-                                        .OrderByDescending(s => s.SalesDate)
-                                        .FirstOrDefault()?.SalesDate ?? null,
-
-                EmployeeRecognitionsCount = _context.EmployeeRecognitions.Count(r => r.EmployeeId == employee.EmployeeId),
-                LastRecognitionDate = _context.EmployeeRecognitions
-                                              .Where(r => r.EmployeeId == employee.EmployeeId)
-                                              .OrderByDescending(r => r.RecognitionDate)
-                                              .FirstOrDefault()?.RecognitionDate ?? null,
-
-                EmployeeTargetsCount = _context.EmployeeTargets.Count(t => t.EmployeeNumber == employee.EmployeeId),
-                LastTargetDate = _context.EmployeeTargets
-                                         .Where(t => t.EmployeeNumber == employee.EmployeeNumber)
-                                         .OrderByDescending(t => t.Month)
-                                         .FirstOrDefault()?.InsertDate ?? null,
+                EmployeeRecognitionsCount = employee != null ? _context.EmployeeRecognitions.Count(r => r.EmployeeId == employee.EmployeeId) : 0,
+                LastRecognitionDate = employee != null ? _context.EmployeeRecognitions
+                                                       .Where(r => r.EmployeeId == employee.EmployeeId)
+                                                       .OrderByDescending(r => r.RecognitionDate)
+                                                       .FirstOrDefault()?.RecognitionDate : (DateTime?)null,
             };
 
             return View(viewModel);
         }
+
 
     }
 }

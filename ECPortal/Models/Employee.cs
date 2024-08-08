@@ -42,6 +42,10 @@ namespace Pk.Com.Jazz.ECP.Models
         [DisplayFormat(ConvertEmptyStringToNull = true, NullDisplayText = "-no summary-")]
         public string? Summary { get; set; }
 
+        [Display(Name = "Employee Region ID", ShortName = "RegionID")]
+        [MaxLength(50)]
+        public int RegionID { get; set; }
+
         [Display(Name = "Is Active?", ShortName = "Active")]
         public bool IsEnabled { get; set; }
 

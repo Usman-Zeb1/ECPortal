@@ -1,193 +1,456 @@
-﻿@* @model List<Pk.Com.Jazz.ECP.Models.EmployeeSales>
-@using Newtonsoft.Json;
+﻿
+<head>
+    <title>Sales Dashboard</title>
+    <style>
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
 
-@{
-    ViewData["Title"] = "Employee Sales";
+        .chart-card {
+            flex: 0 0 48%; /* Adjust the width of the cards */
+            margin-bottom: 20px;
+        }
 
-    var salesStatusData = Model != null
-        ? JsonConvert.SerializeObject(Model.GroupBy(s => s.Status).Select(g => new { Status = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
-        : "[]";
-
-    var salesProgressData = Model != null
-        ? JsonConvert.SerializeObject(Model.GroupBy(s => s.SalesDate).Select(g => new { Date = g.Key, Amount = g.Sum(s => s.SalesAmount) }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
-        : "[]";
-}
-
-<h1 class="text-center my-4">@ViewData["Title"]</h1>
-
-<div class="container">
-    <!-- Chart Container -->
-    <div class="card mb-4">
-        <div class="card-header">
-            <h3 class="mb-0">Sales Status and Progress</h3>
-        </div>
-        <div class="card-body">
-            @if (Model == null || Model.Count == 0)
-            {
-                <div class="text-center mt-2">No sales data available for charts.</div>
+            .chart-card .card {
+                height: 100%;
             }
-            else{
-            <div class="row">
-                <!-- Pie Chart: Sales Status -->
-                <div class="col-md-6">
-                    <canvas id="salesStatusChart" width="400" height="200"></canvas>
-                </div>
-                <!-- Line Chart: Sales Progress Over Time -->
-                <div class="col-md-6">
-                    <canvas id="salesProgressChart" width="400" height="200"></canvas>
-                </div>
-            </div>
-            }
-        </div>
+
+        canvas {
+            width: 100% !important;
+            height: 300px !important;
+        }
+    </style>
+</head>
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Sales Dashboard - Daily Sales</h1>
+
+    <div class="text-center mb-4">
+        <button id="exportDataBtn" class="btn btn-primary mr-2">Export Data</button>
+        <button id="exportGraphsBtn" class="btn btn-secondary">Export Graphs</button>
     </div>
 
-    <!-- Sales Details Table -->
-    <div class="card mt-4">
-        <div class="card-header">
-            <h3 class="mb-0">Sales Details</h3>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive">
-                <table id="salesTable" class="table table-striped table-hover">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Id</th>
-                            <th>Sales Date</th>
-                            <th>Status</th>
 
-                            <th>Sales Amount</th>
-                            <th>Comments</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @if (Model != null && Model.Count > 0)
-                        {
-                            foreach (var sale in Model)
-                            {
-                                <tr>
-                                    <td>@sale.Id</td>
-                                    <td>@sale.SalesDate.ToShortDateString()</td>
-                                    <td>@sale.Status</td>
-                                    <td>@sale.SalesAmount.ToString("C")</td>
-                                    <td>@sale.Comments</td>
-                                </tr>
-                            }
-                        }
-                        else
-                        {
-                            <tr>
-                                <td colspan="8" class="text-center">No sales data available.</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+    <div class="chart-container">
+        <div class="chart-card">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Prepaid Sales</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="prepaidSalesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Postpaid Sales</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="postpaidSalesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Device Sales</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="deviceSalesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Mwallet Sales</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="MwalletChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">4G Sales</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="FourGChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Rox New Sales</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="RoxNewChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Rox Conversion Sales</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="RoxConversionChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-@section Scripts {
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
+
     <script>
-        $(document).ready(function () {
-            // Initialize DataTable
-            $('#salesTable').DataTable({
-                paging: true,
-                pageLength: 5,
-                lengthChange: false,
-                info: false
-            });
+        document.addEventListener("DOMContentLoaded", function () {
+            // Sample data for demonstration; replace with actual data
+            var prepaidSales = @Html.Raw(Json.Serialize(Model.PrepaidSale));
+            var postpaidSales = @Html.Raw(Json.Serialize(Model.PostpaidSale));
+            var deviceSales = @Html.Raw(Json.Serialize(Model.DeviceSale));
+            var MwalletSales = @Html.Raw(Json.Serialize(Model.MWalletSale));
+            var FourGSales = @Html.Raw(Json.Serialize(Model.FourGSale));
+            var RoxNewSales = @Html.Raw(Json.Serialize(Model.RoxNewSale));
+            var RoxConversionSales = @Html.Raw(Json.Serialize(Model.RoxConversionSale));
 
-            // Parse sales status data
-            var salesStatusData = @Html.Raw(salesStatusData);
-            var salesProgressData = @Html.Raw(salesProgressData);
-
-            // Pie Chart: Sales Status
-            var ctxStatus = document.getElementById('salesStatusChart').getContext('2d');
-            new Chart(ctxStatus, {
-                type: 'pie',
+            // Prepaid Sales Chart
+            const prepaidLabels = ['New Sales', 'Prepaid MNP', 'Total'];
+            const prepaidData = prepaidSales.flatMap(({ newSales, prepaidMNP, total }) => [newSales, prepaidMNP, total]);
+            var ctxPrepaid = document.getElementById('prepaidSalesChart').getContext('2d');
+            var prepaidSalesChart = new Chart(ctxPrepaid, {
+                type: 'bar',
                 data: {
-                    labels: salesStatusData.map(item => item.Status),
+                    labels: prepaidLabels,
                     datasets: [{
-                        label: 'Sales Status',
-                        data: salesStatusData.map(item => item.Count),
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.5)',
-                            'rgba(54, 162, 235, 0.5)',
-                            'rgba(255, 206, 86, 0.5)',
-                            'rgba(75, 192, 192, 0.5)',
-                            'rgba(153, 102, 255, 0.5)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)',
-                            'rgba(75, 192, 192, 1)',
-                            'rgba(153, 102, 255, 1)'
-                        ],
+                        label: 'No. of Sales',
+                        data: prepaidData,
+                        backgroundColor: 'rgba(146, 5, 7, 0.5)',
+                        borderColor: 'rgba(146, 5, 7, 1)',
                         borderWidth: 1
                     }]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false
-                }
-            });
-
-            // Line Chart: Sales Progress Over Time
-            var ctxProgress = document.getElementById('salesProgressChart').getContext('2d');
-            new Chart(ctxProgress, {
-                type: 'line',
-                data: {
-                    labels: salesProgressData.map(item => item.Date.toString().split('T')[0]),
-                    datasets: [{
-                        label: 'Sales Progress',
-                        data: salesProgressData.map(item => item.Amount),
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
                     scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Date'
-                            },
-                            ticks: {
-                                maxRotation: 90,
-                                minRotation: 45
-                            }
-                        },
                         y: {
+                            beginAtZero: true,
                             title: {
                                 display: true,
-                                text: 'Amount'
-                            },
-                            min: 0,
-                            beginAtZero: true
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                title: function (context) {
-                                    return context[0].label;
-                                },
-                                label: function (context) {
-                                    return `Amount: $${context.raw}`;
-                                }
+                                text: 'Number of Sales'
                             }
                         }
                     }
                 }
             });
+
+            // Postpaid Sales Chart
+            const postpaidLabels = ['Fresh Sales', 'Port IN', 'Pre To Post', 'Red Red Z', 'Total'];
+            var postpaidData = postpaidSales.flatMap(({ freshSales, portIN, preToPost, redRedZ, total }) => [freshSales, portIN, preToPost, redRedZ, total]);
+
+            var ctxPostpaid = document.getElementById('postpaidSalesChart').getContext('2d');
+            var postpaidSalesChart = new Chart(ctxPostpaid, {
+                type: 'bar',
+                data: {
+                    labels: postpaidLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: postpaidData,
+                        backgroundColor: 'rgba(255, 220, 1, 0.3)',
+                        borderColor: 'rgba(255, 220, 1, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Device Sales Chart
+            const deviceLabels = ['MBB', 'Handsets', 'Total'];
+            var deviceData = deviceSales.flatMap(({ mbb, handsets, total }) => [mbb, handsets, total]);
+
+            var ctxDevice = document.getElementById('deviceSalesChart').getContext('2d');
+            var deviceSalesChart = new Chart(ctxDevice, {
+                type: 'bar',
+                data: {
+                    labels: deviceLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: deviceData,
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        borderColor: 'rgba(0, 0, 0, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Mwallet Sales Chart
+            const mwalletLabels = ['Total'];
+            var mwalletData = MwalletSales.flatMap(({ total }) => [total]);
+
+            var ctxMwallet = document.getElementById('MwalletChart').getContext('2d');
+            var MwalletSalesChart = new Chart(ctxMwallet, {
+                type: 'bar',
+                data: {
+                    labels: mwalletLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: mwalletData,
+                        backgroundColor: 'rgba(146, 5, 7, 0.5)',
+                        borderColor: 'rgba(146, 5, 7, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 4G Sales Chart
+            const FourGLabels = ['Total'];
+            var FourGData = FourGSales.flatMap(({ total }) => [total]);
+
+            var ctxFourG = document.getElementById('FourGChart').getContext('2d');
+            var FourGSalesChart = new Chart(ctxFourG, {
+                type: 'bar',
+                data: {
+                    labels: FourGLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: FourGData,
+                        backgroundColor: 'rgba(255, 220, 1, 0.3)',
+                        borderColor: 'rgba(255, 220, 1, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Rox New Sales Chart
+            const RoxNewLabels = ['Total'];
+            var RoxNewData = RoxNewSales.flatMap(({ total }) => [total]);
+
+            var ctxRoxNew = document.getElementById('RoxNewChart').getContext('2d');
+            var RoxNewSalesChart = new Chart(ctxRoxNew, {
+                type: 'bar',
+                data: {
+                    labels: RoxNewLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: RoxNewData,
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        borderColor: 'rgba(0, 0, 0, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Rox Conversion Sales Chart
+            const RoxConversionLabels = ['Total'];
+            var RoxConversionData = RoxConversionSales.flatMap(({ total }) => [total]);
+
+            var ctxRoxConversion = document.getElementById('RoxConversionChart').getContext('2d');
+            var RoxConversionSalesChart = new Chart(ctxRoxConversion, {
+                type: 'bar',
+                data: {
+                    labels: RoxConversionLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: RoxConversionData,
+                        backgroundColor: 'rgba(146, 5, 7, 0.5)',
+                        borderColor: 'rgba(146, 5, 7, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+
+        // Export data as Excel
+        document.getElementById("exportDataBtn").addEventListener("click", function () {
+            var wb = XLSX.utils.book_new();
+            var ws_data = [
+                ["Prepaid Sales", "", "", "Postpaid Sales", "", "", "", "", "Device Sales", "", "", "Mwallet Sales", "4G Sales", "Rox New Sale", "", "", "", "", "Rox Conversion Sales", "", "", "", "", ""],
+                ["New Sales", "Prepaid MNP", "Total", "Fresh Sales", "Port IN", "Pre to Post", "Red/Red Z", "Total", "MBB", "Handsets", "Total", "Total", "4G Sales", "Basic Vibe", "Boost", "Crazy Vibe", "Insane Vibe", "Total", "Basic Vibe", "Crazy Vibe", "Insane Vibe", "No Vibe", "Total"]
+            ];
+
+            var maxRows = Math.max(
+                prepaidSales.length,
+                postpaidSales.length,
+                deviceSales.length,
+                MwalletSales.length,
+                FourGSales.length,
+                RoxNewSales.length,
+                RoxConversionSales.length
+            );
+
+            for (var i = 0; i < maxRows; i++) {
+                var row = [];
+                if (i < prepaidSales.length) {
+                    row.push(prepaidSales[i].newSales, prepaidSales[i].prepaidMNP, prepaidSales[i].total);
+                } else {
+                    row.push("", "", "");
+                }
+
+                if (i < postpaidSales.length) {
+                    row.push(postpaidSales[i].freshSales, postpaidSales[i].portIN, postpaidSales[i].preToPost, postpaidSales[i].redRedZ, postpaidSales[i].total);
+                } else {
+                    row.push("", "", "", "", "");
+                }
+
+                if (i < deviceSales.length) {
+                    row.push(deviceSales[i].mbb, deviceSales[i].handsets, deviceSales[i].total);
+                } else {
+                    row.push("", "", "");
+                }
+
+                if (i < MwalletSales.length) {
+                    row.push(MwalletSales[i].total);
+                } else {
+                    row.push("");
+                }
+
+                if (i < FourGSales.length) {
+                    row.push(FourGSales[i].total);
+                } else {
+                    row.push("");
+                }
+
+                if (i < RoxNewSales.length) {
+                    row.push(RoxNewSales[i].basicVibe, RoxNewSales[i].boost, RoxNewSales[i].crazyVibe, RoxNewSales[i].insaneVibe, RoxNewSales[i].total);
+                } else {
+                    row.push("", "", "", "", "");
+                }
+
+                if (i < RoxConversionSales.length) {
+                    row.push(RoxConversionSales[i].basicVibe, RoxConversionSales[i].crazyVibe, RoxConversionSales[i].insaneVibe, RoxConversionSales[i].noVibe, RoxConversionSales[i].total);
+                } else {
+                    row.push("", "", "", "", "");
+                }
+
+                ws_data.push(row);
+            }
+
+            var ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+            // Merging cells for parent headers
+            ws['!merges'] = [
+                { s: { r: 0, c: 0 }, e: { r: 0, c: 2 } },
+                { s: { r: 0, c: 3 }, e: { r: 0, c: 7 } },
+                { s: { r: 0, c: 8 }, e: { r: 0, c: 10 } },
+                { s: { r: 0, c: 11 }, e: { r: 0, c: 11 } },
+                { s: { r: 0, c: 12 }, e: { r: 0, c: 12 } },
+                { s: { r: 0, c: 13 }, e: { r: 0, c: 17 } },
+                { s: { r: 0, c: 18 }, e: { r: 0, c: 22 } }
+            ];
+
+            XLSX.utils.book_append_sheet(wb, ws, "Sales Data");
+            XLSX.writeFile(wb, "sales_data.xlsx");
+        });
+
+        // Export graphs as images in a zip file
+        document.getElementById("exportGraphsBtn").addEventListener("click", function () {
+            var zip = new JSZip();
+            var charts = [
+                prepaidSalesChart,
+                postpaidSalesChart,
+                deviceSalesChart,
+                MwalletSalesChart,
+                FourGSalesChart,
+                RoxNewSalesChart,
+                RoxConversionSalesChart
+            ];
+
+            var promises = charts.map(function (chart, index) {
+                return new Promise(function (resolve) {
+                    chart.canvas.toBlob(function (blob) {
+                        zip.file(`chart_${index + 1}.png`, blob);
+                        resolve();
+                    });
+                });
+            });
+
+            Promise.all(promises).then(function () {
+                zip.generateAsync({ type: "blob" }).then(function (content) {
+                    saveAs(content, "charts.zip");
+                });
+            });
+        });
+
         });
     </script>
-} *@
+
+

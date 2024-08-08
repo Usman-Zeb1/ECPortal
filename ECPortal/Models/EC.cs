@@ -18,9 +18,10 @@ namespace Pk.Com.Jazz.ECP.Models
         public int ECID { get; set; }
 
         [Required]
-        [MaxLength(100)]
-        public string Region { get; set; }
+        [ForeignKey("ECRegionID")]
+        public int ECRegionID {  get; set; }
 
+     
         [Required]
         [MaxLength(200)]
         [Display(Name = "Address")]
@@ -43,5 +44,7 @@ namespace Pk.Com.Jazz.ECP.Models
         public ICollection<ECStocks> ECStocks { get; set; }
         public ICollection<ECTNA> ECTNAs { get; set; }
         public ICollection<Employee> Employees { get; set; }
+
+        public virtual ECRegions ECRegion { get; set; }
     }
 }

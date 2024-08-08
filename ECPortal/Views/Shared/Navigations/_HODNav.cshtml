@@ -26,9 +26,21 @@
                 <li class="nav-item">
                     <a data-spinner="no" class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="Index"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a data-spinner="no" class="nav-link text-light" asp-area="" asp-controller="Performance" asp-action="Index"><i class="fas fa-chart-line"></i> Performance</a>
+                <li class="nav-item dropdown">
+                    <a data-spinner="no" id="Performancedropdown" class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-chart-line"></i> Performance
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="Performancedropdown">
+                        <a class="dropdown-item text-dark d-flex align-items-center" asp-area="" asp-controller="Performance" asp-action="Index">
+                            <i class="fas fa-users me-2"></i> Employee Performance
+                        </a>
+                        <a class="dropdown-item text-dark d-flex align-items-center" asp-area="" asp-controller="Performance" asp-action="ECPerformance">
+                            <i class="fas fa-building me-2"></i> Experience Center Performance
+                        </a>
+                    </div>
                 </li>
+
+
 
                 <li class="nav-item dropdown">
                     <a data-spinner="no" class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
