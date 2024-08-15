@@ -36,8 +36,8 @@ namespace Pk.Com.Jazz.ECP.Controllers
          }*/
         public async Task<IActionResult> Index(int month = 0, int year = 0, int? employeeNumber = null, int? regionId = null, int? ecId = null)
         {
-            if (month == 0) month = DateTime.Now.Month;
-            if (year == 0) year = DateTime.Now.Year;
+           /* if (month == 0) month = DateTime.Now.Month;
+            if (year == 0) year = DateTime.Now.Year;*/
 
             if (User.IsInRole("Agent"))
             {
@@ -54,6 +54,9 @@ namespace Pk.Com.Jazz.ECP.Controllers
                 {
                     return View();
                 }
+
+
+
                 return View(performanceModel);
             }
             else if (User.IsInRole("TL") || User.IsInRole("ECM"))
@@ -119,8 +122,8 @@ namespace Pk.Com.Jazz.ECP.Controllers
                     .Select(e => new { e.ECID, e.PhysicalAddress })
                     .ToList();
 
-                ViewBag.Regions = new SelectList(regions, "RegionId", "RegionName");
-                ViewBag.ECs = new SelectList(ecs, "ECId", "ECName");
+                ViewBag.Regions = new SelectList(regions, "ECRegionID", "ECRegionName");
+                ViewBag.ECs = new SelectList(ecs, "ECID", "PhysicalAddress");
 
                 if (regionId.HasValue || ecId.HasValue)
                 {
