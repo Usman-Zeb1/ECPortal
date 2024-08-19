@@ -84,8 +84,6 @@ namespace Pk.Com.Jazz.ECP.Controllers
 
                 var currentEmployee = GetCurrentEmployee();
                
-
-
                 if (currentEmployee == null)
                 {
                     return NotFound("Employee not found.");
@@ -162,7 +160,6 @@ namespace Pk.Com.Jazz.ECP.Controllers
             return View();
         }
 
-
         public JsonResult GetEcsByRegion(int regionId)
         {
             var ecs = _context.ECs
@@ -183,15 +180,12 @@ namespace Pk.Com.Jazz.ECP.Controllers
             return Json(agents);
         }
 
-
         private string GetUserId()
         {
             // Implement logic to get the user ID for the current user
             // This can be based on the user's profile or other data in your system
             return User?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         }
-
-
 
         [Authorize(Roles = "HOD, ECM, RCCH, Admin")]
         public async Task<IActionResult> ECPerformance(int month = 0, int year = 0, int? ECID = null)

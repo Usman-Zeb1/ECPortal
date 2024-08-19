@@ -1,4 +1,5 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Bibliography;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -38,11 +39,14 @@ namespace Pk.Com.Jazz.ECP.Controllers
                 }
                 return View(salesModel);
             }
-            else
+            else if (User.IsInRole("TeamLead") || User.IsInRole("ECM"))
             {
+                var EcId = GetEcID();
+                var managerId = GetEmployeeNumber();
                 var agents = _context.Employee
-                    .Select(e => new { e.EmployeeNumber, e.EmployeeName })
-                    .ToList();
+                            .Where(e => e.ECID == EcId && e.ManagerID == managerId)
+                            .Select(e => new { e.EmployeeNumber, e.EmployeeName })
+                            .ToList();
 
                 ViewBag.Agents = new SelectList(agents, "EmployeeNumber", "EmployeeName");
 
@@ -58,6 +62,14 @@ namespace Pk.Com.Jazz.ECP.Controllers
                 }
 
                 return View("AgentSales");
+            }
+            else if (User.IsInRole("RCCH"))
+            {
+                return View();
+            }
+            else
+            {
+                return View();
             }
         }
         private EmployeeSalesViewModel GetEmployeeSalesModel(int employeeNumber)
@@ -129,6 +141,23 @@ namespace Pk.Com.Jazz.ECP.Controllers
             }
 
             return empNumber.Value;
+        }
+
+        private int GetEcID()
+        {
+            // Implement logic to get the current employee's number
+            // For example, if using ASP.NET Identity:
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            //var empNumber = _context.Employee.FirstOrDefault(e => e.AppUserId == userId)?.EmployeeNumber;
+            var EcId = _context.Employee.FirstOrDefault(e => e.AppUserId == userId)?.ECID;
+
+
+            if (EcId == null)
+            {
+                throw new Exception("Employee not found."); // Handle the case where employee number is null
+            }
+
+            return EcId.Value;
         }
 
 
