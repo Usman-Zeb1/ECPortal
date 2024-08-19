@@ -35,17 +35,20 @@
 <div class="container mt-5">
     <form method="get" asp-action="Index">
         <div class="row mb-4">
-            @if (User.IsInRole("HOD") || User.IsInRole("Admin"))
-            {
+
                 <div class="col-md-3 mb-3">
                     <div class="form-group">
                         <label for="regionId" class="form-label">Region</label>
                         <select id="regionId" name="regionId" class="form-select" onchange="filterEcs()" data-placeholder="Select a Region" required>
                             <option value="">Select a Region</option>
+                            @if(ViewBag.Regions != null)
+                        {
                             @foreach (var region in ViewBag.Regions)
                             {
                                 <option value="@region.Value">@region.Text</option>
                             }
+                        }
+                       
                         </select>
                         <span class="text-danger"></span>
                     </div>
@@ -68,26 +71,7 @@
                         <span class="text-danger"></span>
                     </div>
                 </div>
-            }
-            @if (!User.IsInRole("HOD") && !User.IsInRole("Admin"))
-            {
-                <div class="col-md-3 mb-3">
-                    <div class="form-group">
-                        <label for="agent" class="form-label">Agent</label>
-                        <select id="agent" name="employeeNumber" class="form-select" data-placeholder="Select an Agent" required>
-                            <option value="">Select an Agent</option>
-                            @if (ViewBag.Agents != null)
-                            {
-                                @foreach (var agent in ViewBag.Agents)
-                                {
-                                    <option value="@agent.Value">@agent.Text</option>
-                                }
-                            }
-                        </select>
-                        <span class="text-danger"></span>
-                    </div>
-                </div>
-            }
+           
             <div class="col-md-3 mb-3">
                 <div class="form-group">
                     <label for="month" class="form-label">Month</label>
@@ -264,55 +248,38 @@
             </div>
             <div class="modal-body">
                 <form id="bulkExportForm" method="post">
-                    @if (User.IsInRole("HOD") || User.IsInRole("Admin"))
-                    {
-                        <div class="mb-3">
-                            <label for="regionIdBulk" class="form-label">Region</label>
-                            <select id="regionIdBulk" name="regionIdBulk" class="form-select" onchange="filterEcsBulk()" data-placeholder="Select a Region" required>
-                                <option value="">Select a Region</option>
-                                @foreach (var region in ViewBag.Regions)
-                                {
-                                    <option value="@region.Value">@region.Text</option>
-                                }
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="ecIdBulk" class="form-label">Experience Center</label>
-                            <select id="ecIdBulk" name="ecIdBulk" class="form-select" onchange="filterAgentsBulk()" data-placeholder="Select an Experience Center" required>
-                                <option value="">Select an Experience Center</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="bulkAgent" class="form-label">Agent</label>
-                            <select id="bulkAgent" name="employeeNumber" class="form-select" data-placeholder="Select an Agent">
-                                <option></option>
-                                @if (ViewBag.Agents != null)
-                                {
-                                    @foreach (var agent in ViewBag.Agents)
-                                    {
-                                        <option value="@agent.Value">@agent.Text</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                    }
-                    else
-                    {
+
                     <div class="mb-3">
-                        <label for="agent" class="form-label">Agent</label>
-                        <select id="agent" name="employeeNumber" class="form-select" data-placeholder="Select an Agent" required>
-                            <option value="">Select an Agent</option>
+                        <label for="regionIdBulk" class="form-label">Region</label>
+                        <select id="regionIdBulk" name="regionIdBulk" class="form-select" onchange="filterEcsBulk()" data-placeholder="Select a Region" required>
+                            <option value="">Select a Region</option>
+                            @foreach (var region in ViewBag.Regions)
+                            {
+                                <option value="@region.Value">@region.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ecIdBulk" class="form-label">Experience Center</label>
+                        <select id="ecIdBulk" name="ecIdBulk" class="form-select" onchange="filterAgentsBulk()" data-placeholder="Select an Experience Center" required>
+                            <option value="">Select an Experience Center</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bulkAgent" class="form-label">Agent</label>
+                        <select id="bulkAgent" name="employeeNumber" class="form-select" data-placeholder="Select an Agent">
+                            <option></option>
                             @if (ViewBag.Agents != null)
                             {
                                 @foreach (var agent in ViewBag.Agents)
                                 {
-                                    <option value="@agent.Value" selected>@agent.Text</option>
-                                    
+                                    <option value="@agent.Value">@agent.Text</option>
                                 }
                             }
                         </select>
                     </div>
-                    }
+                    
+                  
                     <div class="mb-3">
                         <label for="startDate" class="form-label">Start Date</label>
                         <input type="date" class="form-control" id="startDate" name="startDate">
@@ -321,30 +288,19 @@
                         <label for="endDate" class="form-label">End Date</label>
                         <input type="date" class="form-control" id="endDate" name="endDate">
                     </div>
-                    @if (User.IsInRole("HOD") || User.IsInRole("Admin"))
-                    {
+
                         <div class="mb-3 d-flex justify-content-between">
-                            <button type="button" class="btn btn-success" id="savedSelectionsHODPerformanceEmployeeViewBtn">
+                            <button type="button" class="btn btn-success" id="savedSelectionsRCCHPerformanceEmployeeViewBtn">
                                 Save Selection
                             </button>
-                            <select id="savedSelectionsHODPerformanceEmployeeView" class="form-select w-50" data-placeholder="Saved Selections">
+                            <select id="savedSelectionsRCCHPerformanceEmployeeView" class="form-select w-50" data-placeholder="Saved Selections">
                                 <option></option>
                             </select>
-                            <button type="button" class="btn btn-danger" id="deleteSelectionsHODPerformanceEmployeeViewBtn">
+                            <button type="button" class="btn btn-danger" id="deleteSelectionsRCCHPerformanceEmployeeViewBtn">
                                 Delete
                             </button>
                         </div>
-                    }
-                    else
-                    {
-                        <div class="mb-3 d-flex justify-content-between">
-                            <button type="button" class="btn btn-success" id="saveSelectionBtn">Save Selection</button>
-                            <select id="savedSelections" class="form-select w-50" data-placeholder="Saved Selections">
-                                <option></option>
-                            </select>
-                            <button type="button" class="btn btn-danger" id="deleteSelectionBtn">Delete</button>
-                        </div>
-                    }
+                    
                     <div class="d-flex justify-content-center mt-3">
                         <button type="submit" class="btn btn-primary w-100">Export</button>
                     </div>
@@ -408,14 +364,6 @@
 
     <script>
        
-        $(document).ready(function () {
-            $('#agent').select2({
-                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-                placeholder: $(this).data('placeholder'),
-                theme: "bootstrap-5",
-
-            });
-        });
 
         $(document).ready(function () {
             $('#employeeNumber').select2({
@@ -492,10 +440,10 @@
             });
         });
         document.addEventListener("DOMContentLoaded", function () {
-            // Function to load saved selections from localStorage for HOD Performance Employee View
-            function loadSavedSelectionsHODPerformanceEmployeeView() {
-                var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsHODPerformanceEmployeeView')) || [];
-                var selectElement = document.getElementById('savedSelectionsHODPerformanceEmployeeView');
+            // Function to load saved selections from localStorage for RCCH Performance Employee View
+            function loadSavedSelectionsRCCHPerformanceEmployeeView() {
+                var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsRCCHPerformanceEmployeeView')) || [];
+                var selectElement = document.getElementById('savedSelectionsRCCHPerformanceEmployeeView');
                 if (selectElement) {
                     selectElement.innerHTML = '<option value="">Saved Selections</option>';
                     savedSelections.forEach((selection, index) => {
@@ -507,8 +455,8 @@
                 }
             }
 
-            // Save selection button click event for HOD Performance Employee View
-            var saveSelectionsHODBtn = document.getElementById('savedSelectionsHODPerformanceEmployeeViewBtn');
+            // Save selection button click event for RCCH Performance Employee View
+            var saveSelectionsHODBtn = document.getElementById('savedSelectionsRCCHPerformanceEmployeeViewBtn');
             if (saveSelectionsHODBtn) {
                 saveSelectionsHODBtn.addEventListener('click', function () {
                     var bulkAgentElement = document.getElementById('bulkAgent');
@@ -529,11 +477,11 @@
                     if (agent && regionId && ecId && startDate && endDate) {
                         var selectionName = prompt('Enter a name for this selection:');
                         if (selectionName) {
-                            var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsHODPerformanceEmployeeView')) || [];
+                            var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsRCCHPerformanceEmployeeView')) || [];
                             if (savedSelections.length < 5) {
                                 savedSelections.push({ name: selectionName, agent, agentName, regionId, regionName, ecId, ecName, startDate, endDate });
-                                localStorage.setItem('savedSelectionsHODPerformanceEmployeeView', JSON.stringify(savedSelections));
-                                loadSavedSelectionsHODPerformanceEmployeeView();
+                                localStorage.setItem('savedSelectionsRCCHPerformanceEmployeeView', JSON.stringify(savedSelections));
+                                loadSavedSelectionsRCCHPerformanceEmployeeView();
                             } else {
                                 alert('You can save up to 5 selections only.');
                             }
@@ -546,16 +494,16 @@
                 });
             }
 
-            // Delete selection button click event for HOD Performance Employee View
-            var deleteSelectionsHODBtn = document.getElementById('deleteSelectionsHODPerformanceEmployeeViewBtn');
+            // Delete selection button click event for RCCH Performance Employee View
+            var deleteSelectionsHODBtn = document.getElementById('deleteSelectionsRCCHPerformanceEmployeeViewBtn');
             if (deleteSelectionsHODBtn) {
                 deleteSelectionsHODBtn.addEventListener('click', function () {
-                    var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsHODPerformanceEmployeeView')) || [];
-                    var selectedIndex = document.getElementById('savedSelectionsHODPerformanceEmployeeView').value;
+                    var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsRCCHPerformanceEmployeeView')) || [];
+                    var selectedIndex = document.getElementById('savedSelectionsRCCHPerformanceEmployeeView').value;
                     if (selectedIndex) {
                         savedSelections.splice(selectedIndex, 1);
-                        localStorage.setItem('savedSelectionsHODPerformanceEmployeeView', JSON.stringify(savedSelections));
-                        loadSavedSelectionsHODPerformanceEmployeeView();
+                        localStorage.setItem('savedSelectionsRCCHPerformanceEmployeeView', JSON.stringify(savedSelections));
+                        loadSavedSelectionsRCCHPerformanceEmployeeView();
                     } else {
                         alert('Please select a saved selection to delete.');
                     }
@@ -624,11 +572,11 @@
                 }
             };
 
-            // Load saved selection when selected for HOD Performance Employee View
-            var savedSelectionsHODElement = document.getElementById('savedSelectionsHODPerformanceEmployeeView');
+            // Load saved selection when selected for RCCH Performance Employee View
+            var savedSelectionsHODElement = document.getElementById('savedSelectionsRCCHPerformanceEmployeeView');
             if (savedSelectionsHODElement) {
                 savedSelectionsHODElement.addEventListener('change', function () {
-                    var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsHODPerformanceEmployeeView')) || [];
+                    var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsRCCHPerformanceEmployeeView')) || [];
                     var selectedIndex = this.value;
                     if (selectedIndex) {
                         var selection = savedSelections[selectedIndex];
@@ -644,8 +592,8 @@
 
 
 
-            // Initial load of saved selections for HOD Performance Employee View
-            loadSavedSelectionsHODPerformanceEmployeeView();
+            // Initial load of saved selections for RCCH Performance Employee View
+            loadSavedSelectionsRCCHPerformanceEmployeeView();
         });
 
 
@@ -657,78 +605,6 @@
             var dailyPerformanceData = @Html.Raw(dailyPerformanceData);
             var monthYear = @Html.Raw(JsonConvert.SerializeObject(monthYear));
             var year = '@Model?.Year ?? DateTime.Now.Year';
-
-            // Function to load saved selections from localStorage
-            function loadSavedSelections() {
-                var savedSelections = JSON.parse(localStorage.getItem('savedSelections')) || [];
-                var selectElement = document.getElementById('savedSelections');
-                if (selectElement) {
-                    selectElement.innerHTML = '<option value="">Saved Selections</option>';
-                    savedSelections.forEach((selection, index) => {
-                        var option = document.createElement('option');
-                        option.value = index;
-                        option.text = `Selection ${index + 1}`;
-                        selectElement.appendChild(option);
-                    });
-                }
-            }
-
-            // Save selection button click event
-            var saveSelectionBtn = document.getElementById('saveSelectionBtn');
-            if (saveSelectionBtn) {
-                saveSelectionBtn.addEventListener('click', function () {
-                    var agent = document.getElementById('bulkAgent').value;
-                    var startDate = document.getElementById('startDate').value;
-                    var endDate = document.getElementById('endDate').value;
-
-                    if (agent && startDate && endDate) {
-                        var savedSelections = JSON.parse(localStorage.getItem('savedSelections')) || [];
-                        if (savedSelections.length < 5) {
-                            savedSelections.push({ agent, startDate, endDate });
-                            localStorage.setItem('savedSelections', JSON.stringify(savedSelections));
-                            loadSavedSelections();
-                        } else {
-                            alert('You can save up to 5 selections only.');
-                        }
-                    } else {
-                        alert('Please fill in all fields to save the selection.');
-                    }
-                });
-            }
-
-            // Delete selection button click event
-            var deleteSelectionBtn = document.getElementById('deleteSelectionBtn');
-            if (deleteSelectionBtn) {
-                deleteSelectionBtn.addEventListener('click', function () {
-                    var savedSelections = JSON.parse(localStorage.getItem('savedSelections')) || [];
-                    var selectedIndex = document.getElementById('savedSelections').value;
-                    if (selectedIndex) {
-                        savedSelections.splice(selectedIndex, 1);
-                        localStorage.setItem('savedSelections', JSON.stringify(savedSelections));
-                        loadSavedSelections();
-                    } else {
-                        alert('Please select a saved selection to delete.');
-                    }
-                });
-            }
-
-            // Load saved selection when selected
-            var savedSelectionsElement = document.getElementById('savedSelections');
-            if (savedSelectionsElement) {
-                savedSelectionsElement.addEventListener('change', function () {
-                    var savedSelections = JSON.parse(localStorage.getItem('savedSelections')) || [];
-                    var selectedIndex = this.value;
-                    if (selectedIndex) {
-                        var selection = savedSelections[selectedIndex];
-                        document.getElementById('bulkAgent').value = selection.agent;
-                        document.getElementById('startDate').value = selection.startDate;
-                        document.getElementById('endDate').value = selection.endDate;
-                    }
-                });
-            }
-
-            // Initial load of saved selections
-            loadSavedSelections();
 
 
             // Chart rendering code
@@ -896,7 +772,7 @@
                 var formData = $(this).serialize();
 
                 $.ajax({
-                    url: '@Url.Action("BulkExport", "Performance")',
+                    url: '@Url.Action("BulkExportEmployee", "Performance")',
                     type: 'POST',
                     data: formData,
                     success: function (response) {

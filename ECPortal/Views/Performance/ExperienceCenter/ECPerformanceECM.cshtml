@@ -34,20 +34,9 @@
 }
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-
 <div class="container mt-5">
     <form method="get">
         <div class="row mb-4">
-            <div class="col-md-3">
-                <label for="ec" class="form-label">Experience Center</label>
-                <select id="ec" name="ECID" class="form-select" data-placeholder="Select an EC">
-                    <option></option>
-                    @foreach (var ec in ViewBag.ECs)
-                    {
-                        <option value="@ec.Value">@ec.Text</option>
-                    }
-                </select>
-            </div>
             <div class="col-md-3">
                 <label for="month" class="form-label">Month</label>
                 <select id="month" name="month" class="form-select" data-placeholder="Select a Month">
@@ -57,7 +46,6 @@
                         var monthName = new DateTime(2024, i, 1).ToString("MMMM");
                         <option value="@i" selected="@(i == Model?.Month)">@monthName</option>
                     }
-
                 </select>
             </div>
             <div class="col-md-3">
@@ -71,16 +59,16 @@
                 </select>
             </div>
             <div class="col-md-3 align-self-end">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn btn-primary w-100">Search</button>
             </div>
         </div>
     </form>
 
-    <div class="col-md-3 align-self-end">
-        <div class="d-flex justify-content-between">
-            <button id="bulkExportBtn" class="btn btn-success ms-2" data-bs-toggle="modal" data-bs-target="#bulkExportModal">Bulk Export</button>
-        </div>
+    <div class="d-flex justify-content-end mt-4">
+        <button id="bulkExportBtn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#bulkExportModal">Bulk Export</button>
     </div>
+</div>
+
 
     @if (Model != null)
     {
@@ -172,17 +160,6 @@
             <div class="modal-body">
                 <form id="bulkExportForm" method="post">
                     <div class="mb-3">
-                        <label for="bulkEC" class="form-label">Experience Center</label>
-
-                        <select id="bulkEC" name="ECID" class="form-select" data-placeholder="Select an EC">
-                            <option></option>
-                            @foreach (var ec in ViewBag.ECs)
-                            {
-                                <option value="@ec.Value">@ec.Text</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="mb-3">
                         <label for="startDate" class="form-label">Start Date</label>
                         <input type="date" class="form-control" id="startDate" name="startDate">
                     </div>
@@ -207,11 +184,7 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            $('#ec').select2({
-                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-                placeholder: $(this).data('placeholder'),
-                theme: "bootstrap-5",
-            });
+
 
             $('#month').select2({
                 width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
@@ -226,15 +199,6 @@
             });
 
 
-            $(document).ready(function () {
-                $("#bulkEC").select2({
-                    dropdownParent: $("#bulkExportModal"),
-                    width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-                    placeholder: $(this).data('placeholder'),
-                    theme: "bootstrap-5",
-
-                });
-            });
 
             var performanceData = @Html.Raw(performanceData);
             var dailyPerformanceData = @Html.Raw(dailyPerformanceData);

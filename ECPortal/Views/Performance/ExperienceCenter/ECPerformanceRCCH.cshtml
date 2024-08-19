@@ -1,0 +1,616 @@
+﻿@model Pk.Com.Jazz.ECP.ViewModels.ECPerformanceViewModel
+@using Newtonsoft.Json
+
+@{
+    ViewData["Title"] = "EC Performance";
+
+    var performanceData = Model != null
+        ? JsonConvert.SerializeObject(new[]
+        {
+            new { Name = "Prepaid Sales", Target = Model.PrepaidSalesTarget, TotalSales = Model.TotalPrepaidSales, Performance = Model.PrepaidSalesPerformance },
+            new { Name = "Postpaid Sales", Target = Model.PostpaidSalesTarget, TotalSales = Model.TotalPostpaidSales, Performance = Model.PostpaidSalesPerformance },
+            new { Name = "Device Sales", Target = Model.DeviceSalesTarget, TotalSales = Model.TotalDeviceSales, Performance = Model.DeviceSalesPerformance },
+            new { Name = "M-Wallet Sales", Target = Model.MWalletSalesTarget, TotalSales = Model.TotalMWalletSales, Performance = Model.MWalletSalesPerformance },
+            new { Name = "4G Sales", Target = Model.FourGSalesTarget, TotalSales = Model.TotalFourGSales, Performance = Model.FourGSalesPerformance },
+            new { Name = "Rox New Sales", Target = Model.RoxNewSalesTarget, TotalSales = Model.TotalRoxNewSales, Performance = Model.RoxNewSalesPerformance },
+            new { Name = "Rox Conversion Sales", Target = Model.RoxConversionSalesTarget, TotalSales = Model.TotalRoxConversionSales, Performance = Model.RoxConversionSalesPerformance }
+                }, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+
+    var dailyPerformanceData = Model != null
+        ? JsonConvert.SerializeObject(Model.DailyPerformances?.Select(dp => new
+        {
+            Date = dp.Date.ToShortDateString(),
+            TotalSales = dp.TotalSales,
+            Performance = dp.Performance
+        }), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+
+    var monthYear = new
+    {
+        MonthName = Model != null ? System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) : string.Empty,
+        Year = Model != null ? Model.Year : DateTime.Now.Year
+    };
+}
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<div class="container mt-5">
+    <form method="get">
+        <div class="row mb-4">
+            <div class="col-md-3">
+                <label for="region" class="form-label">Region</label>
+                <select id="region" name="RegionID" class="form-select" onchange="filterEcs()" data-placeholder="Select a Region">
+                    <option></option>
+                    @foreach (var region in ViewBag.Regions)
+                    {
+                        <option value="@region.Value">@region.Text</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="ec" class="form-label">Experience Center</label>
+                <select id="ec" name="ECID" class="form-select" data-placeholder="Select an Experience Center">
+                    <option value="">Select an Experience Center</option>
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="month" class="form-label">Month</label>
+                <select id="month" name="month" class="form-select" data-placeholder="Select a Month">
+                    <option></option>
+                    @for (int i = 1; i <= 12; i++)
+                    {
+                        var monthName = new DateTime(2024, i, 1).ToString("MMMM");
+                        <option value="@i" selected="@(i == Model?.Month)">@monthName</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3">
+                <label for="year" class="form-label">Year</label>
+                <select id="year" name="year" class="form-select" data-placeholder="Select a Year">
+                    <option></option>
+                    @for (int i = DateTime.Now.Year; i >= DateTime.Now.Year - 5; i--)
+                    {
+                        <option value="@i" selected="@(i == Model?.Year)">@i</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-md-3 align-self-end">
+                <button type="submit" class="btn btn-primary w-100">Search</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="d-flex justify-content-end mt-4">
+        <button id="bulkExportBtn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#bulkExportModal">Bulk Export</button>
+    </div>
+</div>
+
+
+    @if (Model != null)
+    {
+        <h3 class="mt-4 text-center">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) - @Model.Year Performance</h3>
+
+        <!-- Performance Overview Cards -->
+        <div class="card mt-5">
+            <div class="card-header text-center">
+                Performance Overview
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    @foreach (var item in new[]
+                   {
+                new { Title = "Prepaid Sales", Target = Model.PrepaidSalesTarget, TotalSales = Model.TotalPrepaidSales, Performance = Model.PrepaidSalesPerformance },
+                new { Title = "Postpaid Sales", Target = Model.PostpaidSalesTarget, TotalSales = Model.TotalPostpaidSales, Performance = Model.PostpaidSalesPerformance },
+                new { Title = "Device Sales", Target = Model.DeviceSalesTarget, TotalSales = Model.TotalDeviceSales, Performance = Model.DeviceSalesPerformance },
+                new { Title = "M-Wallet Sales", Target = Model.MWalletSalesTarget, TotalSales = Model.TotalMWalletSales, Performance = Model.MWalletSalesPerformance },
+                new { Title = "4G Sales", Target = Model.FourGSalesTarget, TotalSales = Model.TotalFourGSales, Performance = Model.FourGSalesPerformance },
+                new { Title = "Rox New Sales", Target = Model.RoxNewSalesTarget, TotalSales = Model.TotalRoxNewSales, Performance = Model.RoxNewSalesPerformance },
+                new { Title = "Rox Conversion Sales", Target = Model.RoxConversionSalesTarget, TotalSales = Model.TotalRoxConversionSales, Performance = Model.RoxConversionSalesPerformance }
+                })
+                    {
+                        <div class="col-md-4 mb-3">
+                            <div class="card text-white bg-primary">
+                                <div class="card-body">
+                                    <h5 class="card-title">@item.Title</h5>
+                                    <p class="card-text">Target: @item.Target</p>
+                                    <p class="card-text">Total Sales: @item.TotalSales</p>
+                                    <p class="card-text">Performance: @item.Performance%</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Graphs -->
+        <div class="card mt-5 container">
+            <div class="card-header text-center">
+                Performance Charts
+            </div>
+            <div class="card-body">
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <canvas id="horizontalBarChart"></canvas>
+                    </div>
+                </div>
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <canvas id="salesDistributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Buttons -->
+        <div class="row mt-5 justify-content-center">
+            <div class="col-md-4 text-center">
+                <button id="exportBtn" class="btn btn-primary w-100">Export Performance Data</button>
+            </div>
+            <div class="col-md-4 text-center">
+                <button id="exportGraphsBtn" class="btn btn-secondary w-100">Export Graphs</button>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning mt-4 text-center" role="alert">
+            <strong>No performance data available for the selected time period.</strong>
+        </div>
+    }
+</div>
+
+<!-- Bulk Export Modal -->
+<div class="modal fade" id="bulkExportModal" tabindex="-1" aria-labelledby="bulkExportModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bulkExportModalLabel">Bulk Export</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="bulkExportForm" method="post">
+                    <div class="mb-3">
+                        <label for="regionIdBulk" class="form-label">Region</label>
+
+                        <select id="regionIdBulk" name="regionIdBulk" class="form-select" onchange="filterEcsBulk()" data-placeholder="Select a Region">
+                            <option></option>
+                            @foreach (var region in ViewBag.Regions)
+                            {
+                                <option value="@region.Value">@region.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="ecIdBulk" class="form-label">Experience Center</label>
+                        <select id="ecIdBulk" name="ecIdBulk" class="form-select" data-placeholder="Select an Experience Center" required>
+                            <option value="">Select an Experience Center</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="startDate" name="startDate">
+                    </div>
+                    <div class="mb-3">
+                        <label for="endDate" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="endDate" name="endDate">
+                    </div>
+                    <div class="mb-3 d-flex justify-content-between">
+                        <button type="button" class="btn btn-success" id="saveSelectionBtn">Save Selection</button>
+                        <select id="savedSelectionsbulkEC" class="form-select w-50" data-placeholder="Saved Selections">
+                            <option></option>
+                        </select>
+                        <button type="button" class="btn btn-danger" id="deleteSelectionBtn">Delete</button>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Export</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        function filterEcs() {
+            var regionId = document.getElementById('region').value;
+            var ecSelect = document.getElementById('ec');
+            ecSelect.innerHTML = '<option value="">Select an Experience Center</option>';
+
+            if (regionId) {
+                $.ajax({
+                    url: '@Url.Action("GetEcsByRegion", "Performance")',
+                    data: { regionId: regionId },
+                    success: function (data) {
+                        data.forEach(function (ec) {
+                            var option = document.createElement('option');
+                            option.value = ec.value;
+                            option.text = ec.text;
+                            ecSelect.appendChild(option);
+                        });
+                    }
+                });
+            }
+
+      
+        }
+
+
+
+        </script>
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const userName = "@User?.Identity?.Name"; // This gets the username of the currently logged-in user
+
+            // Unique key for this view's saved selections, including the user's username
+            const localStorageKey = bulkECPeformance - RCCHView - ${ userName }
+
+            // Function to load saved selections from localStorage for EC Performance View
+            function loadSavedSelectionsECView() {
+                var savedSelections = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+                var selectElement = document.getElementById('savedSelectionsbulkEC');
+                if (selectElement) {
+                    selectElement.innerHTML = '<option value="">Saved Selections</option>';
+                    savedSelections.forEach((selection, index) => {
+                        var option = document.createElement('option');
+                        option.value = index;
+                        option.text = selection.name;
+                        selectElement.appendChild(option);
+                    });
+                }
+            }
+
+            // Save selection button click event for EC Performance View
+            var saveSelectionBtn = document.getElementById('saveSelectionBtn');
+            if (saveSelectionBtn) {
+                saveSelectionBtn.addEventListener('click', function () {
+                    var regionIdBulkElement = document.getElementById('regionIdBulk');
+                    var ecIdBulkElement = document.getElementById('ecIdBulk');
+                    var startDateElement = document.getElementById('startDate');
+                    var endDateElement = document.getElementById('endDate');
+
+                    var regionId = regionIdBulkElement.value;
+                    var regionName = regionIdBulkElement.options[regionIdBulkElement.selectedIndex].text;
+                    var ecId = ecIdBulkElement.value;
+                    var ecName = ecIdBulkElement.options[ecIdBulkElement.selectedIndex].text;
+                    var startDate = startDateElement.value;
+                    var endDate = endDateElement.value;
+
+                    if (regionId && ecId && startDate && endDate) {
+                        var selectionName = prompt('Enter a name for this selection:');
+                        if (selectionName) {
+                            var savedSelections = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+                            if (savedSelections.length < 5) {
+                                savedSelections.push({ name: selectionName, regionId, regionName, ecId, ecName, startDate, endDate });
+                                localStorage.setItem(localStorageKey, JSON.stringify(savedSelections));
+                                loadSavedSelectionsECView();
+                            } else {
+                                alert('You can save up to 5 selections only.');
+                            }
+                        } else {
+                            alert('Please provide a name for the selection.');
+                        }
+                    } else {
+                        alert('Please fill in all fields to save the selection.');
+                    }
+                });
+            }
+
+            // Delete selection button click event for EC Performance View
+            var deleteSelectionBtn = document.getElementById('deleteSelectionBtn');
+            if (deleteSelectionBtn) {
+                deleteSelectionBtn.addEventListener('click', function () {
+                    var savedSelections = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+                    var selectedIndex = document.getElementById('savedSelectionsbulkEC').value;
+                    if (selectedIndex) {
+                        savedSelections.splice(selectedIndex, 1);
+                        localStorage.setItem(localStorageKey, JSON.stringify(savedSelections));
+                        loadSavedSelectionsECView();
+                    } else {
+                        alert('Please select a saved selection to delete.');
+                    }
+                });
+            }
+
+            // Set selected value in a select2 element
+            function setSelectedValue(selectElement, value) {
+                if (selectElement) {
+                    selectElement.value = value;
+                    $(selectElement).trigger('change'); // Notify select2 of value change
+                }
+            }
+
+            // Filter ECs based on selected region
+            window.filterEcsBulk = function (selectedEcId) {
+                var regionId = document.getElementById('regionIdBulk').value;
+                var ecSelect = document.getElementById('ecIdBulk');
+                ecSelect.innerHTML = '<option value="">Select an Experience Center</option>';
+
+                if (regionId) {
+                    $.ajax({
+                        url: '@Url.Action("GetEcsByRegion", "Performance")',
+                        data: { regionId: regionId },
+                        success: function (data) {
+                            data.forEach(function (ec) {
+                                var option = document.createElement('option');
+                                option.value = ec.value;
+                                option.text = ec.text;
+                                ecSelect.appendChild(option);
+                            });
+                            if (selectedEcId) {
+                                setSelectedValue(ecSelect, selectedEcId);
+                            }
+                        }
+                    });
+                }
+            };
+
+            // Load saved selection when selected for EC Performance View
+            var savedSelectionsECViewElement = document.getElementById('savedSelectionsbulkEC');
+            if (savedSelectionsECViewElement) {
+                savedSelectionsECViewElement.addEventListener('change', function () {
+                    var savedSelections = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+                    var selectedIndex = this.value;
+                    if (selectedIndex) {
+                        var selection = savedSelections[selectedIndex];
+
+                        document.getElementById('startDate').value = selection.startDate;
+                        document.getElementById('endDate').value = selection.endDate;
+
+                        setSelectedValue(document.getElementById('regionIdBulk'), selection.regionId);
+                        filterEcsBulk(selection.ecId);
+                    }
+                });
+            }
+
+            // Initial load of saved selections for EC Performance View
+            loadSavedSelectionsECView();
+        });
+
+        $(document).ready(function () {
+            $('#region').select2({
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+            });
+
+            $('#ec').select2({
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+            });
+
+            $('#month').select2({
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+            });
+
+            $('#year').select2({
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+            });
+
+            $("#regionIdBulk").select2({
+                dropdownParent: $("#bulkExportModal"),
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+            });
+
+            $("#ecIdBulk").select2({
+                dropdownParent: $("#bulkExportModal"),
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+            });
+
+            var performanceData = @Html.Raw(performanceData);
+            var dailyPerformanceData = @Html.Raw(dailyPerformanceData);
+            var monthYear = @Html.Raw(JsonConvert.SerializeObject(monthYear));
+            var year = '@Model?.Year ?? DateTime.Now.Year';
+
+            // Chart rendering code
+            if (performanceData.length > 0) {
+                var ctx = document.getElementById('performanceChart').getContext('2d');
+                var performanceChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: dailyPerformanceData.map(item => item.Date),
+                        datasets: [{
+                            label: 'Total Sales',
+                            data: dailyPerformanceData.map(item => item.TotalSales),
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 2,
+                            fill: false
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Daily Sales Chart'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Value'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Date'
+                                }
+                            }
+                        }
+                    }
+                });
+
+                var ctx2 = document.getElementById('salesDistributionChart').getContext('2d');
+                var salesDistributionChart = new Chart(ctx2, {
+                    type: 'pie',
+                    data: {
+                        labels: performanceData.map(item => item.Name),
+                        datasets: [{
+                            data: performanceData.map(item => item.TotalSales),
+                            backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(255, 206, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(199, 199, 199, 0.2)'
+                            ],
+                            borderColor: [
+                                'rgba(255, 99, 132, 1)',
+                                'rgba(54, 162, 235, 1)',
+                                'rgba(255, 206, 86, 1)',
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 159, 64, 1)',
+                                'rgba(199, 199, 199, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+
+                var ctx3 = document.getElementById('horizontalBarChart').getContext('2d');
+                var horizontalBarChart = new Chart(ctx3, {
+                    type: 'bar',
+                    data: {
+                        labels: performanceData.map(item => item.Name),
+                        datasets: [{
+                            label: 'Total Sales',
+                            data: performanceData.map(item => item.TotalSales),
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Target',
+                            data: performanceData.map(item => item.Target),
+                            type: 'scatter',
+                            pointStyle: 'rectRot',
+                            pointRadius: 6,
+                            backgroundColor: 'rgba(255, 99, 132, 1)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        indexAxis: 'y',
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Monthly Performance'
+                            }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+                document.getElementById('exportBtn').addEventListener('click', function () {
+                    var wb = XLSX.utils.book_new();
+                    var ws_data = [
+                        ["Category", "Target", "Total Sales", "Performance (%)"],
+                        ...performanceData.map(item => [item.Name, item.Target, item.TotalSales, item.Performance])
+                    ];
+                    var ws = XLSX.utils.aoa_to_sheet(ws_data);
+                    XLSX.utils.book_append_sheet(wb, ws, 'Performance Data');
+
+                    var zipFileName = `${monthYear.MonthName}-${monthYear.Year}-Performance.xlsx`;
+                    XLSX.writeFile(wb, zipFileName);
+                });
+
+                document.getElementById('exportGraphsBtn').addEventListener('click', function () {
+                    var charts = ['performanceChart', 'horizontalBarChart', 'salesDistributionChart'];
+                    var promises = charts.map(chartId => {
+                        var chart = document.getElementById(chartId);
+                        return new Promise((resolve, reject) => {
+                            chart.toBlob(blob => {
+                                if (blob) {
+                                    resolve({ blob: blob, name: chartId });
+                                } else {
+                                    reject('Could not generate image.');
+                                }
+                            });
+                        });
+                    });
+
+                    Promise.all(promises).then(results => {
+                        var zip = new JSZip();
+                        results.forEach(result => {
+                            zip.file(`${result.name}.png`, result.blob);
+                        });
+                        var zipFileName = `${monthYear.MonthName}-${monthYear.Year}-Performance-Graphs.zip`;
+                        zip.generateAsync({ type: 'blob' }).then(content => {
+                            saveAs(content, zipFileName);
+                        });
+                    });
+                });
+            }
+        });
+
+        $(document).ready(function () {
+            $("#bulkExportForm").submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '@Url.Action("BulkExportEC", "Performance")',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            var link = document.createElement('a');
+                            link.href = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,' + response.fileContent;
+                            link.download = response.fileName;
+                            link.click();
+                        } else {
+                            // Show an alert or modal
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert("An error occurred while processing the request.");
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+}

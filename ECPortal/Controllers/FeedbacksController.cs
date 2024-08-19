@@ -54,7 +54,7 @@ namespace Pk.Com.Jazz.ECP.Controllers
             }
             else
             {
-                
+               
                 viewModel.Feedbacks = _context.EmployeeFeedbacks
                     .Where(fb => fb.ProvidedBy == User.Identity.Name) // Assuming CreatedBy is the user who gave the feedback
                     .OrderBy(fb => fb.FeedbackDate)
@@ -80,18 +80,53 @@ namespace Pk.Com.Jazz.ECP.Controllers
         // GET: Feedbacks/Create
         public IActionResult Create()
         {
-            // Fetch employees
-            List<Employee> employees = _context.Employee.ToList();
+            // Get the current user role
+            var userRole = User.IsInRole("HOD") ? "HOD" :
+                           User.IsInRole("RCCH") ? "RCCH" :
+                           User.IsInRole("ECM") ? "ECM" :
+                           User.IsInRole("TeamLead") ? "TeamLead" : null;
 
-            // Create a dictionary or list to hold the employee IDs and names
+            List<Employee> employees = new List<Employee>();
+
+            if (userRole == "HOD")
+            {
+                // Fetch all employees
+                employees = _context.Employee.ToList();
+            }
+            else if (userRole == "RCCH")
+            {
+                // Fetch employees from the same region
+                var currentEmployee = GetCurrentEmployee();
+                employees = _context.Employee
+                                    .Where(e => e.RegionID == currentEmployee.RegionID)
+                                    .ToList();
+            }
+            else if (userRole == "ECM")
+            {
+                // Fetch employees from the same Experience Center (EC)
+                var currentEmployee = GetCurrentEmployee();
+                employees = _context.Employee
+                                    .Where(e => e.ECID == currentEmployee.ECID && e.Title != "ECM")
+                                    .ToList();
+            }
+
+            else if (userRole == "TeamLead")
+            {
+                // Fetch employees from the same Experience Center (EC)
+                var currentEmployee = GetCurrentEmployee();
+                employees = _context.Employee
+                                    .Where(e => e.ECID == currentEmployee.ECID && e.Title != "ECM" && e.Title != "TeamLead")
+                                    .ToList();
+            }
+
+            // Prepare employee data for the view
             var employeeData = employees.ToDictionary(e => e.EmployeeId, e => e.EmployeeName);
             var feedbackTypes = new List<string> { "Excellent", "Positive", "Negative", "Neutral" };
 
             // Append employee data to ViewBag
             ViewBag.Employees = employeeData;
-
-            
             ViewBag.FeedbackTypes = feedbackTypes;
+
             var model = new EmployeeFeedback
             {
                 ProvidedBy = User.Identity.Name // Assuming the username is stored in User.Identity.Name
@@ -115,20 +150,66 @@ namespace Pk.Com.Jazz.ECP.Controllers
                 return RedirectToAction(nameof(Success));
             }
 
-            // Re-fetch employee data in case of validation failure
-            List<Employee> employees = _context.Employee.ToList();
-            var feedbackTypes = new List<string> { "Positive","Excellent", "Negative", "Neutral" };
-            ViewBag.Employees = employees.ToDictionary(e => e.EmployeeId, e => e.EmployeeName);
-            
+            // Re-fetch employee data based on the user role in case of validation failure
+            var userRole = User.IsInRole("HOD") ? "HOD" :
+                           User.IsInRole("RCCH") ? "RCCH" :
+                           User.IsInRole("ECM") ? "ECM" :
+                           User.IsInRole("TeamLead") ? "TeamLead" : null;
+
+            List<Employee> employees = new List<Employee>();
+
+            if (userRole == "HOD")
+            {
+                // Fetch all employees
+                employees = _context.Employee.ToList();
+            }
+            else if (userRole == "RCCH")
+            {
+                // Fetch employees from the same region
+                var currentEmployee = GetCurrentEmployee();
+                employees = _context.Employee
+                                    .Where(e => e.RegionID == currentEmployee.RegionID)
+                                    .ToList();
+            }
+            else if (userRole == "ECM" || userRole == "TeamLead")
+            {
+                // Fetch employees from the same Experience Center (EC)
+                var currentEmployee = GetCurrentEmployee();
+                employees = _context.Employee
+                                    .Where(e => e.ECID == currentEmployee.ECID)
+                                    .ToList();
+            }
+
+            var employeeData = employees.ToDictionary(e => e.EmployeeId, e => e.EmployeeName);
+            var feedbackTypes = new List<string> { "Positive", "Excellent", "Negative", "Neutral" };
+
+            ViewBag.Employees = employeeData;
             ViewBag.FeedbackTypes = feedbackTypes;
+
             return View(employeeFeedback); // Return the model with validation errors
         }
+
 
 
         // GET: Feedbacks/Success
         public IActionResult Success()
         {
             return View();
+        }
+
+        private Employee GetCurrentEmployee()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentEmployee = _context.Employee.FirstOrDefault(e => e.AppUserId == userId);
+
+            if (currentEmployee == null)
+            {
+
+                throw new Exception("Employee Number not found.");
+
+            }
+
+            return currentEmployee;
         }
     }
 }

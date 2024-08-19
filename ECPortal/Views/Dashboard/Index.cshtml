@@ -20,29 +20,45 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <p><strong>Name:</strong> @Model.Employee?.EmployeeName</p>
-                                <p><strong>Employee Number:</strong> @Model.Employee?.EmployeeNumber</p>
+                                <p><strong>Employee Number:</strong> @(Model.Employee?.EmployeeNumber ?? 0)</p>
                             </div>
                             <div class="col-md-6">
                                 <p><strong>User Login:</strong> @Model.Employee?.UserAdLogin</p>
-                                <p><strong>Date of Joining:</strong> @Model.Employee?.DOJ</p>
+                                <p><strong>Date of Joining:</strong> @(Model.Employee?.DOJ ?? "N/A")</p>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-md-6">
-                                <p><strong>Experience Center ID:</strong> @Model.EC?.ECID</p>
-                                <p><strong>Role Name:</strong> @Model.Role</p>
+                        @if (User.IsInRole("RCCH") || User.IsInRole("HOD"))
+                        {
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p><strong>Role Name:</strong> @(Model.Role ?? "N/A")</p>
+                                </div>
                             </div>
-                            <div class="col-md-6">
-                                <p><strong>Experience Center Address:</strong> @Model.EC?.PhysicalAddress</p>
-                                <p><strong>Experience Center Region:</strong> @Model.EC?.ECRegion?.ECRegionName</p>
+                        }
+
+                        else
+                        {
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <p><strong>Experience Center ID:</strong> @(Model.EC?.ECID ?? 0)</p>
+                                    <p><strong>Role Name:</strong> @(Model.Role ?? "N/A")</p>
+                                </div>
+                                <div class="col-md-6">
+                                    <p><strong>Experience Center Address:</strong> @(Model.EC?.PhysicalAddress ?? "N/A")</p>
+                                    <p><strong>Experience Center Region:</strong> @(Model.EC?.ECRegion?.ECRegionName ?? "N/A")</p>
+                                </div>
                             </div>
-                        </div>
+                        }
+
+                       
                     </div>
                 </div>
             </a>
 
             <div class="row">
                 <!-- Employee Commissions Summary -->
+                @if (User.IsInRole("Agent"))
+                {
                 <div class="col-md-6 col-lg-4 mb-4">
                     <a href="@Url.Action("Index", "Commissions")" class="text-decoration-none">
                         <div class="card shadow-sm h-100 border-0">
@@ -51,11 +67,13 @@
                             </div>
                             <div class="card-body text-black">
                                 <p><strong>Total:</strong> @Model.EmployeeCommissionsCount</p>
-                                <p><strong>Last Date:</strong> @Model.LastCommissionDate?.ToShortDateString()</p>
+                                <p><strong>Last Date:</strong> @(Model.LastCommissionDate?.ToShortDateString() ?? "N/A")</p>
                             </div>
                         </div>
                     </a>
                 </div>
+                }
+               
 
                 <!-- Employee Feedback Summary -->
                 <div class="col-md-6 col-lg-4 mb-4">
@@ -66,7 +84,7 @@
                             </div>
                             <div class="card-body text-black">
                                 <p><strong>Total:</strong> @Model.EmployeeFeedbacksCount</p>
-                                <p><strong>Last Date:</strong> @Model.LastFeedbackDate?.ToShortDateString()</p>
+                                <p><strong>Last Date:</strong> @(Model.LastFeedbackDate?.ToShortDateString() ?? "N/A")</p>
                             </div>
                         </div>
                     </a>
@@ -81,7 +99,7 @@
                             </div>
                             <div class="card-body bg-gray text-black">
                                 <p><strong>Total:</strong> @Model.EmployeeTrainingsCount</p>
-                                <p><strong>Last Date:</strong> @Model.LastTrainingDate?.ToShortDateString()</p>
+                                <p><strong>Last Date:</strong> @(Model.LastTrainingDate?.ToShortDateString() ?? "N/A")</p>
                             </div>
                         </div>
                     </a>
@@ -96,7 +114,7 @@
                             </div>
                             <div class="card-body bg-grey text-black">
                                 <p><strong>Total:</strong> @Model.EmployeeRecognitionsCount</p>
-                                <p><strong>Last Date:</strong> @Model.LastRecognitionDate?.ToShortDateString()</p>
+                                <p><strong>Last Date:</strong> @(Model.LastRecognitionDate?.ToShortDateString() ?? "N/A")</p>
                             </div>
                         </div>
                     </a>
