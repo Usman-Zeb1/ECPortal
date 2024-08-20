@@ -306,32 +306,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Performance/Agent/AgentPerformance.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZm9ybWFuY2VcQWdlbnRcQWdlbnRQZXJmb3JtYW5jZS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Performance/Agent/HODOrAdminAgentPerformance.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZm9ybWFuY2VcQWdlbnRcSE9ET3JBZG1pbkFnZW50UGVyZm9ybWFuY2UuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Performance/Agent/RCCHAgentPerformance.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZm9ybWFuY2VcQWdlbnRcUkNDSEFnZW50UGVyZm9ybWFuY2UuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Performance/Agent/TLOrECMAgentPerformance.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZm9ybWFuY2VcQWdlbnRcVExPckVDTUFnZW50UGVyZm9ybWFuY2UuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Performance/ExperienceCenter/ECPerformanceECM.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZm9ybWFuY2VcRXhwZXJpZW5jZUNlbnRlclxFQ1BlcmZvcm1hbmNlRUNNLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Performance/ExperienceCenter/ECPerformanceHOD.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZm9ybWFuY2VcRXhwZXJpZW5jZUNlbnRlclxFQ1BlcmZvcm1hbmNlSE9ELmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Performance/ExperienceCenter/ECPerformanceRCCH.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZm9ybWFuY2VcRXhwZXJpZW5jZUNlbnRlclxFQ1BlcmZvcm1hbmNlUkNDSC5jc2h0bWw=
+[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Performance/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGVyZm9ybWFuY2VcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/QualityScores/Index.cshtml]
@@ -348,10 +324,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Recognitions/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVjb2duaXRpb25zXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Sales/AgentSales.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FsZXNcQWdlbnRTYWxlcy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Sales/Index.cshtml]
@@ -448,10 +420,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Stocks/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RvY2tzXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Targets/AgentsTargets.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFyZ2V0c1xBZ2VudHNUYXJnZXRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/usman.zeb1/Desktop/ECPortal/ECPortal/Views/Targets/Index.cshtml]

@@ -1,7 +1,5 @@
-﻿using DocumentFormat.OpenXml.InkML;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -17,20 +15,16 @@ namespace Pk.Com.Jazz.ECP.Controllers
     public class HierarchyController : Controller
     {
         private readonly ECContext _context;
-        private readonly UserManager<AppUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-      
 
-        public HierarchyController(ECContext context, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
+        public HierarchyController(ECContext context)
         {
-            _roleManager = roleManager;
             _context = context;
-            _userManager = userManager;
         }
 
         [HttpGet]
-        public async Task<IActionResult> CreateAsync(string id)
+        public IActionResult Create(string id)
         {
+
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             // Use the provided id or fall back to the userId
             var effectiveId = !string.IsNullOrEmpty(id) ? id : userId;
@@ -39,45 +33,6 @@ namespace Pk.Com.Jazz.ECP.Controllers
                 Employee = _context.Employee.FirstOrDefault(e => e.AppUserId == effectiveId) ?? new Employee(),
                 AppUser = _context.AppUsers.Find(effectiveId) ?? new AppUser()
             };
-
-            var userRoles = await _userManager.GetRolesAsync(viewModel.AppUser);
-
-            if (userRoles.Any())
-            {
-                viewModel.Employee.Title = userRoles.First(); // Assuming one role per user
-            }
-
-            // Repopulate dropdowns if model state is invalid
-            ViewBag.ExperienceCentres = _context.ECs.Select(ec => new SelectListItem
-            {
-                Value = ec.ECID.ToString(),  // This will be assigned to Employee.ECID
-                Text = ec.PhysicalAddress    // This will be displayed in the dropdown
-            }).ToList();
-
-
-            // Populate region dropdown if model state is valid
-            ViewBag.Regions = _context.ECRegions.Select(ec => new SelectListItem
-            {
-                Value = ec.ECRegionID.ToString(),
-                Text = ec.ECRegionName
-            }).ToList();
-
-
-            var Id = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            //var empNumber = _context.Employee.FirstOrDefault(e => e.AppUserId == userId)?.EmployeeNumber;
-            var title = _context.Employee.FirstOrDefault(e => e.AppUserId == Id)?.Title;
-            var reporting = _context.Employee
-                             .Where(e => e.Title == title)
-                             .Select(e => new SelectListItem
-                             {
-                                 Value = e.EmployeeNumber.ToString(),
-                                 Text = e.UserAdLogin
-                             })
-                             .ToList();
-
-            ViewBag.reporting = reporting;
-
-
 
             if (id == null) {
                 return View("Hierarchy", viewModel);
@@ -104,16 +59,12 @@ namespace Pk.Com.Jazz.ECP.Controllers
 
         public async Task<IActionResult> Index()
         {
-
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var empNumber = _context.Employee.FirstOrDefault(e => e.AppUserId == userId)?.EmployeeNumber;
-
             var Users = await _context.AppUsers
-                .Where(appUser => _context.Employee.Any(e => e.AppUserId == appUser.Id)&&
-                       _context.Employee.Any(e => e.ManagerID == empNumber && e.AppUserId == appUser.Id)
-                )
+                .Where(appUser => _context.Employee.Any(e => e.AppUserId == appUser.Id))
                 .OrderByDescending(o => o.ModifiedDate)
                 .ToListAsync();
+
+
             return View(Users);
 
         }
@@ -131,33 +82,16 @@ namespace Pk.Com.Jazz.ECP.Controllers
 
         public async Task<IActionResult> NonProfilerList()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var empNumber = _context.Employee.FirstOrDefault(e => e.AppUserId == userId)?.EmployeeNumber;
-            var title = _context.Employee.FirstOrDefault(e => e.AppUserId == userId)?.Title;
-            if (title == "ECM")
-            {
+           var appUsers = await _context.AppUsers
+                .Where(appUser => !_context.Employee.Any(e => e.AppUserId == appUser.Id))
+                .OrderByDescending(o => o.ModifiedDate)
+                .ToListAsync();
 
-                //var appUsers = await _context.AppUsers
-                //        .Where(appUser =>
-                //            !_context.Employee.Any(e => e.AppUserId == appUser.Id) 
-                //        )
-                //        .OrderByDescending(o => o.ModifiedDate)
-                //        .ToListAsync();
-                // Get the role ID for "TeamLead"
-                var teamLeadRole = await _roleManager.Roles.FirstOrDefaultAsync(r => r.Name == "TeamLead");
+            // Serialize the list to a string (you can choose how to serialize, e.g., JSON)
+            var serializedUsers = JsonConvert.SerializeObject(appUsers);
 
-                var appUsers = await _context.AppUsers
-                                 .Where(appUser =>
-                                     !_context.Employee.Any(e => e.AppUserId == appUser.Id) &&  // Exclude users present in the Employee table
-                                     _context.UserRoles.Any(ur => ur.UserId == appUser.Id && ur.RoleId == teamLeadRole.Id)  // Check if user has "TeamLead" role
-                                 )
-                                 .OrderByDescending(o => o.ModifiedDate)
-                                 .ToListAsync();
-
-                var serializedUsers = JsonConvert.SerializeObject(appUsers);
+            // Redirect to the Index action of the AppUsers controller with the serialized data
             return View("Index",appUsers);
-            }
-            return View();
         }
 
         [HttpPost]
@@ -209,7 +143,7 @@ namespace Pk.Com.Jazz.ECP.Controllers
 
                 await _context.SaveChangesAsync();
                 ViewBag.UploadStatus = "Success";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "AppUsers");
             }
             return View();
         }

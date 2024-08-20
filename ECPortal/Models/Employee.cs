@@ -43,7 +43,7 @@ namespace Pk.Com.Jazz.ECP.Models
         public string? Summary { get; set; }
 
         [Display(Name = "Employee Region ID", ShortName = "RegionID")]
-     
+        [MaxLength(50)]
         public int RegionID { get; set; }
 
         [Display(Name = "Is Active?", ShortName = "Active")]
