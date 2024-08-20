@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ECPortal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+36959da3ac5e20f736c5f65a7296ce462c9f85ed")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+244158bca29752def8e3ab00ece81f06a0742611")]
 [assembly: System.Reflection.AssemblyProductAttribute("ECPortal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ECPortal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
