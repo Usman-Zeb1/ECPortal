@@ -324,6 +324,7 @@ namespace Pk.Com.Jazz.ECP.Controllers
 
 
 
+
         #region ECPerformance
 
         [Authorize(Roles = "HOD, ECM, RCCH, Admin")]
@@ -810,20 +811,140 @@ namespace Pk.Com.Jazz.ECP.Controllers
         [HttpPost]
         public async Task<IActionResult> BulkExportEC(int ecIdBulk, DateTime startDate, DateTime endDate)
         {
-            if(User.IsInRole("ECM"))
+            if (User.IsInRole("ECM"))
             {
                 var currentEmp = GetCurrentEmployee();
                 ecIdBulk = (int)currentEmp.ECID;
             }
-            var performanceData = await GetBulkPerformanceDataEC(ecIdBulk, startDate, endDate);
 
-            if (performanceData == null || !performanceData.Any())
+            List<ECPerformanceViewModel> performanceData;
+
+            if (ecIdBulk == -1)
             {
-                return Json(new { success = false, message = "No performance data found for the selected criteria." });
+                // Fetch performance data for all ECs
+                performanceData = await GetBulkPerformanceDataAllECs(startDate, endDate);
+                if (performanceData == null || !performanceData.Any())
+                {
+                    return Json(new { success = false, message = "No performance data found for the selected criteria." });
+                }
+                return GenerateAllECsWorkbook(performanceData, startDate, endDate);
             }
+            else
+            {
+                // Fetch performance data for a specific EC
+                performanceData = await GetBulkPerformanceDataEC(ecIdBulk, startDate, endDate);
+                if (performanceData == null || !performanceData.Any())
+                {
+                    return Json(new { success = false, message = "No performance data found for the selected criteria." });
+                }
+                return GenerateSingleECWorkbook(performanceData, startDate, endDate);
+            }
+        }
 
+        private IActionResult GenerateAllECsWorkbook(List<ECPerformanceViewModel> performanceData, DateTime startDate, DateTime endDate)
+        {
             using (var workbook = new XLWorkbook())
             {
+                // Create the workbook for all ECs
+
+                // Daily Performance Sheet
+                var dailySheet = workbook.Worksheets.Add("All ECs Daily Sales");
+                var currentRow = 1;
+
+                // Daily Performance Header
+                dailySheet.Cell(currentRow, 1).Value = "Date";
+                dailySheet.Cell(currentRow, 2).Value = "EC Address";
+                dailySheet.Cell(currentRow, 3).Value = "Prepaid Sales";
+                dailySheet.Cell(currentRow, 4).Value = "Postpaid Sales";
+                dailySheet.Cell(currentRow, 5).Value = "Device Sales";
+                dailySheet.Cell(currentRow, 6).Value = "M-Wallet Sales";
+                dailySheet.Cell(currentRow, 7).Value = "4G Sales";
+                dailySheet.Cell(currentRow, 8).Value = "Rox New Sales";
+                dailySheet.Cell(currentRow, 9).Value = "Rox Conversion Sales";
+                dailySheet.Cell(currentRow, 10).Value = "Total Sales";
+
+                // Add Daily Performance Data
+                foreach (var data in performanceData)
+                {
+                    foreach (var dailyPerformance in data.DailyPerformances)
+                    {
+                        currentRow++;
+                        dailySheet.Cell(currentRow, 1).Value = dailyPerformance.Date.ToShortDateString();
+                        dailySheet.Cell(currentRow, 2).Value = data.ECName;
+                        dailySheet.Cell(currentRow, 3).Value = dailyPerformance.PrepaidSales;
+                        dailySheet.Cell(currentRow, 4).Value = dailyPerformance.PostpaidSales;
+                        dailySheet.Cell(currentRow, 5).Value = dailyPerformance.DeviceSales;
+                        dailySheet.Cell(currentRow, 6).Value = dailyPerformance.MWalletSales;
+                        dailySheet.Cell(currentRow, 7).Value = dailyPerformance.FourGSales;
+                        dailySheet.Cell(currentRow, 8).Value = dailyPerformance.RoxNewSales;
+                        dailySheet.Cell(currentRow, 9).Value = dailyPerformance.RoxConversionSales;
+                        dailySheet.Cell(currentRow, 10).Value = dailyPerformance.TotalSales;
+                    }
+                }
+
+                // Monthly Targets and Performance Sheet
+                var monthlySheet = workbook.Worksheets.Add("All ECs Monthly Performance");
+                currentRow = 1;
+
+                // Monthly Performance Header
+                monthlySheet.Cell(currentRow, 1).Value = "Month-Year";
+                monthlySheet.Cell(currentRow, 2).Value = "EC Address";
+                monthlySheet.Cell(currentRow, 3).Value = "Prepaid Sales Target";
+                monthlySheet.Cell(currentRow, 4).Value = "Postpaid Sales Target";
+                monthlySheet.Cell(currentRow, 5).Value = "Device Sales Target";
+                monthlySheet.Cell(currentRow, 6).Value = "M-Wallet Sales Target";
+                monthlySheet.Cell(currentRow, 7).Value = "4G Sales Target";
+                monthlySheet.Cell(currentRow, 8).Value = "Rox New Sales Target";
+                monthlySheet.Cell(currentRow, 9).Value = "Rox Conversion Sales Target";
+                monthlySheet.Cell(currentRow, 10).Value = "Total Sales Target";
+                monthlySheet.Cell(currentRow, 11).Value = "Prepaid Sales Performance (%)";
+                monthlySheet.Cell(currentRow, 12).Value = "Postpaid Sales Performance (%)";
+                monthlySheet.Cell(currentRow, 13).Value = "Device Sales Performance (%)";
+                monthlySheet.Cell(currentRow, 14).Value = "M-Wallet Sales Performance (%)";
+                monthlySheet.Cell(currentRow, 15).Value = "4G Sales Performance (%)";
+                monthlySheet.Cell(currentRow, 16).Value = "Rox New Sales Performance (%)";
+                monthlySheet.Cell(currentRow, 17).Value = "Rox Conversion Sales Performance (%)";
+
+                var monthlyData = GetMonthlyPerformanceDataEC(performanceData, startDate, endDate);
+
+                foreach (var data in monthlyData)
+                {
+                    currentRow++;
+                    monthlySheet.Cell(currentRow, 1).Value = data.MonthYear;
+                    monthlySheet.Cell(currentRow, 2).Value = data.ECName;
+                    monthlySheet.Cell(currentRow, 3).Value = data.PrepaidSalesTarget;
+                    monthlySheet.Cell(currentRow, 4).Value = data.PostpaidSalesTarget;
+                    monthlySheet.Cell(currentRow, 5).Value = data.DeviceSalesTarget;
+                    monthlySheet.Cell(currentRow, 6).Value = data.MWalletSalesTarget;
+                    monthlySheet.Cell(currentRow, 7).Value = data.FourGSalesTarget;
+                    monthlySheet.Cell(currentRow, 8).Value = data.RoxNewSalesTarget;
+                    monthlySheet.Cell(currentRow, 9).Value = data.RoxConversionSalesTarget;
+                    monthlySheet.Cell(currentRow, 10).Value = data.TotalSalesTarget;
+                    monthlySheet.Cell(currentRow, 11).Value = data.PrepaidSalesPerformance;
+                    monthlySheet.Cell(currentRow, 12).Value = data.PostpaidSalesPerformance;
+                    monthlySheet.Cell(currentRow, 13).Value = data.DeviceSalesPerformance;
+                    monthlySheet.Cell(currentRow, 14).Value = data.MWalletSalesPerformance;
+                    monthlySheet.Cell(currentRow, 15).Value = data.FourGSalesPerformance;
+                    monthlySheet.Cell(currentRow, 16).Value = data.RoxNewSalesPerformance;
+                    monthlySheet.Cell(currentRow, 17).Value = data.RoxConversionSalesPerformance;
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    workbook.SaveAs(stream);
+                    var content = stream.ToArray();
+                    var base64 = Convert.ToBase64String(content);
+                    return Json(new { success = true, fileContent = base64, fileName = $"AllECs_PerformanceData_{startDate:yyyyMMdd}_{endDate:yyyyMMdd}.xlsx" });
+                }
+            }
+        }
+
+        private IActionResult GenerateSingleECWorkbook(List<ECPerformanceViewModel> performanceData, DateTime startDate, DateTime endDate)
+        {
+            using (var workbook = new XLWorkbook())
+            {
+                // Create the workbook for a single EC
+
                 // Daily Performance Sheet
                 var dailySheet = workbook.Worksheets.Add("Daily Sales");
                 var currentRow = 1;
@@ -861,7 +982,7 @@ namespace Pk.Com.Jazz.ECP.Controllers
                 var monthlySheet = workbook.Worksheets.Add("Monthly Targets and Performance");
                 currentRow = 1;
 
-                // Monthly Targets and Performance Header
+                // Monthly Performance Header
                 monthlySheet.Cell(currentRow, 1).Value = "Month-Year";
                 monthlySheet.Cell(currentRow, 2).Value = "Prepaid Sales Target";
                 monthlySheet.Cell(currentRow, 3).Value = "Postpaid Sales Target";
@@ -879,10 +1000,8 @@ namespace Pk.Com.Jazz.ECP.Controllers
                 monthlySheet.Cell(currentRow, 15).Value = "Rox New Sales Performance (%)";
                 monthlySheet.Cell(currentRow, 16).Value = "Rox Conversion Sales Performance (%)";
 
-                // Aggregated data for each month in the date range
                 var monthlyData = GetMonthlyPerformanceDataEC(performanceData, startDate, endDate);
 
-                // Add Monthly Targets and Performance Data
                 foreach (var data in monthlyData)
                 {
                     currentRow++;
@@ -909,11 +1028,11 @@ namespace Pk.Com.Jazz.ECP.Controllers
                     workbook.SaveAs(stream);
                     var content = stream.ToArray();
                     var base64 = Convert.ToBase64String(content);
-
-                    return Json(new { success = true, fileContent = base64, fileName = $"PerformanceData_{ecIdBulk}_{startDate:yyyyMMdd}_{endDate:yyyyMMdd}.xlsx" });
+                    return Json(new { success = true, fileContent = base64, fileName = $"EC_{startDate:yyyyMMdd}_{endDate:yyyyMMdd}.xlsx" });
                 }
             }
         }
+
 
         private List<MonthlyPerformanceViewModel> GetMonthlyPerformanceDataEC(List<ECPerformanceViewModel> performanceData, DateTime startDate, DateTime endDate)
         {
@@ -929,6 +1048,7 @@ namespace Pk.Com.Jazz.ECP.Controllers
                 var monthlyPerformance = new MonthlyPerformanceViewModel
                 {
                     MonthYear = monthYear,
+                   
                     PrepaidSalesTarget = firstEntry.PrepaidSalesTarget,
                     PostpaidSalesTarget = firstEntry.PostpaidSalesTarget,
                     DeviceSalesTarget = firstEntry.DeviceSalesTarget,
@@ -1079,7 +1199,138 @@ namespace Pk.Com.Jazz.ECP.Controllers
             return performanceModels;
         }
 
-      
+
+        private async Task<List<ECPerformanceViewModel>> GetBulkPerformanceDataAllECs(DateTime startDate, DateTime endDate)
+        {
+            // Fetch daily sales for all ECs within the date range
+            var dailySales = await _context.ECSales
+                .Where(a => a.SalesDate >= startDate && a.SalesDate <= endDate)
+                .ToListAsync();
+
+            // Fetch EC targets for all ECs within the date range
+            var ecTargets = await _context.ECTargets
+                .Where(t => t.Month >= startDate.Month && t.Month <= endDate.Month && t.Year >= startDate.Year && t.Year <= endDate.Year)
+                .ToListAsync();
+
+            if (ecTargets == null || dailySales == null)
+            {
+                return null;
+            }
+
+            var salesIds = dailySales.Select(d => new
+            {
+                d.ECPrepaidSaleId,
+                d.ECPostpaidSaleId,
+                d.ECDeviceSaleId,
+                d.ECMWalletSaleId,
+                d.ECFourGSaleId,
+                d.ECRoxNewSaleId,
+                d.ECRoxConversionSaleId
+            }).ToList();
+
+            var prepaidSales = await _context.ECPrepaidSales
+                .Where(p => salesIds.Select(s => s.ECPrepaidSaleId).Contains(p.Id))
+                .ToListAsync();
+
+            var postpaidSales = await _context.ECPostpaidSales
+                .Where(p => salesIds.Select(s => s.ECPostpaidSaleId).Contains(p.Id))
+                .ToListAsync();
+
+            var deviceSales = await _context.ECDeviceSales
+                .Where(d => salesIds.Select(s => s.ECDeviceSaleId).Contains(d.Id))
+                .ToListAsync();
+
+            var mWalletSales = await _context.ECMWalletSales
+                .Where(m => salesIds.Select(s => s.ECMWalletSaleId).Contains(m.Id))
+                .ToListAsync();
+
+            var fourGSales = await _context.ECFourGSales
+                .Where(f => salesIds.Select(s => s.ECFourGSaleId).Contains(f.Id))
+                .ToListAsync();
+
+            var roxNewSales = await _context.ECRoxNewSales
+                .Where(r => salesIds.Select(s => s.ECRoxNewSaleId).Contains(r.Id))
+                .ToListAsync();
+
+            var roxConversionSales = await _context.ECRoxConversionSales
+                .Where(r => salesIds.Select(s => s.ECRoxConversionSaleId).Contains(r.Id))
+                .ToListAsync();
+
+            var dailyPerformances = dailySales.GroupBy(d => new { d.SalesDate.Date, d.ECID })
+                .Select(g => new DailyPerformanceViewModel
+                {
+                    Date = g.Key.Date,
+                    ECID = g.Key.ECID,
+                    PrepaidSales = prepaidSales.Where(p => g.Select(d => d.ECPrepaidSaleId).Contains(p.Id)).Sum(p => p.Total),
+                    PostpaidSales = postpaidSales.Where(p => g.Select(d => d.ECPostpaidSaleId).Contains(p.Id)).Sum(p => p.Total),
+                    DeviceSales = deviceSales.Where(d => g.Select(ds => ds.ECDeviceSaleId).Contains(d.Id)).Sum(d => d.Total),
+                    MWalletSales = mWalletSales.Where(m => g.Select(d => d.ECMWalletSaleId).Contains(m.Id)).Sum(m => m.Total),
+                    FourGSales = fourGSales.Where(f => g.Select(d => d.ECFourGSaleId).Contains(f.Id)).Sum(f => f.Total),
+                    RoxNewSales = roxNewSales.Where(r => g.Select(d => d.ECRoxNewSaleId).Contains(r.Id)).Sum(r => r.Total),
+                    RoxConversionSales = roxConversionSales.Where(r => g.Select(d => d.ECRoxConversionSaleId).Contains(r.Id)).Sum(r => r.Total),
+                    TotalSales = prepaidSales.Where(p => g.Select(d => d.ECPrepaidSaleId).Contains(p.Id)).Sum(p => p.Total) +
+                                 postpaidSales.Where(p => g.Select(d => d.ECPostpaidSaleId).Contains(p.Id)).Sum(p => p.Total) +
+                                 deviceSales.Where(d => g.Select(ds => ds.ECDeviceSaleId).Contains(d.Id)).Sum(d => d.Total) +
+                                 mWalletSales.Where(m => g.Select(d => d.ECMWalletSaleId).Contains(m.Id)).Sum(m => m.Total) +
+                                 fourGSales.Where(f => g.Select(d => d.ECFourGSaleId).Contains(f.Id)).Sum(f => f.Total) +
+                                 roxNewSales.Where(r => g.Select(d => d.ECRoxNewSaleId).Contains(r.Id)).Sum(r => r.Total) +
+                                 roxConversionSales.Where(r => g.Select(d => d.ECRoxConversionSaleId).Contains(r.Id)).Sum(r => r.Total),
+                    PrepaidSalesPerformance = CalculatePerformance(
+                        prepaidSales.Where(p => g.Select(d => d.ECPrepaidSaleId).Contains(p.Id)).Sum(p => p.Total),
+                        ecTargets.FirstOrDefault(t => t.Month == g.Key.Date.Month && t.Year == g.Key.Date.Year && t.ECID == g.Key.ECID)?.ECPrepaidSaleTarget ?? 0),
+                    PostpaidSalesPerformance = CalculatePerformance(
+                        postpaidSales.Where(p => g.Select(d => d.ECPostpaidSaleId).Contains(p.Id)).Sum(p => p.Total),
+                        ecTargets.FirstOrDefault(t => t.Month == g.Key.Date.Month && t.Year == g.Key.Date.Year && t.ECID == g.Key.ECID)?.ECPostpaidSaleTarget ?? 0),
+                    DeviceSalesPerformance = CalculatePerformance(
+                        deviceSales.Where(d => g.Select(ds => ds.ECDeviceSaleId).Contains(d.Id)).Sum(d => d.Total),
+                        ecTargets.FirstOrDefault(t => t.Month == g.Key.Date.Month && t.Year == g.Key.Date.Year && t.ECID == g.Key.ECID)?.ECDeviceSaleTarget ?? 0),
+                    MWalletSalesPerformance = CalculatePerformance(
+                        mWalletSales.Where(m => g.Select(d => d.ECMWalletSaleId).Contains(m.Id)).Sum(m => m.Total),
+                        ecTargets.FirstOrDefault(t => t.Month == g.Key.Date.Month && t.Year == g.Key.Date.Year && t.ECID == g.Key.ECID)?.ECMWalletSaleTarget ?? 0),
+                    FourGSalesPerformance = CalculatePerformance(
+                        fourGSales.Where(f => g.Select(d => d.ECFourGSaleId).Contains(f.Id)).Sum(f => f.Total),
+                        ecTargets.FirstOrDefault(t => t.Month == g.Key.Date.Month && t.Year == g.Key.Date.Year && t.ECID == g.Key.ECID)?.ECFourGSaleTarget ?? 0),
+                    RoxNewSalesPerformance = CalculatePerformance(
+                        roxNewSales.Where(r => g.Select(d => d.ECRoxNewSaleId).Contains(r.Id)).Sum(r => r.Total),
+                        ecTargets.FirstOrDefault(t => t.Month == g.Key.Date.Month && t.Year == g.Key.Date.Year && t.ECID == g.Key.ECID)?.ECRoxNewSaleTarget ?? 0),
+                    RoxConversionSalesPerformance = CalculatePerformance(
+                        roxConversionSales.Where(r => g.Select(d => d.ECRoxConversionSaleId).Contains(r.Id)).Sum(r => r.Total),
+                        ecTargets.FirstOrDefault(t => t.Month == g.Key.Date.Month && t.Year == g.Key.Date.Year && t.ECID == g.Key.ECID)?.ECRoxConversionSaleTarget ?? 0)
+                }).ToList();
+
+            // Create the performance model list
+            var performanceModels = dailyPerformances.Select(dp => new ECPerformanceViewModel
+            {
+                Month = dp.Date.Month,
+                Year = dp.Date.Year,
+                ECID = dp.ECID,
+                ECName = _context.ECs.FirstOrDefault(ec => ec.ECID == dp.ECID)?.PhysicalAddress, // Assuming you have an ECName in the ExperienceCenters table
+                PrepaidSalesTarget = ecTargets.FirstOrDefault(t => t.Month == dp.Date.Month && t.Year == dp.Date.Year && t.ECID == dp.ECID)?.ECPrepaidSaleTarget ?? 0,
+                PostpaidSalesTarget = ecTargets.FirstOrDefault(t => t.Month == dp.Date.Month && t.Year == dp.Date.Year && t.ECID == dp.ECID)?.ECPostpaidSaleTarget ?? 0,
+                DeviceSalesTarget = ecTargets.FirstOrDefault(t => t.Month == dp.Date.Month && t.Year == dp.Date.Year && t.ECID == dp.ECID)?.ECDeviceSaleTarget ?? 0,
+                MWalletSalesTarget = ecTargets.FirstOrDefault(t => t.Month == dp.Date.Month && t.Year == dp.Date.Year && t.ECID == dp.ECID)?.ECMWalletSaleTarget ?? 0,
+                FourGSalesTarget = ecTargets.FirstOrDefault(t => t.Month == dp.Date.Month && t.Year == dp.Date.Year && t.ECID == dp.ECID)?.ECFourGSaleTarget ?? 0,
+                RoxNewSalesTarget = ecTargets.FirstOrDefault(t => t.Month == dp.Date.Month && t.Year == dp.Date.Year && t.ECID == dp.ECID)?.ECRoxNewSaleTarget ?? 0,
+                RoxConversionSalesTarget = ecTargets.FirstOrDefault(t => t.Month == dp.Date.Month && t.Year == dp.Date.Year && t.ECID == dp.ECID)?.ECRoxConversionSaleTarget ?? 0,
+                TotalPrepaidSales = dp.PrepaidSales,
+                TotalPostpaidSales = dp.PostpaidSales,
+                TotalDeviceSales = dp.DeviceSales,
+                TotalMWalletSales = dp.MWalletSales,
+                TotalFourGSales = dp.FourGSales,
+                TotalRoxNewSales = dp.RoxNewSales,
+                TotalRoxConversionSales = dp.RoxConversionSales,
+                PrepaidSalesPerformance = dp.PrepaidSalesPerformance,
+                PostpaidSalesPerformance = dp.PostpaidSalesPerformance,
+                DeviceSalesPerformance = dp.DeviceSalesPerformance,
+                MWalletSalesPerformance = dp.MWalletSalesPerformance,
+                FourGSalesPerformance = dp.FourGSalesPerformance,
+                RoxNewSalesPerformance = dp.RoxNewSalesPerformance,
+                RoxConversionSalesPerformance = dp.RoxConversionSalesPerformance,
+                DailyPerformances = new List<DailyPerformanceViewModel> { dp }
+            }).ToList();
+
+            return performanceModels;
+        }
 
         public JsonResult GetEcsByRegion(int regionId)
         {

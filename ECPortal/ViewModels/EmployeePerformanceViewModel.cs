@@ -44,6 +44,7 @@ namespace Pk.Com.Jazz.ECP.ViewModels
 
     public class DailyPerformanceViewModel
     {
+        public int ECID {  get; set; }
         public DateTime Date { get; set; }
         public int PrepaidSales { get; set; }
         public int PostpaidSales { get; set; }
@@ -68,6 +69,8 @@ namespace Pk.Com.Jazz.ECP.ViewModels
 
     public class MonthlyPerformanceViewModel
     {
+
+        public string ECName {  get; set; }
         public string MonthYear { get; set; }
         public int PrepaidSalesTarget { get; set; }
         public int PostpaidSalesTarget { get; set; }

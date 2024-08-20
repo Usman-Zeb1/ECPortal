@@ -14,9 +14,6 @@ namespace Pk.Com.Jazz.ECP.Models
         [Required]
         public int Handsets { get; set; }
 
-        [Required]
-        public int Target { get; set; }
-
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public int Total { get; set; }
 

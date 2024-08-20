@@ -70,17 +70,54 @@ namespace Pk.Com.Jazz.ECP.Controllers
         }
 
 
-
         // GET: EmployeeRecognition/Create
         public IActionResult Create()
         {
-            var employees = _context.Employee.ToList();
+            // Get the current user role
+            var userRole = User.IsInRole("HOD") ? "HOD" :
+                           User.IsInRole("RCCH") ? "RCCH" :
+                           User.IsInRole("ECM") ? "ECM" :
+                           User.IsInRole("TeamLead") ? "TeamLead" : null;
+
+            List<Employee> employees = new List<Employee>();
+
+            if (userRole == "HOD")
+            {
+                // Fetch all employees
+                employees = _context.Employee.ToList();
+            }
+            else if (userRole == "RCCH")
+            {
+                // Fetch employees from the same region
+                var currentEmployee = GetCurrentEmployee();
+                employees = _context.Employee
+                                    .Where(e => e.RegionID == currentEmployee.RegionID)
+                                    .ToList();
+            }
+            else if (userRole == "ECM")
+            {
+                // Fetch employees from the same Experience Center (EC)
+                var currentEmployee = GetCurrentEmployee();
+                employees = _context.Employee
+                                    .Where(e => e.ECID == currentEmployee.ECID && e.Title != "ECM")
+                                    .ToList();
+            }
+            else if (userRole == "TeamLead")
+            {
+                // Fetch employees from the same Experience Center (EC)
+                var currentEmployee = GetCurrentEmployee();
+                employees = _context.Employee
+                                    .Where(e => e.ECID == currentEmployee.ECID && e.Title != "ECM" && e.Title != "TeamLead")
+                                    .ToList();
+            }
+
             ViewBag.Employees = employees.Select(e => new SelectListItem
             {
                 Value = e.EmployeeId.ToString(),
                 Text = $"{e.EmployeeName} - {e.EmployeeNumber}"
             }).ToList();
-            var recognitionTypes = new List<string> { "Employee of the Month", "Outstanding Performance", "Team Player", "Innovator" }; // Default recognition types
+
+            var recognitionTypes = new List<string> { "Employee of the Month", "Outstanding Performance", "Team Player", "Innovator" };
             ViewBag.RecognitionTypes = new SelectList(recognitionTypes);
 
             var model = new EmployeeRecognition
@@ -119,18 +156,64 @@ namespace Pk.Com.Jazz.ECP.Controllers
                 }
             }
 
-            var employees = _context.Employee.ToList();
+            // Re-fetch employee data based on the user role in case of validation failure
+            var userRole = User.IsInRole("HOD") ? "HOD" :
+                           User.IsInRole("RCCH") ? "RCCH" :
+                           User.IsInRole("ECM") ? "ECM" :
+                           User.IsInRole("TeamLead") ? "TeamLead" : null;
+
+            List<Employee> employees = new List<Employee>();
+
+            if (userRole == "HOD")
+            {
+                // Fetch all employees
+                employees = _context.Employee.ToList();
+            }
+            else if (userRole == "RCCH")
+            {
+                // Fetch employees from the same region
+                var currentEmployee = GetCurrentEmployee();
+                employees = _context.Employee
+                                    .Where(e => e.RegionID == currentEmployee.RegionID)
+                                    .ToList();
+            }
+            else if (userRole == "ECM" || userRole == "TeamLead")
+            {
+                // Fetch employees from the same Experience Center (EC)
+                var currentEmployee = GetCurrentEmployee();
+                employees = _context.Employee
+                                    .Where(e => e.ECID == currentEmployee.ECID)
+                                    .ToList();
+            }
+
             ViewBag.Employees = employees.Select(e => new SelectListItem
             {
                 Value = e.EmployeeId.ToString(),
                 Text = $"{e.EmployeeName} - {e.EmployeeNumber}"
             }).ToList();
 
-            var recognitionTypes = new List<string> { "Employee of the Month", "Outstanding Performance", "Team Player", "Innovator" }; // Default recognition types
+            var recognitionTypes = new List<string> { "Employee of the Month", "Outstanding Performance", "Team Player", "Innovator" };
             ViewBag.RecognitionTypes = new SelectList(recognitionTypes);
 
-            return View(employeeRecognition);
+            return View(employeeRecognition); // Return the model with validation errors
         }
+
+        private Employee GetCurrentEmployee()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentEmployee = _context.Employee.FirstOrDefault(e => e.AppUserId == userId);
+
+            if (currentEmployee == null)
+            {
+
+                throw new Exception("Employee Number not found.");
+
+            }
+
+            return currentEmployee;
+        }
+
+
 
 
 

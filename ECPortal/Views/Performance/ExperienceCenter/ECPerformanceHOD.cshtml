@@ -36,7 +36,7 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="container mt-5">
-    <form method="get" asp-action="Index">
+    <form method="get" asp-action="ECPerformance">
         <div class="row mb-4">
             <div class="col-md-3 mb-3">
                 <div class="form-group">
@@ -56,15 +56,6 @@
                     <label for="ecId" class="form-label">Experience Center</label>
                     <select id="ecId" name="ecId" class="form-select" onchange="filterAgents()" data-placeholder="Select an Experience Center" required>
                         <option value="">Select an Experience Center</option>
-                    </select>
-                    <span class="text-danger"></span>
-                </div>
-            </div>
-            <div class="col-md-3 mb-3">
-                <div class="form-group">
-                    <label for="employeeNumber" class="form-label">Agent</label>
-                    <select id="employeeNumber" name="employeeNumber" class="form-select" data-placeholder="Select an Agent" required>
-                        <option value="">Select an Agent</option>
                     </select>
                     <span class="text-danger"></span>
                 </div>
@@ -113,40 +104,48 @@
         <h3 class="mt-4 text-center">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) - @Model.Year Performance</h3>
 
         <!-- Performance Overview Cards -->
-        <div class="card mt-5">
-            <div class="card-header text-center">
-                Performance Overview
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    @foreach (var item in new[]
-                   {
-                new { Title = "Prepaid Sales", Target = Model.PrepaidSalesTarget, TotalSales = Model.TotalPrepaidSales, Performance = Model.PrepaidSalesPerformance },
-                new { Title = "Postpaid Sales", Target = Model.PostpaidSalesTarget, TotalSales = Model.TotalPostpaidSales, Performance = Model.PostpaidSalesPerformance },
-                new { Title = "Device Sales", Target = Model.DeviceSalesTarget, TotalSales = Model.TotalDeviceSales, Performance = Model.DeviceSalesPerformance },
-                new { Title = "M-Wallet Sales", Target = Model.MWalletSalesTarget, TotalSales = Model.TotalMWalletSales, Performance = Model.MWalletSalesPerformance },
-                new { Title = "4G Sales", Target = Model.FourGSalesTarget, TotalSales = Model.TotalFourGSales, Performance = Model.FourGSalesPerformance },
-                new { Title = "Rox New Sales", Target = Model.RoxNewSalesTarget, TotalSales = Model.TotalRoxNewSales, Performance = Model.RoxNewSalesPerformance },
-                new { Title = "Rox Conversion Sales", Target = Model.RoxConversionSalesTarget, TotalSales = Model.TotalRoxConversionSales, Performance = Model.RoxConversionSalesPerformance }
-                })
-                    {
-                        <div class="col-md-4 mb-3">
-                            <div class="card text-white bg-primary">
-                                <div class="card-body">
+    <div class="card mt-5">
+        <div class="card-header text-center">
+            Performance Charts
+        </div>
+        <div class="card-body bg-light">
+            <div class="row">
+                @foreach (var item in new[]
+               {
+            new { Title = "Prepaid Sales", Target = Model.PrepaidSalesTarget, TotalSales = Model.TotalPrepaidSales, Performance = Model.PrepaidSalesPerformance, CardColor = "#cdeaf4", BarColor = "#5bc0de" }, // Slightly Darker Light Blue Card, Blue Bar
+            new { Title = "Postpaid Sales", Target = Model.PostpaidSalesTarget, TotalSales = Model.TotalPostpaidSales, Performance = Model.PostpaidSalesPerformance, CardColor = "#d4f2d4", BarColor = "#5cb85c" }, // Slightly Darker Light Green Card, Green Bar
+            new { Title = "Device Sales", Target = Model.DeviceSalesTarget, TotalSales = Model.TotalDeviceSales, Performance = Model.DeviceSalesPerformance, CardColor = "#ffe4b3", BarColor = "#f0ad4e" }, // Slightly Darker Light Yellow Card, Yellow Bar
+            new { Title = "M-Wallet Sales", Target = Model.MWalletSalesTarget, TotalSales = Model.TotalMWalletSales, Performance = Model.MWalletSalesPerformance, CardColor = "#f7c6c6", BarColor = "#d9534f" }, // Slightly Darker Light Red Card, Red Bar
+            new { Title = "4G Sales", Target = Model.FourGSalesTarget, TotalSales = Model.TotalFourGSales, Performance = Model.FourGSalesPerformance, CardColor = "#c4d3f8", BarColor = "#0275d8" }, // Slightly Darker Light Blue-Grey Card, Dark Blue Bar
+            new { Title = "Rox New Sales", Target = Model.RoxNewSalesTarget, TotalSales = Model.TotalRoxNewSales, Performance = Model.RoxNewSalesPerformance, CardColor = "#e6d1f2", BarColor = "#c49cd4" }, // Soft Lavender Card, Darker Lavender Bar
+            new { Title = "Rox Conversion Sales", Target = Model.RoxConversionSalesTarget, TotalSales = Model.TotalRoxConversionSales, Performance = Model.RoxConversionSalesPerformance, CardColor = "#fbd2b4", BarColor = "#f4a77a" } // Soft Peach Card, Darker Peach Bar
+            })
+                {
+                    <div class="col-md-4 mb-4">
+                        <div class="card text-dark shadow-sm h-100 rounded" style="background-color: @item.CardColor;">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <div>
                                     <h5 class="card-title">@item.Title</h5>
-                                    <p class="card-text">Target: @item.Target</p>
-                                    <p class="card-text">Total Sales: @item.TotalSales</p>
-                                    <p class="card-text">Performance: @item.Performance%</p>
+                                    <p class="card-text">Target: <strong>@item.Target</strong></p>
+                                    <p class="card-text">Total Sales: <strong>@item.TotalSales</strong></p>
+                                    <p class="card-text">Performance:</p>
+                                    <div class="progress" style="height: 20px; position: relative;">
+                                        <div class="progress-bar progress-bar-animated" role="progressbar" style="width: @item.Performance%; background-color: @item.BarColor;" aria-valuenow="@item.Performance" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="progress-percentage" style="font-weight: bold;">@item.Performance%</span>
+                                        </div>
+                                    </div>
                                 </div>
+                               
                             </div>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </div>
+    </div>
 
         <!-- Performance Graphs -->
-        <div class="card mt-5 container">
+        <div class="card mt-5">
             <div class="card-header text-center">
                 Performance Charts
             </div>
@@ -212,10 +211,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="ecIdBulk" class="form-label">Experience Center</label>
-                        <select id="ecIdBulk" name="ecIdBulk" class="form-select"  data-placeholder="Select an Experience Center" required>
+                        <select id="ecIdBulk" name="ecIdBulk" class="form-select" data-placeholder="Select an Experience Center" required>
                             <option value="">Select an Experience Center</option>
+                            <option value="-1">ALL Experience Centers</option> <!-- Added "ALL" option -->
+                            <!-- Additional options will be dynamically populated here -->
                         </select>
                     </div>
+
                     <div class="mb-3">
                         <label for="startDate" class="form-label">Start Date</label>
                         <input type="date" class="form-control" id="startDate" name="startDate">
@@ -271,7 +273,7 @@
             const userName = "@User?.Identity?.Name"; // This gets the username of the currently logged-in user
 
             // Unique key for this view's saved selections, including the user's username
-            const localStorageKey = bulkECPeformance - HODView - ${ userName }
+            const localStorageKey = `bulkECPeformance-HODView-${userName}`;
 
             // Function to load saved selections from localStorage for EC Performance View
             function loadSavedSelectionsECView() {
@@ -287,7 +289,6 @@
                     });
                 }
             }
-
             // Save selection button click event for EC Performance View
             var saveSelectionBtn = document.getElementById('saveSelectionBtn');
             if (saveSelectionBtn) {
@@ -298,31 +299,51 @@
                     var endDateElement = document.getElementById('endDate');
 
                     var regionId = regionIdBulkElement.value;
-                    var regionName = regionIdBulkElement.options[regionIdBulkElement.selectedIndex].text;
+                    var regionName = regionIdBulkElement.options[regionIdBulkElement.selectedIndex]?.text || '';
                     var ecId = ecIdBulkElement.value;
                     var ecName = ecIdBulkElement.options[ecIdBulkElement.selectedIndex].text;
                     var startDate = startDateElement.value;
                     var endDate = endDateElement.value;
 
-                    if (regionId && ecId && startDate && endDate) {
+                    if (ecId && startDate && endDate) {
+                        // Allow saving without region if "ALL Experience Centers" is selected
+                        if (ecId === "-1") {
+                            regionId = "";
+                            regionName = "";
+                        }
+
                         var selectionName = prompt('Enter a name for this selection:');
                         if (selectionName) {
                             var savedSelections = JSON.parse(localStorage.getItem(localStorageKey)) || [];
-                            if (savedSelections.length < 5) {
-                                savedSelections.push({ name: selectionName, regionId, regionName, ecId, ecName, startDate, endDate });
-                                localStorage.setItem(localStorageKey, JSON.stringify(savedSelections));
-                                loadSavedSelectionsECView();
+
+                            // Check if the selection already exists
+                            var exists = savedSelections.some(selection =>
+                                selection.regionId === regionId &&
+                                selection.ecId === ecId &&
+                                selection.startDate === startDate &&
+                                selection.endDate === endDate
+                            );
+
+                            if (!exists) {
+                                if (savedSelections.length < 5) {
+                                    savedSelections.push({ name: selectionName, regionId, regionName, ecId, ecName, startDate, endDate });
+                                    localStorage.setItem(localStorageKey, JSON.stringify(savedSelections));
+                                    loadSavedSelectionsECView();
+                                } else {
+                                    alert('You can save up to 5 selections only.');
+                                }
                             } else {
-                                alert('You can save up to 5 selections only.');
+                                alert('This selection already exists. Please choose a different name or modify the selection.');
                             }
                         } else {
                             alert('Please provide a name for the selection.');
                         }
                     } else {
-                        alert('Please fill in all fields to save the selection.');
+                        alert('Please fill in all fields (except region, if "ALL Experience Centers" is selected) to save the selection.');
                     }
                 });
             }
+
 
             // Delete selection button click event for EC Performance View
             var deleteSelectionBtn = document.getElementById('deleteSelectionBtn');
@@ -330,7 +351,7 @@
                 deleteSelectionBtn.addEventListener('click', function () {
                     var savedSelections = JSON.parse(localStorage.getItem(localStorageKey)) || [];
                     var selectedIndex = document.getElementById('savedSelectionsbulkEC').value;
-                    if (selectedIndex) {
+                    if (selectedIndex !== "") {
                         savedSelections.splice(selectedIndex, 1);
                         localStorage.setItem(localStorageKey, JSON.stringify(savedSelections));
                         loadSavedSelectionsECView();
@@ -352,7 +373,7 @@
             window.filterEcsBulk = function (selectedEcId) {
                 var regionId = document.getElementById('regionIdBulk').value;
                 var ecSelect = document.getElementById('ecIdBulk');
-                ecSelect.innerHTML = '<option value="">Select an Experience Center</option>';
+                ecSelect.innerHTML = '<option value="">Select an Experience Center</option><option value="-1">ALL Experience Centers</option>';
 
                 if (regionId) {
                     $.ajax({
@@ -379,21 +400,32 @@
                 savedSelectionsECViewElement.addEventListener('change', function () {
                     var savedSelections = JSON.parse(localStorage.getItem(localStorageKey)) || [];
                     var selectedIndex = this.value;
-                    if (selectedIndex) {
+                    if (selectedIndex !== "") {
                         var selection = savedSelections[selectedIndex];
 
+                        // Set the start and end date values
                         document.getElementById('startDate').value = selection.startDate;
                         document.getElementById('endDate').value = selection.endDate;
 
-                        setSelectedValue(document.getElementById('regionIdBulk'), selection.regionId);
-                        filterEcsBulk(selection.ecId);
+                        // Handle the case when "ALL Experience Centers" is selected
+                        if (selection.ecId === "-1") {
+                            // Set "ALL Experience Centers" and clear the region selection
+                            setSelectedValue(document.getElementById('ecIdBulk'), selection.ecId);
+                            document.getElementById('regionIdBulk').value = ""; // Clear region selection
+                        } else {
+                            // Otherwise, set both region and EC values
+                            setSelectedValue(document.getElementById('regionIdBulk'), selection.regionId);
+                            filterEcsBulk(selection.ecId);
+                        }
                     }
                 });
             }
 
+
             // Initial load of saved selections for EC Performance View
             loadSavedSelectionsECView();
         });
+
 
 
       

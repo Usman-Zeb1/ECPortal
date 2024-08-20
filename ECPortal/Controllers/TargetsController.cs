@@ -47,9 +47,39 @@ namespace Pk.Com.Jazz.ECP.Controllers
             }
             else
             {
-                var agents = _context.Employee
-                    .Select(e => new { e.EmployeeNumber, e.EmployeeName })
-                    .ToList();
+                List<Employee> agents = new List<Employee>();
+
+                if (User.IsInRole("TeamLead"))
+                {
+                    // Fetch agents in the same Experience Center (EC) as the TeamLead
+                    var currentEmployee = GetCurrentEmployee();
+                    agents = _context.Employee
+                        .Where(e => e.ECID == currentEmployee.ECID && e.Title == "Agent")
+                        .ToList();
+                }
+                else if (User.IsInRole("ECM"))
+                {
+                    // Fetch agents in the same Experience Center (EC)
+                    var currentEmployee = GetCurrentEmployee();
+                    agents = _context.Employee
+                        .Where(e => e.ECID == currentEmployee.ECID && e.Title == "Agent")
+                        .ToList();
+                }
+                else if (User.IsInRole("RCCH"))
+                {
+                    // Fetch agents in the same region
+                    var currentEmployee = GetCurrentEmployee();
+                    agents = _context.Employee
+                        .Where(e => e.RegionID == currentEmployee.RegionID && e.Title == "Agent")
+                        .ToList();
+                }
+                else if (User.IsInRole("HOD"))
+                {
+                    // Fetch all agents
+                    agents = _context.Employee
+                        .Where(e => e.Title == "Agent")
+                        .ToList();
+                }
 
                 ViewBag.Agents = new SelectList(agents, "EmployeeNumber", "EmployeeName");
 
@@ -68,7 +98,20 @@ namespace Pk.Com.Jazz.ECP.Controllers
             }
         }
 
+        private Employee GetCurrentEmployee()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentEmployee = _context.Employee.FirstOrDefault(e => e.AppUserId == userId);
 
+            if (currentEmployee == null)
+            {
+
+                throw new Exception("Employee Number not found.");
+
+            }
+
+            return currentEmployee;
+        }
 
 
         private int GetEmployeeNumber()

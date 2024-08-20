@@ -7,6 +7,9 @@ namespace Pk.Com.Jazz.ECP.ViewModels
 {
     public class ECPerformanceViewModel
     {
+        public int ECID {  get; set; }
+
+        public string ECName { get; set; }
         public int Month { get; set; }
         public int Year { get; set; }
         public int PrepaidSalesTarget { get; set; }
