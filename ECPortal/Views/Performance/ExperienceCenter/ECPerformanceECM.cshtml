@@ -35,6 +35,7 @@
 
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 <div class="container mt-5">
+     <h1 class="text-center mb-4">Performance - Experience Center</h1>
     <form method="get">
         <div class="row mb-4">
             <div class="col-md-3">
@@ -75,37 +76,51 @@
         <h3 class="mt-4 text-center">@System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(Model.Month) - @Model.Year Performance</h3>
 
         <!-- Performance Overview Cards -->
-        <div class="card mt-5">
-            <div class="card-header text-center">
-                Performance Overview
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    @foreach (var item in new[]
-                   {
-                new { Title = "Prepaid Sales", Target = Model.PrepaidSalesTarget, TotalSales = Model.TotalPrepaidSales, Performance = Model.PrepaidSalesPerformance },
-                new { Title = "Postpaid Sales", Target = Model.PostpaidSalesTarget, TotalSales = Model.TotalPostpaidSales, Performance = Model.PostpaidSalesPerformance },
-                new { Title = "Device Sales", Target = Model.DeviceSalesTarget, TotalSales = Model.TotalDeviceSales, Performance = Model.DeviceSalesPerformance },
-                new { Title = "M-Wallet Sales", Target = Model.MWalletSalesTarget, TotalSales = Model.TotalMWalletSales, Performance = Model.MWalletSalesPerformance },
-                new { Title = "4G Sales", Target = Model.FourGSalesTarget, TotalSales = Model.TotalFourGSales, Performance = Model.FourGSalesPerformance },
-                new { Title = "Rox New Sales", Target = Model.RoxNewSalesTarget, TotalSales = Model.TotalRoxNewSales, Performance = Model.RoxNewSalesPerformance },
-                new { Title = "Rox Conversion Sales", Target = Model.RoxConversionSalesTarget, TotalSales = Model.TotalRoxConversionSales, Performance = Model.RoxConversionSalesPerformance }
-                })
-                    {
-                        <div class="col-md-4 mb-3">
-                            <div class="card text-white bg-primary">
-                                <div class="card-body">
+    <div class="card mt-5">
+        <div class="card-header text-center">
+            Performance Overview
+        </div>
+        <div class="card-body bg-light">
+            <div class="row">
+                @foreach (var item in new[]
+               {
+            new { Title = "Prepaid Sales", Target = Model.PrepaidSalesTarget, TotalSales = Model.TotalPrepaidSales, Performance = Model.PrepaidSalesPerformance },
+            new { Title = "Postpaid Sales", Target = Model.PostpaidSalesTarget, TotalSales = Model.TotalPostpaidSales, Performance = Model.PostpaidSalesPerformance },
+            new { Title = "Device Sales", Target = Model.DeviceSalesTarget, TotalSales = Model.TotalDeviceSales, Performance = Model.DeviceSalesPerformance },
+            new { Title = "M-Wallet Sales", Target = Model.MWalletSalesTarget, TotalSales = Model.TotalMWalletSales, Performance = Model.MWalletSalesPerformance },
+            new { Title = "4G Sales", Target = Model.FourGSalesTarget, TotalSales = Model.TotalFourGSales, Performance = Model.FourGSalesPerformance },
+            new { Title = "Rox New Sales", Target = Model.RoxNewSalesTarget, TotalSales = Model.TotalRoxNewSales, Performance = Model.RoxNewSalesPerformance },
+            new { Title = "Rox Conversion Sales", Target = Model.RoxConversionSalesTarget, TotalSales = Model.TotalRoxConversionSales, Performance = Model.RoxConversionSalesPerformance }
+            })
+                {
+                    var titleClass = item.Title.Replace(" ", "-").ToLower();
+                    var cardClass = (titleClass == "4g-sales") ? "fourg-sales-card" : titleClass + "-card";
+                    var barClass = (titleClass == "4g-sales") ? "fourg-sales-bar" : titleClass + "-bar";
+
+                    <div class="col-md-4 mb-4">
+                        <div class="card text-dark shadow-sm h-100 rounded @cardClass">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <div>
                                     <h5 class="card-title">@item.Title</h5>
-                                    <p class="card-text">Target: @item.Target</p>
-                                    <p class="card-text">Total Sales: @item.TotalSales</p>
-                                    <p class="card-text">Performance: @item.Performance%</p>
+                                    <div class="d-flex justify-content-between">
+                                        <p class="card-text mb-0">Target: <strong>@item.Target</strong></p>
+                                        <p class="card-text mb-0">Total Sales: <strong>@item.TotalSales</strong></p>
+                                    </div>
+                                    <p class="card-text">Performance:</p>
+                                    <div class="progress" style="height: 20px; position: relative;">
+                                        <div class="progress-bar progress-bar-animated @barClass" role="progressbar" style="width: @item.Performance%;" aria-valuenow="@item.Performance" aria-valuemin="0" aria-valuemax="100">
+                                            <span class="progress-percentage" style="font-weight: bold;">@item.Performance%</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </div>
+    </div>
+
 
         <!-- Performance Graphs -->
         <div class="card mt-5 container">

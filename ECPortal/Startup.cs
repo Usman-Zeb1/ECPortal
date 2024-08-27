@@ -88,7 +88,7 @@ public class Startup
     private async Task CreateRoles(IServiceProvider serviceProvider)
     {
         var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        string[] roleNames = { Roles.Admin, Roles.Agent, Roles.TeamLead, Roles.RCCH, Roles.ECM, Roles.HOD, Roles.Trainer };
+        string[] roleNames = { Roles.Admin, Roles.Agent, Roles.TeamLead, Roles.RCCH, Roles.ECM, Roles.HOD, Roles.Trainer, Roles.OPG };
         IdentityResult roleResult;
 
         foreach (var roleName in roleNames)

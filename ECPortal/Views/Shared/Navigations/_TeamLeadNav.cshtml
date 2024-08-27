@@ -26,8 +26,20 @@
                 <li class="nav-item">
                     <a data-spinner="no" class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="Index"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                 </li>
-                <li class="nav-item">
-                    <a data-spinner="no" class="nav-link text-light" asp-area="" asp-controller="Performance" asp-action="Index"><i class="fas fa-chart-line"></i> Performance</a>
+
+                <li class="nav-item dropdown">
+                    <a data-spinner="no" id="Performancedropdown" class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-chart-line"></i> Performance
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="Performancedropdown">
+                        <a class="dropdown-item text-dark d-flex align-items-center" asp-area="" asp-controller="Performance" asp-action="YourPerformance">
+                            <i class="fas fa-user me-2"></i> Your Performance
+                        </a>
+                        <a class="dropdown-item text-dark d-flex align-items-center" asp-area="" asp-controller="Performance" asp-action="Index">
+                            <i class="fas fa-users me-2"></i> Employee Performance
+                        </a>
+                       
+                    </div>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -36,7 +48,11 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Targets" asp-action="Index"><i class="fas fa-bullseye"></i> Targets</a>
+                            <a class="dropdown-item dropdown-toggle text-dark" href="#"><i class="fas fa-bullseye"></i> Targets</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Targets" asp-action="YourTargets"><i class="fas fa-crosshairs"></i> Your Targets</a></li>
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Targets" asp-action="Index"><i class="fas fa-list-alt"></i> Agent Targets</a></li>
+                            </ul>
                         </li>
 
                         <li>
@@ -52,15 +68,23 @@
                         <li>
                             <a class="dropdown-item text-dark" asp-area="" asp-controller="Commissions" asp-action="Index"><i class="fas fa-dollar-sign"></i> Commissions</a>
                         </li>
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Sales" asp-action="Index"><i class="fas fa-shopping-cart"></i> Sales</a>
-                        </li>
+
 
                         <li>
-                            <a class="dropdown-item dropdown-toggle text-dark" href="#"><i class="fas fa-clipboard-check"></i> Audits</a>
+                            <a class="dropdown-item dropdown-toggle text-dark" href="#">
+                                <i class="fas fa-shopping-cart"></i> Sales
+                            </a>
                             <ul class="dropdown-menu dropdown-submenu">
-                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Audits" asp-action="Index"><i class="fas fa-list"></i> All Audits</a></li>
-                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Audits" asp-action="Create"><i class="fas fa-plus"></i> Create Audit</a></li>
+                                <li>
+                                    <a class="dropdown-item text-dark" asp-area="" asp-controller="Sales" asp-action="YourSales">
+                                        <i class="fas fa-list"></i> Your Sales
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-dark" asp-area="" asp-controller="Sales" asp-action="Index">
+                                        <i class="fas fa-user"></i> Agent Sales
+                                    </a>
+                                </li>
                             </ul>
                         </li>
 
@@ -79,12 +103,7 @@
                                 <li><a class="dropdown-item text-dark" asp-area="" asp-controller="TNAs" asp-action="Create"><i class="fas fa-plus"></i> Create TNA</a></li>
                             </ul>
                         </li>
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Giveaways" asp-action="Index"><i class="fas fa-gift"></i> Giveaways</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Stocks" asp-action="Index"><i class="fas fa-boxes"></i> Stocks</a>
-                        </li>
+
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -108,7 +127,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item text-dark" asp-area="" asp-controller="Hierarchy" asp-action="Create"><i class="fas fa-user"></i> View Hierarchy</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Hierarchy" asp-action="NonProfilerList"><i class="fas fa-add"></i> Add Hierachy</a>
+                       @*  <a class="dropdown-item text-dark" asp-area="" asp-controller="Hierarchy" asp-action="NonProfilerList"><i class="fas fa-add"></i> Add Hierachy</a> *@
                         <a class="dropdown-item text-dark" asp-area="" asp-controller="Hierarchy" asp-action="Index"><i class="fas fa-comments"></i> Update Hierarchy</a>
                     </div>
                 </li>

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Pk.Com.Jazz.ECP.Data;
+using Pk.Com.Jazz.ECP.Models;
 using Pk.Com.Jazz.ECP.ViewModels;
 using System.Security.Claims;
 
@@ -20,58 +21,191 @@ namespace Pk.Com.Jazz.ECP.Controllers
             _context = context;
         }
 
-        public IActionResult Index(int? employeeNumber = null)
+        public async Task<IActionResult> Index(int? employeeNumber = null, int? regionId = null, int? ecId = null)
         {
             if (User.IsInRole("Agent"))
             {
-                employeeNumber = GetEmployeeNumber();
-
-                if (employeeNumber == null)
-                {
-                    return NotFound("Employee not found.");
-                }
-
-                // Fetch performance data for the agent
-                var salesModel = GetEmployeeSalesModel(employeeNumber.Value);
-                if (salesModel == null)
-                {
-                    return View();
-                }
-                return View(salesModel);
+                return HandleAgentSales(employeeNumber);
             }
             else if (User.IsInRole("TeamLead") || User.IsInRole("ECM"))
             {
-                var EcId = GetEcID();
-                var managerId = GetEmployeeNumber();
-                var agents = _context.Employee
-                            .Where(e => e.ECID == EcId && e.ManagerID == managerId)
-                            .Select(e => new { e.EmployeeNumber, e.EmployeeName })
-                            .ToList();
+                return HandleTLSales(employeeNumber);
+            }
+            else if (User.IsInRole("RCCH"))
+            {
+                return await HandleRCCHSales(employeeNumber, regionId, ecId);
+            }
+            else if (User.IsInRole("HOD") || User.IsInRole("Admin"))
+            {
+                return await HandleHODOrAdminSales(employeeNumber, regionId, ecId);
+            }
+
+            return View();
+        }
+
+        private IActionResult HandleAgentSales(int? employeeNumber)
+        {
+            employeeNumber = GetEmployeeNumber();
+
+            if (employeeNumber == null)
+            {
+                return NotFound("Employee not found.");
+            }
+
+            // Fetch performance data for the agent
+            var salesModel = GetEmployeeSalesModel(employeeNumber.Value);
+            if (salesModel == null)
+            {
+                return View("Agent/AgentSales");
+            }
+            return View("Agent/AgentSales", salesModel);
+        }
+
+        public IActionResult YourSales(int? employeeNumber)
+        {
+            employeeNumber = GetEmployeeNumber();
+
+            if (employeeNumber == null)
+            {
+                return NotFound("Employee not found.");
+            }
+
+            // Fetch performance data for the agent
+            var salesModel = GetEmployeeSalesModel(employeeNumber.Value);
+            if (salesModel == null)
+            {
+                return View("Agent/TLSales");
+            }
+            return View("Agent/TLSales", salesModel);
+        }
+
+        private IActionResult HandleTLSales(int? employeeNumber)
+        {
+            var ecId = GetEcID();
+            var managerId = GetEmployeeNumber();
+            var agents = _context.Employee
+                        .Where(e => e.ECID == ecId && (e.Title == "Agent" || e.Title == "TeamLead"))
+                        .Select(e => new { e.EmployeeNumber, e.EmployeeName })
+                        .ToList();
+
+            /*var agents = _context.Employee
+                       .Where(e => e.ECID == ecId && e.ManagerID == managerId)
+                       .Select(e => new { e.EmployeeNumber, e.EmployeeName })
+                       .ToList();*/
+
+            ViewBag.Agents = new SelectList(agents, "EmployeeNumber", "EmployeeName");
+
+            if (employeeNumber.HasValue)
+            {
+                // Fetch performance data for the selected employee
+                var salesModel = GetEmployeeSalesModel(employeeNumber.Value);
+                if (salesModel != null)
+                {
+                    ViewBag.EmployeeName = agents.FirstOrDefault(a => a.EmployeeNumber == employeeNumber.Value)?.EmployeeName;
+                    return View("Agent/TLOrECMAgentSales", salesModel);
+                }
+            }
+
+            return View("Agent/TLOrECMAgentSales");
+        }
+
+        private async Task<IActionResult> HandleRCCHSales(int? employeeNumber, int? regionId, int? ecId)
+        {
+            var currentEmployee = GetCurrentEmployee();
+
+            var parentRegionName = _context.ECRegions
+            .Where(r => r.ECRegionID == currentEmployee.RegionID)
+            .Select(r => r.ECParentRegionName)
+            .FirstOrDefault();
+
+
+            var regions = _context.ECRegions
+            .Where(r => r.ECParentRegionName == parentRegionName)
+            .ToList();
+
+
+
+            ViewBag.Regions = new SelectList(regions, "ECRegionID", "ECRegionName");
+            /*       ViewBag.ECs = new SelectList(ecs, "ECID", "PhysicalAddress");*/
+
+            if (regionId.HasValue || ecId.HasValue)
+            {
+                var agentsQuery = _context.Employee.AsQueryable();
+
+                if (regionId.HasValue)
+                {
+                    agentsQuery = agentsQuery.Where(e => e.RegionID == regionId);
+                }
+
+                if (ecId.HasValue)
+                {
+                    agentsQuery = agentsQuery.Where(e => e.ECID == ecId);
+                }
+
+                var agents = await agentsQuery
+                    .Select(e => new { e.EmployeeNumber, e.EmployeeName })
+                    .ToListAsync();
 
                 ViewBag.Agents = new SelectList(agents, "EmployeeNumber", "EmployeeName");
 
                 if (employeeNumber.HasValue)
                 {
-                    // Fetch performance data for the selected employee
                     var salesModel = GetEmployeeSalesModel(employeeNumber.Value);
                     if (salesModel != null)
                     {
                         ViewBag.EmployeeName = agents.FirstOrDefault(a => a.EmployeeNumber == employeeNumber.Value)?.EmployeeName;
-                        return View("AgentSales", salesModel);
+                        return View("Agent/RCCHAgentSales", salesModel);
                     }
                 }
-
-                return View("AgentSales");
             }
-            else if (User.IsInRole("RCCH"))
-            {
-                return View();
-            }
-            else
-            {
-                return View();
-            }
+            // Implement logic specific to RCCH role
+            // For example, fetching data for all experience centers under a region
+            return View("Agent/RCCHAgentSales"); // Replace with your specific view
         }
+
+        private async Task<IActionResult> HandleHODOrAdminSales(int? employeeNumber, int? regionId, int? ecId)
+        {
+            var regions = _context.ECRegions
+          .ToList();
+
+
+
+            ViewBag.Regions = new SelectList(regions, "ECRegionID", "ECRegionName");
+            /*       ViewBag.ECs = new SelectList(ecs, "ECID", "PhysicalAddress");*/
+
+            if (regionId.HasValue || ecId.HasValue)
+            {
+                var agentsQuery = _context.Employee.AsQueryable();
+
+                if (regionId.HasValue)
+                {
+                    agentsQuery = agentsQuery.Where(e => e.RegionID == regionId);
+                }
+
+                if (ecId.HasValue)
+                {
+                    agentsQuery = agentsQuery.Where(e => e.ECID == ecId);
+                }
+
+                var agents = await agentsQuery
+                    .Select(e => new { e.EmployeeNumber, e.EmployeeName })
+                    .ToListAsync();
+
+                ViewBag.Agents = new SelectList(agents, "EmployeeNumber", "EmployeeName");
+
+                if (employeeNumber.HasValue)
+                {
+                    var salesModel = GetEmployeeSalesModel(employeeNumber.Value);
+                    if (salesModel != null)
+                    {
+                        ViewBag.EmployeeName = agents.FirstOrDefault(a => a.EmployeeNumber == employeeNumber.Value)?.EmployeeName;
+                        return View("Agent/HODOrAdminAgentSales", salesModel);
+                    }
+                }
+            }
+            return View("Agent/HODOrAdminAgentSales"); // Replace with your specific view
+        }
+
         private EmployeeSalesViewModel GetEmployeeSalesModel(int employeeNumber)
         {
             var today = DateTime.Now.Date;
@@ -127,7 +261,20 @@ namespace Pk.Com.Jazz.ECP.Controllers
             };
         }
 
+        private Employee GetCurrentEmployee()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var currentEmployee = _context.Employee.FirstOrDefault(e => e.AppUserId == userId);
 
+            if (currentEmployee == null)
+            {
+
+                throw new Exception("Employee Number not found.");
+
+            }
+
+            return currentEmployee;
+        }
         private int GetEmployeeNumber()
         {
             // Implement logic to get the current employee's number
@@ -142,6 +289,27 @@ namespace Pk.Com.Jazz.ECP.Controllers
 
             return empNumber.Value;
         }
+
+        public JsonResult GetEcsByRegion(int regionId)
+        {
+            var ecs = _context.ECs
+                .Where(e => e.ECRegionID == regionId)
+                .Select(e => new { value = e.ECID, text = e.PhysicalAddress })
+                .ToList();
+
+            return Json(ecs);
+        }
+
+        public JsonResult GetAgentsByEc(int ecId)
+        {
+            var agents = _context.Employee
+                .Where(e => e.ECID == ecId && (e.Title == "Agent" || e.Title == "TeamLead"))
+                .Select(e => new { value = e.EmployeeNumber, text = e.EmployeeName })
+                .ToList();
+
+            return Json(agents);
+        }
+
 
         private int GetEcID()
         {

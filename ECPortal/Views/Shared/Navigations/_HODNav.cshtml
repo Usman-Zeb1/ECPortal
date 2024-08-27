@@ -48,8 +48,13 @@
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <li>
-                            <a class="dropdown-item text-dark" asp-area="" asp-controller="Targets" asp-action="Index"><i class="fas fa-bullseye"></i> Targets</a>
+                            <a class="dropdown-item dropdown-toggle text-dark" href="#"><i class="fas fa-bullseye"></i> Targets</a>
+                            <ul class="dropdown-menu dropdown-submenu">
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Targets" asp-action="Index"><i class="fas fa-list-alt"></i> Agent Targets</a></li>
+                                <li><a class="dropdown-item text-dark" asp-area="" asp-controller="Targets" asp-action="ECTargets"><i class="fas fa-crosshairs"></i> Experience Center Targets</a></li>
+                            </ul>
                         </li>
+
 
                         <li>
                             <a class="dropdown-item dropdown-toggle text-dark" href="#"><i class="fas fa-award"></i> Recognitions</a>
@@ -120,7 +125,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item text-dark" asp-area="" asp-controller="Hierarchy" asp-action="Create"><i class="fas fa-user"></i> View Hierarchy</a>
-                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Hierarchy" asp-action="NonProfilerList"><i class="fas fa-add"></i> Add Hierachy</a>
+                       @*  <a class="dropdown-item text-dark" asp-area="" asp-controller="Hierarchy" asp-action="NonProfilerList"><i class="fas fa-add"></i> Add Hierachy</a> *@
                         <a class="dropdown-item text-dark" asp-area="" asp-controller="Hierarchy" asp-action="Index"><i class="fas fa-comments"></i> Update Hierarchy</a>
                     </div>
                 </li>

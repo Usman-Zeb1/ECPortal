@@ -157,6 +157,10 @@ namespace Pk.Com.Jazz.ECP.Controllers
                 var serializedUsers = JsonConvert.SerializeObject(appUsers);
             return View("Index",appUsers);
             }
+            else if (title == "TeamLead")
+            {
+
+            }
             return View();
         }
 
@@ -197,6 +201,7 @@ namespace Pk.Com.Jazz.ECP.Controllers
                     existingEmployee.QmaticLogin = employee.QmaticLogin;
                     existingEmployee.QmaticPowerLogin = employee.QmaticPowerLogin;
                     existingEmployee.EditBy = HttpContext.Session.GetString("UserID");
+                    existingEmployee.RegionID = employee.RegionID;
 
                     _context.Employee.Update(existingEmployee);
                 }

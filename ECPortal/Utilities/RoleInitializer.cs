@@ -9,7 +9,7 @@ namespace Pk.Com.Jazz.ECP.Utilities
         public static async Task InitializeAsync(RoleManager<IdentityRole> roleManager)
         {
             // Ensure that the required roles exist
-            string[] roleNames = { "ECM", "Admin", "Agent", "RCCH", "TeamLead", "HOD" };
+            string[] roleNames = { "ECM", "Admin", "Agent", "RCCH", "TeamLead", "HOD", "OPG" };
             foreach (string roleName in roleNames)
             {
                 if (!await roleManager.RoleExistsAsync(roleName))

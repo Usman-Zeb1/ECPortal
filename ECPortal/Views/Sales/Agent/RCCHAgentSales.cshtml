@@ -1,0 +1,887 @@
+﻿
+<head>
+    <meta charset="UTF-8">
+    <title>Agent Sales</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .chart-card {
+            flex: 0 0 48%; /* Adjust the width of the cards */
+            margin-bottom: 20px;
+        }
+
+            .chart-card .card {
+                height: 100%;
+            }
+
+        canvas {
+            width: 100% !important;
+            height: 300px !important;
+        }
+
+    </style>
+</head>
+
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Agent Daily Sales</h1>
+
+        <form method="get" asp-action="Index">
+            <div class="row mb-4 justify-content-center">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="regionId" class="form-label">Region</label>
+                            <select id="regionId" name="regionId" class="form-select" onchange="filterEcs()" data-placeholder="Select a Region" required>
+                                <option value="">Select a Region</option>
+                                @if (ViewBag.Regions != null)
+                                {
+                                    @foreach (var region in ViewBag.Regions)
+                                    {
+                                        <option value="@region.Value">@region.Text</option>
+                                    }
+                                }
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="ecId" class="form-label">Experience Center</label>
+                            <select id="ecId" name="ecId" class="form-select" onchange="filterAgents()" data-placeholder="Select an Experience Center" required>
+                                <option value="">Select an Experience Center</option>
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="employeeNumber" class="form-label">Agent</label>
+                            <select id="employeeNumber" name="employeeNumber" class="form-select" data-placeholder="Select an Agent" required>
+                                <option value="">Select an Agent</option>
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-1 d-flex justify-content-center align-items-end">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+
+
+
+
+
+        <div class="text-center mb-4">
+            <button id="exportDataBtn" class="btn btn-primary">Export Data</button>
+            <button id="exportGraphsBtn" class="btn btn-secondary">Export Graphs</button>
+            <button id="bulkExportBtn" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#bulkExportModal">Bulk Export</button>
+        </div>
+
+        @if (Model != null)
+        {
+            <div class="chart-container">
+                <div class="chart-card">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Prepaid Sales</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="prepaidSalesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Postpaid Sales</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="postpaidSalesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Device Sales</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="deviceSalesChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Mwallet Sales</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="MwalletChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">4G Sales</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="FourGChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Rox New Sales</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="RoxNewChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Rox Conversion Sales</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="RoxConversionChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-warning mt-4 text-center" role="alert">
+                <strong>No sales data available for the selected agent.</strong>
+            </div>
+        }
+
+        <!-- Bulk Export Modal -->
+        <div class="modal fade" id="bulkExportModal" tabindex="-1" aria-labelledby="bulkExportModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="bulkExportModalLabel">Bulk Export</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="bulkExportForm" method="post">
+                            <div class="mb-3">
+                                <label for="regionIdBulk" class="form-label">Region</label>
+                                <select id="regionIdBulk" name="regionIdBulk" class="form-select" onchange="filterEcsBulk()" data-placeholder="Select a Region" required>
+                                    <option value="">Select a Region</option>
+                                    @foreach (var region in ViewBag.Regions)
+                                    {
+                                        <option value="@region.Value">@region.Text</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ecIdBulk" class="form-label">Experience Center</label>
+                                <select id="ecIdBulk" name="ecIdBulk" class="form-select" onchange="filterAgentsBulk()" data-placeholder="Select an Experience Center" required>
+                                    <option value="">Select an Experience Center</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="bulkAgent" class="form-label">Agent</label>
+                                <select id="bulkAgent" name="employeeNumber" class="form-select" data-placeholder="Select an Agent">
+                                    <option></option>
+                                    @if (ViewBag.Agents != null)
+                                    {
+                                        @foreach (var agent in ViewBag.Agents)
+                                        {
+                                            <option value="@agent.Value">@agent.Text</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="startDate" class="form-label">Start Date</label>
+                                <input type="date" class="form-control" id="startDate" name="startDate">
+                            </div>
+                            <div class="mb-3">
+                                <label for="endDate" class="form-label">End Date</label>
+                                <input type="date" class="form-control" id="endDate" name="endDate">
+                            </div>
+                            <div class="mb-3 d-flex justify-content-between">
+                                <button type="button" class="btn btn-success" id="savedSelectionsRCCHSalesEmployeeViewBtn">Save Selection</button>
+                                <select id="savedSelectionsRCCHSalesEmployeeView" class="form-select w-50" data-placeholder="Saved Selections">
+                                    <option></option>
+                                </select>
+                                <button type="button" class="btn btn-danger" id="deleteSelectionsRCCHSalesEmployeeViewBtn">Delete</button>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Export</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        function filterEcs() {
+            var regionId = document.getElementById('regionId').value;
+            var ecSelect = document.getElementById('ecId');
+            ecSelect.innerHTML = '<option value="">Select EC</option>';
+
+            if (regionId) {
+                $.ajax({
+                    url: '@Url.Action("GetEcsByRegion", "Sales")',
+                    data: { regionId: regionId },
+                    success: function (data) {
+                        data.forEach(function (ec) {
+                            var option = document.createElement('option');
+                            option.value = ec.value;
+                            option.text = ec.text;
+                            ecSelect.appendChild(option);
+                        });
+                    }
+                });
+            }
+
+            // Clear agent dropdown
+            document.getElementById('employeeNumber').innerHTML = '<option value="">Select Agent</option>';
+        }
+
+        function filterAgents() {
+            var ecId = document.getElementById('ecId').value;
+            var agentSelect = document.getElementById('employeeNumber');
+            agentSelect.innerHTML = '<option value="">Select Agent</option>';
+
+            if (ecId) {
+                $.ajax({
+                    url: '@Url.Action("GetAgentsByEc", "Sales")',
+                    data: { ecId: ecId },
+                    success: function (data) {
+                        data.forEach(function (agent) {
+                            var option = document.createElement('option');
+                            option.value = agent.value;
+                            option.text = agent.text;
+                            agentSelect.appendChild(option);
+                        });
+                    }
+                });
+            }
+        }
+
+
+    </script>
+
+    <script>
+
+        $(document).ready(function () {
+            $("#bulkAgent").select2({
+                dropdownParent: $("#bulkExportModal"),
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+
+            });
+        });
+
+        $(document).ready(function () {
+            $("#employeeNumber").select2({
+
+                width: '100%',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+
+            });
+        });
+
+
+        $(document).ready(function () {
+            $('#ecId').select2({
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+
+            });
+        });
+
+        $(document).ready(function () {
+            $('#regionId').select2({
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+
+            });
+        });
+
+        $(document).ready(function () {
+            $("#bulkAgent").select2({
+                dropdownParent: $("#bulkExportModal"),
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+
+            });
+        });
+
+        $(document).ready(function () {
+            $("#ecIdBulk").select2({
+                dropdownParent: $("#bulkExportModal"),
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+
+            });
+        });
+
+        $(document).ready(function () {
+            $("#regionIdBulk").select2({
+                dropdownParent: $("#bulkExportModal"),
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                theme: "bootstrap-5",
+
+            });
+        });
+
+        $(document).ready(function () {
+            $("#bulkExportForm").submit(function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                var formData = $(this).serialize();
+
+                $.ajax({
+                    url: '@Url.Action("BulkExport", "Sales")',
+                    type: 'POST',
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            var link = document.createElement('a');
+                            link.href = 'data:application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;base64,' + response.fileContent;
+                            link.download = response.fileName;
+                            link.click();
+                        } else {
+                            // Show an alert or modal
+                            alert(response.message);
+                        }
+                    },
+                    error: function () {
+                        alert("An error occurred while processing the request.");
+                    }
+                });
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            function loadSavedSelectionsRCCHSalesEmployeeView() {
+                var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsRCCHSalesEmployeeView')) || [];
+                var selectElement = document.getElementById('savedSelectionsRCCHSalesEmployeeView');
+                if (selectElement) {
+                    selectElement.innerHTML = '<option value="">Saved Selections</option>';
+                    savedSelections.forEach((selection, index) => {
+                        var option = document.createElement('option');
+                        option.value = index;
+                        option.text = selection.name;
+                        selectElement.appendChild(option);
+                    });
+                }
+            }
+
+            // Save selection button click event for RCCH Sales Employee View
+            var saveSelectionsRCCHBtn = document.getElementById('savedSelectionsRCCHSalesEmployeeViewBtn');
+            if (saveSelectionsRCCHBtn) {
+                saveSelectionsRCCHBtn.addEventListener('click', function () {
+                    var bulkAgentElement = document.getElementById('bulkAgent');
+                    var regionIdBulkElement = document.getElementById('regionIdBulk');
+                    var ecIdBulkElement = document.getElementById('ecIdBulk');
+                    var startDateElement = document.getElementById('startDate');
+                    var endDateElement = document.getElementById('endDate');
+
+                    var agent = bulkAgentElement.value;
+                    var agentName = bulkAgentElement.options[bulkAgentElement.selectedIndex].text;
+                    var regionId = regionIdBulkElement.value;
+                    var regionName = regionIdBulkElement.options[regionIdBulkElement.selectedIndex].text;
+                    var ecId = ecIdBulkElement.value;
+                    var ecName = ecIdBulkElement.options[ecIdBulkElement.selectedIndex].text;
+                    var startDate = startDateElement.value;
+                    var endDate = endDateElement.value;
+
+                    if (agent && regionId && ecId && startDate && endDate) {
+                        var selectionName = prompt('Enter a name for this selection:');
+                        if (selectionName) {
+                            var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsRCCHSalesEmployeeView')) || [];
+                            if (savedSelections.length < 5) {
+                                savedSelections.push({ name: selectionName, agent, agentName, regionId, regionName, ecId, ecName, startDate, endDate });
+                                localStorage.setItem('savedSelectionsRCCHSalesEmployeeView', JSON.stringify(savedSelections));
+                                loadSavedSelectionsRCCHSalesEmployeeView();
+                            } else {
+                                alert('You can save up to 5 selections only.');
+                            }
+                        } else {
+                            alert('Please provide a name for the selection.');
+                        }
+                    } else {
+                        alert('Please fill in all fields to save the selection.');
+                    }
+                });
+            }
+
+            // Delete selection button click event for RCCH Sales Employee View
+            var deleteSelectionsRCCHBtn = document.getElementById('deleteSelectionsRCCHSalesEmployeeViewBtn');
+            if (deleteSelectionsRCCHBtn) {
+                deleteSelectionsRCCHBtn.addEventListener('click', function () {
+                    var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsRCCHSalesEmployeeView')) || [];
+                    var selectedIndex = document.getElementById('savedSelectionsRCCHSalesEmployeeView').value;
+                    if (selectedIndex) {
+                        savedSelections.splice(selectedIndex, 1);
+                        localStorage.setItem('savedSelectionsRCCHSalesEmployeeView', JSON.stringify(savedSelections));
+                        loadSavedSelectionsRCCHSalesEmployeeView();
+                    } else {
+                        alert('Please select a saved selection to delete.');
+                    }
+                });
+            }
+
+            // Set selected value in a select2 element
+            function setSelectedValue(selectElement, value) {
+                if (selectElement) {
+                    selectElement.value = value;
+                    $(selectElement).trigger('change'); // Notify select2 of value change
+                }
+            }
+
+            // Filter ECs based on selected region
+            window.filterEcsBulk = function (selectedEcId, selectedAgentId) {
+                var regionId = document.getElementById('regionIdBulk').value;
+                var ecSelect = document.getElementById('ecIdBulk');
+                ecSelect.innerHTML = '<option value="">Select EC</option>';
+
+                if (regionId) {
+                    $.ajax({
+                        url: '@Url.Action("GetEcsByRegion", "Sales")',
+                        data: { regionId: regionId },
+                        success: function (data) {
+                            data.forEach(function (ec) {
+                                var option = document.createElement('option');
+                                option.value = ec.value;
+                                option.text = ec.text;
+                                ecSelect.appendChild(option);
+                            });
+                            if (selectedEcId) {
+                                setSelectedValue(ecSelect, selectedEcId);
+                                filterAgentsBulk(selectedAgentId);
+                            }
+                        }
+                    });
+                }
+
+                // Clear agent dropdown
+                document.getElementById('bulkAgent').innerHTML = '<option value="">Select Agent</option>';
+            };
+
+            // Filter agents based on selected EC
+            window.filterAgentsBulk = function (selectedAgentId) {
+                var ecId = document.getElementById('ecIdBulk').value;
+                var agentSelect = document.getElementById('bulkAgent');
+                agentSelect.innerHTML = '<option value="">Select Agent</option>';
+
+                if (ecId) {
+                    $.ajax({
+                        url: '@Url.Action("GetAgentsByEc", "Sales")',
+                        data: { ecId: ecId },
+                        success: function (data) {
+                            data.forEach(function (agent) {
+                                var option = document.createElement('option');
+                                option.value = agent.value;
+                                option.text = agent.text;
+                                agentSelect.appendChild(option);
+                            });
+                            if (selectedAgentId) {
+                                setSelectedValue(agentSelect, selectedAgentId);
+                            }
+                        }
+                    });
+                }
+            };
+
+            // Load saved selection when selected for RCCH Sales Employee View
+            var savedSelectionsRCCHElement = document.getElementById('savedSelectionsRCCHSalesEmployeeView');
+            if (savedSelectionsRCCHElement) {
+                savedSelectionsRCCHElement.addEventListener('change', function () {
+                    var savedSelections = JSON.parse(localStorage.getItem('savedSelectionsRCCHSalesEmployeeView')) || [];
+                    var selectedIndex = this.value;
+                    if (selectedIndex) {
+                        var selection = savedSelections[selectedIndex];
+
+                        document.getElementById('startDate').value = selection.startDate;
+                        document.getElementById('endDate').value = selection.endDate;
+
+                        setSelectedValue(document.getElementById('regionIdBulk'), selection.regionId);
+                        filterEcsBulk(selection.ecId, selection.agent);
+                    }
+                });
+            }
+
+
+
+            // Initial load of saved selections for RCCH Sales Employee View
+            loadSavedSelectionsRCCHSalesEmployeeView();
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            var prepaidSales = @Html.Raw(Json.Serialize(Model?.PrepaidSale ?? new List<EmployeePrepaidSale>()));
+            var postpaidSales = @Html.Raw(Json.Serialize(Model?.PostpaidSale ?? new List<EmployeePostpaidSale>()));
+            var deviceSales = @Html.Raw(Json.Serialize(Model?.DeviceSale ?? new List<EmployeeDeviceSale>()));
+            var MwalletSales = @Html.Raw(Json.Serialize(Model?.MWalletSale ?? new List<EmployeeMWalletSale>()));
+            var FourGSales = @Html.Raw(Json.Serialize(Model?.FourGSale ?? new List<EmployeeFourGSale>()));
+            var RoxNewSales = @Html.Raw(Json.Serialize(Model?.RoxNewSale ?? new List<EmployeeRoxNewSale>()));
+            var RoxConversionSales = @Html.Raw(Json.Serialize(Model?.RoxConversionSale ?? new List<EmployeeRoxConversionSale>()));
+
+
+
+
+
+            // Prepaid Sales Chart
+            const prepaidLabels = ['New Sales', 'Prepaid MNP', 'Total'];
+            const prepaidData = prepaidSales.flatMap(({ newSales, prepaidMNP, total }) => [newSales, prepaidMNP, total]);
+            var ctxPrepaid = document.getElementById('prepaidSalesChart').getContext('2d');
+            var prepaidSalesChart = new Chart(ctxPrepaid, {
+                type: 'bar',
+                data: {
+                    labels: prepaidLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: prepaidData,
+                        backgroundColor: 'rgba(146, 5, 7, 0.5)',
+                        borderColor: 'rgba(146, 5, 7, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Postpaid Sales Chart
+            const postpaidLabels = ['Fresh Sales', 'Port IN', 'Pre To Post', 'Red Red Z', 'Total'];
+            var postpaidData = postpaidSales.flatMap(({ freshSales, portIN, preToPost, redRedZ, total }) => [freshSales, portIN, preToPost, redRedZ, total]);
+
+            var ctxPostpaid = document.getElementById('postpaidSalesChart').getContext('2d');
+            var postpaidSalesChart = new Chart(ctxPostpaid, {
+                type: 'bar',
+                data: {
+                    labels: postpaidLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: postpaidData,
+                        backgroundColor: 'rgba(255, 220, 1, 0.3)',
+                        borderColor: 'rgba(255, 220, 1, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Device Sales Chart
+            const deviceLabels = ['MBB', 'Handsets', 'Total'];
+            var deviceData = deviceSales.flatMap(({ mbb, handsets, total }) => [mbb, handsets, total]);
+
+            var ctxDevice = document.getElementById('deviceSalesChart').getContext('2d');
+            var deviceSalesChart = new Chart(ctxDevice, {
+                type: 'bar',
+                data: {
+                    labels: deviceLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: deviceData,
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        borderColor: 'rgba(0, 0, 0, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Mwallet Sales Chart
+            const mwalletLabels = ['Total'];
+            var mwalletData = MwalletSales.flatMap(({ total }) => [total]);
+
+            var ctxMwallet = document.getElementById('MwalletChart').getContext('2d');
+            var MwalletSalesChart = new Chart(ctxMwallet, {
+                type: 'bar',
+                data: {
+                    labels: mwalletLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: mwalletData,
+                        backgroundColor: 'rgba(146, 5, 7, 0.5)',
+                        borderColor: 'rgba(146, 5, 7, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 4G Sales Chart
+            const FourGLabels = ['Total'];
+            var FourGData = FourGSales.flatMap(({ total }) => [total]);
+
+            var ctxFourG = document.getElementById('FourGChart').getContext('2d');
+            var FourGSalesChart = new Chart(ctxFourG, {
+                type: 'bar',
+                data: {
+                    labels: FourGLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: FourGData,
+                        backgroundColor: 'rgba(255, 220, 1, 0.3)',
+                        borderColor: 'rgba(255, 220, 1, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Rox New Sales Chart
+            const RoxNewLabels = ['Total'];
+            var RoxNewData = RoxNewSales.flatMap(({ total }) => [total]);
+
+            var ctxRoxNew = document.getElementById('RoxNewChart').getContext('2d');
+            var RoxNewSalesChart = new Chart(ctxRoxNew, {
+                type: 'bar',
+                data: {
+                    labels: RoxNewLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: RoxNewData,
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        borderColor: 'rgba(0, 0, 0, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Rox Conversion Sales Chart
+            const RoxConversionLabels = ['Basic Vibe', 'Crazy Vibe', 'Insane Vibe', 'No Vibe', 'Total'];
+            var RoxConversionData = RoxConversionSales.flatMap(({ basicVibe, crazyVibe, insaneVibe, noVibe, total }) => [basicVibe, crazyVibe, insaneVibe, noVibe, total]);
+
+            var ctxRoxConversion = document.getElementById('RoxConversionChart').getContext('2d');
+            var RoxConversionSalesChart = new Chart(ctxRoxConversion, {
+                type: 'bar',
+                data: {
+                    labels: RoxConversionLabels,
+                    datasets: [{
+                        label: 'No. of Sales',
+                        data: RoxConversionData,
+                        backgroundColor: 'rgba(146, 5, 7, 0.5)',
+                        borderColor: 'rgba(146, 5, 7, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Number of Sales'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Export data as Excel
+            document.getElementById("exportDataBtn").addEventListener("click", function () {
+                var wb = XLSX.utils.book_new();
+                var ws_data = [
+                    ["Prepaid Sales", "", "", "Postpaid Sales", "", "", "", "", "Device Sales", "", "", "Mwallet Sales", "4G Sales", "Rox New Sale", "", "", "", "Rox Conversion Sales", "", "", "", "", ""],
+                    ["New Sales", "Prepaid MNP", "Total", "Fresh Sales", "Port IN", "Pre to Post", "Red/Red Z", "Total", "MBB", "Handsets", "Total", "Total", "4G Sales", "Basic Vibe", "Boost", "Crazy Vibe", "Insane Vibe", "Total", "Basic Vibe", "Crazy Vibe", "Insane Vibe", "No Vibe", "Total"]
+                ];
+
+                var maxRows = Math.max(
+                    prepaidSales.length,
+                    postpaidSales.length,
+                    deviceSales.length,
+                    MwalletSales.length,
+                    FourGSales.length,
+                    RoxNewSales.length,
+                    RoxConversionSales.length
+                );
+
+                for (var i = 0; i < maxRows; i++) {
+                    var row = [];
+                    if (i < prepaidSales.length) {
+                        row.push(prepaidSales[i].newSales, prepaidSales[i].prepaidMNP, prepaidSales[i].total);
+                    } else {
+                        row.push("", "", "");
+                    }
+
+                    if (i < postpaidSales.length) {
+                        row.push(postpaidSales[i].freshSales, postpaidSales[i].portIN, postpaidSales[i].preToPost, postpaidSales[i].redRedZ, postpaidSales[i].total);
+                    } else {
+                        row.push("", "", "", "", "");
+                    }
+
+                    if (i < deviceSales.length) {
+                        row.push(deviceSales[i].mbb, deviceSales[i].handsets, deviceSales[i].total);
+                    } else {
+                        row.push("", "", "");
+                    }
+
+                    if (i < MwalletSales.length) {
+                        row.push(MwalletSales[i].total);
+                    } else {
+                        row.push("");
+                    }
+
+                    if (i < FourGSales.length) {
+                        row.push(FourGSales[i].total);
+                    } else {
+                        row.push("");
+                    }
+
+                    if (i < RoxNewSales.length) {
+                        row.push(RoxNewSales[i].basicVibe, RoxNewSales[i].boost, RoxNewSales[i].crazyVibe, RoxNewSales[i].insaneVibe, RoxNewSales[i].total);
+                    } else {
+                        row.push("", "", "", "", "");
+                    }
+
+                    if (i < RoxConversionSales.length) {
+                        row.push(RoxConversionSales[i].basicVibe, RoxConversionSales[i].crazyVibe, RoxConversionSales[i].insaneVibe, RoxConversionSales[i].noVibe, RoxConversionSales[i].total);
+                    } else {
+                        row.push("", "", "", "", "");
+                    }
+
+                    ws_data.push(row);
+                }
+
+                var ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+                // Merging cells for parent headers
+                ws['!merges'] = [
+                    { s: { r: 0, c: 0 }, e: { r: 0, c: 2 } },
+                    { s: { r: 0, c: 3 }, e: { r: 0, c: 7 } },
+                    { s: { r: 0, c: 8 }, e: { r: 0, c: 10 } },
+                    { s: { r: 0, c: 11 }, e: { r: 0, c: 11 } },
+                    { s: { r: 0, c: 12 }, e: { r: 0, c: 12 } },
+                    { s: { r: 0, c: 13 }, e: { r: 0, c: 17 } },
+                    { s: { r: 0, c: 18 }, e: { r: 0, c: 22 } }
+                ];
+
+                XLSX.utils.book_append_sheet(wb, ws, "Sales Data");
+                XLSX.writeFile(wb, "sales_data.xlsx");
+            });
+
+            // Export graphs as images in a zip file
+            document.getElementById("exportGraphsBtn").addEventListener("click", function () {
+                var zip = new JSZip();
+                var charts = [
+                    prepaidSalesChart,
+                    postpaidSalesChart,
+                    deviceSalesChart,
+                    MwalletSalesChart,
+                    FourGSalesChart,
+                    RoxNewSalesChart,
+                    RoxConversionSalesChart
+                ];
+
+                var promises = charts.map(function (chart, index) {
+                    return new Promise(function (resolve) {
+                        chart.canvas.toBlob(function (blob) {
+                            zip.file(`chart_${index + 1}.png`, blob);
+                            resolve();
+                        });
+                    });
+                });
+
+                Promise.all(promises).then(function () {
+                    zip.generateAsync({ type: "blob" }).then(function (content) {
+                        saveAs(content, "charts.zip");
+                    });
+                });
+            });
+
+        });
+    </script>
+

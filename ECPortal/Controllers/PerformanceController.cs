@@ -71,6 +71,27 @@ namespace Pk.Com.Jazz.ECP.Controllers
             return View("Agent/AgentPerformance");
         }
 
+        public async Task<IActionResult> YourPerformance(int month = 0, int year = 0, int? employeeNumber = null)
+        {
+            if (month == 0) month = DateTime.Now.Month;
+            if (year == 0) year = DateTime.Now.Year;
+
+            employeeNumber = GetEmployeeNumber();
+            if (employeeNumber == null)
+            {
+                return NotFound("Employee not found.");
+            }
+
+            var performanceModel = await GetPerformanceModel(employeeNumber.Value, month, year);
+
+            if (performanceModel != null)
+            {
+                return View("Agent/TLPerformance", performanceModel);
+            }
+
+            return View("Agent/TLPerformance");
+        }
+
         private async Task<IActionResult> HandleTLOrECMRole(int month, int year, int? employeeNumber)
         {
            
@@ -1345,7 +1366,7 @@ namespace Pk.Com.Jazz.ECP.Controllers
         public JsonResult GetAgentsByEc(int ecId)
         {
             var agents = _context.Employee
-                .Where(e => e.ECID == ecId)
+                .Where(e => e.ECID == ecId && (e.Title == "Agent" || e.Title == "TeamLead"))
                 .Select(e => new { value = e.EmployeeNumber, text = e.EmployeeName })
                 .ToList();
 

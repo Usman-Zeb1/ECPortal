@@ -1,3 +1,67 @@
+/* site.css */
+
+/* Card background colors */
+.prepaid-sales-card {
+    background-color: #cdeaf4;
+}
+
+.postpaid-sales-card {
+    background-color: #d4f2d4;
+}
+
+.device-sales-card {
+    background-color: #ffe4b3;
+}
+
+.m-wallet-sales-card {
+    background-color: #f7c6c6;
+}
+
+.fourg-sales-card {
+    background-color: #c4d3f8;
+}
+
+.rox-new-sales-card {
+    background-color: #e6d1f2;
+}
+
+.rox-conversion-sales-card {
+    background-color: #fbd2b4;
+}
+
+/* Progress bar colors */
+.prepaid-sales-bar {
+    background-color: #5bc0de;
+}
+
+.postpaid-sales-bar {
+    background-color: #5cb85c;
+}
+
+.device-sales-bar {
+    background-color: #f0ad4e;
+}
+
+.m-wallet-sales-bar {
+    background-color: #d9534f;
+}
+
+.fourg-sales-bar {
+    background-color: #0275d8;
+}
+
+.rox-new-sales-bar {
+    background-color: #c49cd4;
+}
+
+.rox-conversion-sales-bar {
+    background-color: #f4a77a;
+}
+
+
+
+
+
 /* Sticky nav bar body needs space */
 body {
     margin: 0;
