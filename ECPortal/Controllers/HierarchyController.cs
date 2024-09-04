@@ -48,19 +48,29 @@ namespace Pk.Com.Jazz.ECP.Controllers
             }
 
             // Repopulate dropdowns if model state is invalid
-            ViewBag.ExperienceCentres = _context.ECs.Select(ec => new SelectListItem
-            {
-                Value = ec.ECID.ToString(),  // This will be assigned to Employee.ECID
-                Text = ec.PhysicalAddress    // This will be displayed in the dropdown
-            }).ToList();
+            //ViewBag.ExperienceCentres = _context.ECs.Select(ec => new SelectListItem
+            //{
+            //    Value = ec.ECID.ToString(),  // This will be assigned to Employee.ECID
+            //    Text = ec.PhysicalAddress    // This will be displayed in the dropdown
+            //}).ToList();
 
 
-            // Populate region dropdown if model state is valid
-            ViewBag.Regions = _context.ECRegions.Select(ec => new SelectListItem
-            {
-                Value = ec.ECRegionID.ToString(),
-                Text = ec.ECRegionName
-            }).ToList();
+            //// Populate region dropdown if model state is valid
+            //ViewBag.Regions = _context.ECRegions.Select(ec => new SelectListItem
+            //{
+            //    Value = ec.ECRegionID.ToString(),
+            //    Text = ec.ECRegionName
+            //}).ToList();
+
+            // Fetch specific values for Experience Centre, Manager, and Region based on the employee data
+            var experienceCentre = _context.ECs.FirstOrDefault(ec => ec.ECID == viewModel.Employee.ECID);
+            var manager = _context.Employee.FirstOrDefault(e => e.EmployeeId == viewModel.Employee.ManagerID);
+            var region = _context.ECRegions.FirstOrDefault(r => r.ECRegionID == viewModel.Employee.RegionID);
+
+            // Populate ViewBag with specific values
+            ViewBag.ExperienceCentre = experienceCentre?.PhysicalAddress;
+            ViewBag.ManagerName = _context.Employee.FirstOrDefault(e => e.EmployeeNumber == viewModel.Employee.ManagerID);
+            ViewBag.Region = region?.ECRegionName;
 
 
             var Id = User.FindFirstValue(ClaimTypes.NameIdentifier);

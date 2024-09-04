@@ -198,10 +198,15 @@
                     <span asp-validation-for="Employee.EmailAddress" class="text-danger"></span>
                 </div>
 
-            <div class="input-group">
-                <label asp-for="Employee.RegionID" class="control-label">Region ID</label>
-                <input tabindex="-1" asp-for="Employee.RegionID" class="form-control" type="email" value="@Model?.Employee?.RegionID" readonly />
+            @*     <div class="input-group">
+                    <label asp-for="Employee.RegionID" class="control-label">Region ID</label>
+                    <input tabindex="-1" asp-for="Employee.RegionID" class="form-control" type="email" value="@Model?.Employee?.RegionID" readonly />
                
+                </div> *@
+            <div class="input-group">
+                <label asp-for="Employee.RegionID" class="control-label">Region</label>
+                <input type="text" class="form-control" value="@ViewBag.Region" readonly />
+                <span asp-validation-for="Employee.RegionID" class="text-danger"></span>
             </div>
             </div>
         </div>
@@ -211,29 +216,18 @@
         </div>
 
         <div class="form-group">
-            <div class="input-row">
                 <div class="input-group">
                     <label asp-for="Employee.ECID" class="control-label">Experience Centre</label>
-                    <select tabindex="-1" asp-for="Employee.ECID" class="form-control" readonly>
-                        <option value="">Select...</option>
-                        <option value="1">EC1</option>
-                        <option value="2">EC2</option>
-                        <option value="3">EC3</option>
-                    </select>
+                    <input type="text" class="form-control" value="@ViewBag.ExperienceCentre" readonly />
                     <span asp-validation-for="Employee.ECID" class="text-danger"></span>
                 </div>
 
                 <div class="input-group">
                     <label asp-for="Employee.ManagerID" class="control-label">Line Manager</label>
-                    <select tabindex="-1" asp-for="Employee.ManagerID" class="form-control" readonly>
-                        <option value="">Select...</option>
-                        <option value="1">M1</option>
-                        <option value="2">M2</option>
-                        <option value="3">M3</option>
-                    </select>
+                    <input type="text" class="form-control" value="@ViewBag.ManagerName.EmployeeName" readonly />
                     <span asp-validation-for="Employee.ManagerID" class="text-danger"></span>
                 </div>
-            </div>
+           
         </div>
 
         <div class="banner">
