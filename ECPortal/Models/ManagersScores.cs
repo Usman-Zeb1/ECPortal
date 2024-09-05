@@ -1,12 +1,13 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using Pk.Com.Jazz.ECP.Models;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pk.Com.Jazz.ECP.Models
 {
-    public class QuizScores
+    public class ManagersScores
     {
-        public QuizScores() {
+        public ManagersScores()
+        {
 
             ModifiedDate = DateTime.Now;
             InsertDate = DateTime.Now;
@@ -33,10 +34,10 @@ namespace Pk.Com.Jazz.ECP.Models
         public DateTime? ModifiedDate { get; set; }
 
         // Additional columns deemed necessary
-        [Required]
-        public int Score { get; set; }
+        //[Required]
+        //public int Score { get; set; }
 
-        public string? Comments { get; set; }
+       // public string? Comments { get; set; }
 
         public int asTarget { get; set; }
 
@@ -52,7 +53,7 @@ namespace Pk.Com.Jazz.ECP.Models
 
         public int QuizTarget { get; set; }
 
-        public int QuizOnline { get; set;}
+        public int QuizOnline { get; set; }
 
         public int QuizPercentage { get; set; }
 
@@ -62,6 +63,14 @@ namespace Pk.Com.Jazz.ECP.Models
 
         public int RamPercentage { get; set; }
 
+
+        public int MSTarget { get; set; }
+
+        public int MysteryShopping {  get; set; }
+
+        public int MSPercentage { get; set; }
+
         public int ResponsesCount { get; set; }
+
     }
 }

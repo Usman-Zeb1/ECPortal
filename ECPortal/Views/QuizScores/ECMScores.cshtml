@@ -1,4 +1,90 @@
-﻿
+﻿@* @model List<Pk.Com.Jazz.ECP.Models.QuizScores>
+@using Newtonsoft.Json;
+
+@{
+    ViewData["Title"] = "Employee Quiz Scores";
+
+    var quizStatusData = Model != null
+        ? JsonConvert.SerializeObject(Model.GroupBy(q => q.Status).Select(g => new { Status = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+
+    var quizProgressData = Model != null
+        ? JsonConvert.SerializeObject(Model.GroupBy(q => q.QuizDate).Select(g => new { Date = g.Key, Count = g.Count() }).ToList(), new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+        : "[]";
+}
+
+<h1 class="text-center my-4">@ViewData["Title"]</h1>
+
+<div class="container">
+  
+
+    <!-- Quiz Scores Details Table -->
+    <div class="card mt-4">
+        <div class="card-header">
+            <h3 class="mb-0">Quiz Scores Details</h3>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table id="quizScoresTable" class="table table-striped table-hover">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Date</th>
+                            <th>AS Target</th>
+                            <th>Agent satisfaction</th>
+                            <th>AS %</th>
+                            <th>VS Target</th>
+                            <th>Visit satisfaction</th>
+                            <th>VS %</th>
+                            <th>Quiz Target</th>
+                            <th>Quiz Online</th>
+                            <th>Quiz %</th>
+                            <th>RAM Target</th>
+                            <th>Fatal Error</th>
+                            <th>RAM %</th>
+                            <th>No. of Responses</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            foreach (var quiz in Model)
+                            {
+                                <tr>
+                                    <td>@quiz.QuizDate</td>
+                                    <td>@quiz.asTarget</td>
+                                    <td>@quiz.AgentSatisfaction</td>
+                                    <td>@quiz.asPercentage</td>
+                                    <td>@quiz.vsTarget</td>
+                                    <td>@quiz.visitSatisfaction</td>
+                                    <td>@quiz.vsPercentage</td>
+                                    <td>@quiz.QuizTarget</td>
+                                    <td>@quiz.QuizOnline</td>
+                                    <td>@quiz.QuizPercentage</td>
+                                    <td>@quiz.RamTarget</td>
+                                    <td>@quiz.FatalError</td>
+                                    <td>@quiz.RamPercentage</td>
+                                    <td>@quiz.ResponsesCount</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="7" class="text-center">No quiz score data available.</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+ *@
+
+
+
+
  @model List<Pk.Com.Jazz.ECP.Models.ManagersScores>
 @using Newtonsoft.Json;
 

@@ -1,0 +1,88 @@
+﻿@model List<QuizScoreViewModel>
+
+@{
+    ViewData["Title"] = "HOD - Experience Center Quiz Scores";
+}
+
+<h1 class="text-center my-4">@ViewData["Title"]</h1>
+
+<div class="container">
+    <!-- Dropdown for Experience Centers -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="mb-0">Select Experience Center</h3>
+        </div>
+        <div class="card-body">
+            <form method="get" action="@Url.Action("GetECQuizScores", "QuizScores")">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="experienceCenterId">Experience Center</label>
+                        <select id="experienceCenterId" name="experienceCenterId" class="form-control">
+                            <option value="">Select Experience Center</option>
+                            @foreach (var ec in ViewBag.ExperienceCenters)
+                            {
+                                <option value="@ec.ECID">@ec.PhysicalAddress</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-2 align-self-end">
+                        <button type="submit" class="btn btn-primary">Get Quiz Scores</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Quiz Scores Table -->
+    @if (Model != null && Model.Count > 0)
+    {
+        <div class="card mt-4">
+            <div class="card-header">
+                <h3 class="mb-0">Quiz Scores for Selected Experience Center</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Employee Name</th>
+                                <th>Quiz Date</th>
+                                <th>AS Target</th>
+                                <th>Agent Satisfaction</th>
+                                <th>AS %</th>
+                                <th>VS Target</th>
+                                <th>Visit Satisfaction</th>
+                                <th>VS %</th>
+                                <th>Quiz Target</th>
+                                <th>Quiz Online</th>
+                                <th>Quiz %</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var quiz in Model)
+                            {
+                                <tr>
+                                    <td>@quiz.EmployeeName</td>
+                                    <td>@quiz.QuizDate.ToString("MM/dd/yyyy")</td>
+                                    <td>@quiz.asTarget</td>
+                                    <td>@quiz.AgentSatisfaction</td>
+                                    <td>@quiz.asPercentage</td>
+                                    <td>@quiz.vsTarget</td>
+                                    <td>@quiz.visitSatisfaction</td>
+                                    <td>@quiz.vsPercentage</td>
+                                    <td>@quiz.QuizTarget</td>
+                                    <td>@quiz.QuizOnline</td>
+                                    <td>@quiz.QuizPercentage</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">No quiz score data available for this Experience Center.</div>
+    }
+</div>

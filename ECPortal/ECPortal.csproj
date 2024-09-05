@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\ManagersScores.cs" />
     <Compile Remove="Migrations\20240605173829_second.cs" />
     <Compile Remove="Migrations\20240605173829_second.Designer.cs" />
     <Compile Remove="Migrations\20240606054618_third.cs" />

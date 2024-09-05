@@ -17,6 +17,8 @@ public class ECContext : IdentityDbContext<AppUser>
     public virtual DbSet<Employee> Employee { get; set; }
     public virtual DbSet<QualityScores> QualityScores { get; set; }
 
+    public virtual DbSet<ManagersScores> ManagersScores { get; set; }
+
     public virtual DbSet<TrainingRequests> TrainingRequests { get; set; }
 
     public virtual DbSet<QuizScores> QuizScores { get; set; }

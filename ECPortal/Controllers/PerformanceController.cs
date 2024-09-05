@@ -13,7 +13,6 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Claims;
 
-
 namespace Pk.Com.Jazz.ECP.Controllers
 {
     [Authorize]

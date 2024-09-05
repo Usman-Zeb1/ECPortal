@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Pk.Com.Jazz.ECP.Data;
 
@@ -11,9 +12,11 @@ using Pk.Com.Jazz.ECP.Data;
 namespace Pk.Com.Jazz.ECP.Migrations
 {
     [DbContext(typeof(ECContext))]
-    partial class ECContextModelSnapshot : ModelSnapshot
+    [Migration("20240904072109_New Columns in Quiz Scores")]
+    partial class NewColumnsinQuizScores
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -231,85 +234,6 @@ namespace Pk.Com.Jazz.ECP.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("Pk.Com.Jazz.ECP.Data.ManagersScores", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AgentSatisfaction")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FatalError")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MSPercentage")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MSTarget")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MysteryShopping")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("QuizDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("QuizOnline")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuizPercentage")
-                        .HasColumnType("int");
-
-                    b.Property<int>("QuizTarget")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RamPercentage")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RamTarget")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ResponsesCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("asPercentage")
-                        .HasColumnType("int");
-
-                    b.Property<int>("asTarget")
-                        .HasColumnType("int");
-
-                    b.Property<int>("visitSatisfaction")
-                        .HasColumnType("int");
-
-                    b.Property<int>("vsPercentage")
-                        .HasColumnType("int");
-
-                    b.Property<int>("vsTarget")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("ManagersScores");
                 });
 
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.AppUserToken", b =>
@@ -1796,17 +1720,6 @@ namespace Pk.Com.Jazz.ECP.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Pk.Com.Jazz.ECP.Data.ManagersScores", b =>
-                {
-                    b.HasOne("Pk.Com.Jazz.ECP.Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Pk.Com.Jazz.ECP.Models.EC", b =>
